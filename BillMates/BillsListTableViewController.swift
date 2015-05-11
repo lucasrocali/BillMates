@@ -28,9 +28,14 @@ class BillsListTableViewController: UITableViewController {
     }
     
     func getData() {
-        if (PFUser.currentUser() != nil){
+        if(PFUser.currentUser() != nil){
+            var query = PFUser.query()
+
+            var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+            if (PFUser.currentUser() != nil && user["group"] != nil){
             model.fetchAllObjects()
             //model.fetchAllObjectsFromLocalDataStore()
+            }
         }
     }
 
@@ -49,13 +54,9 @@ class BillsListTableViewController: UITableViewController {
 
         var object : PFObject = self.model.billObjects.objectAtIndex(indexPath.row) as! PFObject
         cell.textLabel!.text = object["description"] as? String
-        //var valueTxt = String(format: "%.2f", object["value"]!)
+
         cell.detailTextLabel!.text = object["value"]!.description as? String
-        /*
-        let bill = model.getBill(indexPath.row)
-        cell.textLabel!.text = bill.attDescription
-        cell.detailTextLabel!.text = bill.attValue
-        */
+
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
         return cell
@@ -87,7 +88,6 @@ class BillsListTableViewController: UITableViewController {
         
         if segue.identifier == "BillsListToBillDetail"
         {
-            //println("Segue!")
             let indexPath = self.tableView.indexPathForSelectedRow()!
             let object : PFObject = self.model.billObjects[indexPath.row] as! PFObject
             var billDetail = segue.destinationViewController as! UIViewController

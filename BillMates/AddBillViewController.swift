@@ -26,29 +26,17 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func doneAddBill(sender: UIBarButtonItem) {
         
-        self.model.saveBill(description: txtDescription.text, value: txtValue.text)
-        
-                
-        
-        self.navigationController?.popToRootViewControllerAnimated(true)
-        //println("Done Pressed")
-        
-        //if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
-          //  model.saveBill(description: txtDescription.text, value: txtValue.text)
-        
-            //self.navigationController?.popToRootViewControllerAnimated(true)
-            //self.view.endEditing(true)
-        //}
+        if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
+            self.model.saveBill(description: txtDescription.text, value: txtValue.text)
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //model.getUsers()
-        //println(model.users[0].attName)
+
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.delegate = self
-        //println(model.users[1].attName)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -57,74 +45,42 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //println("You selected cell \(indexPath.row)")
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        var object : PFObject = self.model.friendObjects.objectAtIndex(indexPath.row) as! PFObject
-        let friendName = object["friendName"] as? String
+        var friendName: String = self.model.friendString[indexPath.row]
         
-        
-        
-        if model.isAddedUser(friendName!){
-            model.removeAddedUsers(friendName!)
+        if model.isAddedUser(friendName){
+            model.removeAddedUsers(friendName)
         } else {
-            model.addAddedUsers(friendName!)
+            model.addAddedUsers(friendName)
         }
-        
-        
-        /*
-        var houseMate:HouseMate = self.model.houseMates[indexPath.row] as HouseMate
-        
-        houseMate.added = !houseMate.added
 
-        self.model.houseMates[indexPath.row] = houseMate*/
         tableView.reloadData()
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        //println("count")
-        return model.friendObjects.count
+        return model.friendString.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UITableViewCell
         
-        var object : PFObject = self.model.friendObjects.objectAtIndex(indexPath.row) as! PFObject
-        let friendName = object["friendName"] as? String
+        var friendName: String = self.model.friendString[indexPath.row]
         cell.textLabel!.text = friendName
     
-        
-        //println("addedUser")
-        if model.isAddedUser(friendName!){
-            //println("checked")
+        if model.isAddedUser(friendName){
             cell.accessoryType = .Checkmark
         }
         else{
-            //println("None\n")
             cell.accessoryType = .None
         }
     
 
         return cell
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

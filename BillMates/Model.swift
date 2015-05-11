@@ -20,7 +20,7 @@ class Model {
     
     var addedUsers: [String] = [String]()
     
-    var friendObjects : NSMutableArray = NSMutableArray()
+    var friendString : [String] = [String]()
     
     var billObjects: NSMutableArray = NSMutableArray()
     
@@ -28,11 +28,14 @@ class Model {
     
     
     func fetchAllObjectsFromLocalDataStore(){
+        
+        var query = PFUser.query()
+        var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        
         var queryBill: PFQuery = PFQuery(className: "Bill")
         queryBill.fromLocalDatastore()
         
-        
-        queryBill.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        queryBill.whereKey("groupName", equalTo: user["group"]!)
         
         queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
@@ -40,27 +43,7 @@ class Model {
                 //println(temp)
                  if temp.count > 0 {
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
-                    println("Bills \(self.billObjects.count)")
-                }
-                
-            } else {
-                println(error?.userInfo)
-            }
-            
-        }// -
-        var queryFriend: PFQuery = PFQuery(className: "Friend")
-        queryFriend.fromLocalDatastore()
-        
-        
-        queryFriend.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
-        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                var temp: NSArray = objects as! NSArray
-                //println(temp)
-                if temp.count > 0 {
-                    self.friendObjects = temp.mutableCopy() as! NSMutableArray
-                    println("Friends \(self.friendObjects.count)")
+                    println("\t\t\tBills \(self.billObjects.count)")
                 }
                 
             } else {
@@ -68,35 +51,65 @@ class Model {
             }
             
         }
-        /*
-        var queryUser = PFUser.query()
-        queryUser!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
-        queryUser!.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+        
+        var queryFriend: PFQuery = PFQuery(className: "Group")
+        queryFriend.fromLocalDatastore()
+        
+        
+        queryFriend.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                 var temp: NSArray = objects as! NSArray
                 //println(temp)
                 if temp.count > 0 {
-                
-                    self.userObject = temp.mutableCopy() as! NSMutableArray
-                    
-                    
-                    //println(self.userObject.objectAtIndex(0))
-                    /*if self.userObject.objectAtIndex(0)["group"] == nil {
-                        userGroup = "o"
-                    }
-                    else {
-                    userGroup = userObject["group"] as! String
-                    }
-                    //println(userGroup)*/
+                    var aux : NSMutableArray = temp.mutableCopy() as! NSMutableArray
+                    var group : PFObject = aux.objectAtIndex(0) as! PFObject
+                    self.friendString = group["groupFriends"] as! [String]
+                    println("Friends \(self.friendString)")
                 }
                 
             } else {
                 println(error?.userInfo)
             }
             
-        }// -*/
+        }
     }
     
+    func fetchAllObjects(){
+        PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
+        
+        var query = PFUser.query()
+        var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        
+        var queryBill: PFQuery = PFQuery(className: "Bill")
+        queryBill.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                println(error?.userInfo)
+            }
+            
+        }
+        
+        var queryFriend: PFQuery = PFQuery(className: "Group")
+        queryFriend.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                println(error?.userInfo)
+            }
+            
+        }
+        
+        
+    }
     func createGroup(groupName:String,groupKey:String) -> Bool{
         
         var queryGroup: PFQuery = PFQuery(className: "Group")
@@ -128,52 +141,13 @@ class Model {
         var query = PFUser.query()
         var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
         
-        //user["group"] = groupName
+        user["group"] = groupName
         
         if object.save() && user.save() {
             return true
         } else {
             return false
         }
-
-        /*var object : PFObject!
-        
-        object = PFObject(className: "Group")
-        
-        object["whoCreate"] = PFUser.currentUser()!.username!
-        
-        object["groupName"] = groupName
-        object["groupKey"] = groupKey
-        
-        var groupFriends : [String] = []
-        groupFriends.append(PFUser.currentUser()!.username!)
-        
-        object["groupFriends"] = groupFriends
-        
-        
-        object.saveEventually { (success,error) -> Void in
-            if (error == nil){
-                println("Group Saved!")
-                var query = PFUser.query()
-                var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-                
-                //user["group"] = groupName
-                
-                user.saveEventually { (success,error) -> Void in
-                    if (error == nil){
-                        println("Group Saved on user")
-                    }
-                    else {
-                        println("Something wrong..")
-                    }
-                }
-            }
-            else {
-                println("Something wrong..")
-            }
-        }*/
-        
-        
     }
     
     func joinGroup(groupName:String,groupKey:String) -> Bool{
@@ -207,7 +181,7 @@ class Model {
             var query = PFUser.query()
             var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
             
-            //user["group"] = groupName
+            user["group"] = groupName
             
             if g.save() && user.save(){
                 return true
@@ -220,97 +194,8 @@ class Model {
         else {
            return false 
         }
-        /*
-        
-        var queryGroup: PFQuery = PFQuery(className: "Group")
-      
-        queryGroup.whereKey("groupName", equalTo: groupName)
-        
-        var temp: NSArray = queryGroup.findObjects() as! NSArray
-        
-        println(temp)
-        var group : NSMutableArray = temp.mutableCopy() as! NSMutableArray
-        
-        if group.count > 0 {
-            println(group.objectAtIndex(0))
-            var g : PFObject = group.objectAtIndex(0) as! PFObject
-        
-        
-            var groupFriends : [String] = g["groupFriends"] as! [String]
-        
-            groupFriends.append(PFUser.currentUser()!.username!)
-        
-            g["groupFriends"] = groupFriends
-        
-            g.saveEventually { (success,error) -> Void in
-            if (error == nil){
-                    println("Group Saved!")
-                    var query = PFUser.query()
-                    var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-                
-                    //user["group"] = groupName
-                
-                    user.saveEventually { (success,error) -> Void in
-                        if (error == nil){
-                            println("Group Saved on user")
-                        }
-                        else {
-                            println("Something wrong..")
-                    
-                        }
-                    }
-
-                }
-                else {
-                
-                    println("Something wrong..")
-
-                }
-            }
-        }*/
     }
     
-    func fetchAllObjects(){
-        PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
-        
-        var queryBill: PFQuery = PFQuery(className: "Bill")
-        queryBill.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
-        queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                PFObject.pinAllInBackground(objects,block:nil)
-                self.fetchAllObjectsFromLocalDataStore()
-            } else {
-                println(error?.userInfo)
-            }
-            
-        }
-        
-        var queryFriend: PFQuery = PFQuery(className: "Friend")
-        queryFriend.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
-        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                PFObject.pinAllInBackground(objects,block:nil)
-                self.fetchAllObjectsFromLocalDataStore()
-            } else {
-                println(error?.userInfo)
-            }
-            
-        }
-
-        
-    }
-    
-    func getCurrentUserGroup() -> String {
-        println(self.userObject.count)
-        if self.userObject.count != 0 {
-            return self.userObject.objectAtIndex(0)["group"] as! String
-        }
-        else {
-            return "."
-        }
-    }
     //Singleton
     private struct Static {
         static var instance: Model?
@@ -349,43 +234,8 @@ class Model {
             }}
         
         self.billObjects.removeObjectAtIndex(index)
-        //var object = billObjects.objectAtIndex(index) as! PFObject
-        //self.billObjects.
-        //println(billObjects)
-        
-        /*
-        let bill = bills[index]
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        managedContext.deleteObject(bill)
-        
-        bills.removeAtIndex(index)
-        
-        var error: NSError?
-        if !managedContext.save(&error) {
-            abort()
-        }*/
     }
-    /*
-    func getBills() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        
-        let fetchRequest = NSFetchRequest(entityName: "Bill")
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [Bill]?
-        
-        if let results = fetchedResults {
-            bills = results
-        }
-        else {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }
-    }
-    */
+    
     func saveBill(#description:String, value:String) {
         var object : PFObject!
         
@@ -400,6 +250,10 @@ class Model {
         
         object["sharedWith"] = addedUsers
         
+        var query = PFUser.query()
+        var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        
+        object["groupName"] =  user["group"]!
         
         
         object.saveEventually { (success,error) -> Void in
@@ -411,142 +265,11 @@ class Model {
             }
         }
         
+        
+        
         addedUsers.removeAll(keepCapacity: false)
-
-        /*
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        let entity = NSEntityDescription.entityForName("Bill", inManagedObjectContext: managedContext)
-        
-        //let managedContextUser = appDelegate.managedObjectContext!
-        //let entityUser = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContextUser)
-        
-        let bill = Bill(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        let billOwnerName = addedUsers[0]
-        
-        bill.attDescription = description
-        bill.attValue = value
-        bill.billOwner = getObjUser(billOwnerName)
-        
-        for i in 1..<addedUsers.count {
-            let billOwnerName = addedUsers[i]
-            bill.addBillUser(getObjUser(billOwnerName))
-        }
-        self.bills.append(bill)
-//        println(bill.billOwner.attName)
-        //println("Owner of \(bill.getDescrition()) is \(bill.getBillOwner().attName)")
-        //for user in addedUsers {
-            //println(user)
-        //}
-        addedUsers.removeAll(keepCapacity: false)
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }*/
-    }
-    func getUser(index: Int) -> User {
-        return users[index]
-    }
-
-
-    func saveUser(#name:String) {
-        var object : PFObject!
-        
-        object = PFObject(className: "Friend")
-        
-        object["username"] = PFUser.currentUser()?.username
-        
-        object["friendName"] = name
-        
-        object.saveEventually { (success,error) -> Void in
-            if (error == nil){
-                println("Salvou!")
-            }
-            else {
-                println("Nao mandou..")
-            }
-        }
-        /*
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        
-        let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
-        
-        let user = User(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        user.attName = name
-        self.users.append(user)
         
         
-        
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }*/
-    }
-/*
-    func getUsers() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [User]?
-        
-        if let results = fetchedResults {
-            users = results
-        }
-        else {
-            println("Could not fetch \(error), \(error!.userInfo)")
-        }
-    }
-    */
-    func deleteUser(index:Int) {
-        println("Delete at \(index)")
-        //println(billObjects)
-        
-        var user = friendObjects.objectAtIndex(index) as! PFObject
-        
-        
-        
-        var query = PFQuery(className:"Friend")
-        query.getObjectInBackgroundWithId(user.objectId!) {
-            (bill: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println(error)
-            } else {
-                bill?.deleteInBackground()
-            }}
-        
-        self.friendObjects.removeObjectAtIndex(index)
-        /*
-        var index = -1
-        for i in 0..<users.count {
-            if (users[i].attName == name) {
-                index = i
-            }
-        }
-        
-        if index >= 0{
-            let user  = users[index]
-        
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-                let managedContext = appDelegate.managedObjectContext!
-                managedContext.deleteObject(user)
-        
-                users.removeAtIndex(index)
-        
-                var error: NSError?
-            if !managedContext.save(&error) {
-                abort()
-            }
-        }
-        else {
-            println("Name not found")
-        }*/
     }
     func addAddedUsers(name: String){
         self.addedUsers.append(name)
@@ -582,18 +305,5 @@ class Model {
         
         return trimmed.isEmpty
     }
-    
-    func getObjUser (name:String) -> User {
-        var index = 0
-        for i in 0..<users.count {
-            //println("\(users[i].attName) - \(name)")
-            if (users[i].attName == name) {
-                //println("Foi")
-                index = i
-            }
-        }
-        //println(index)
-        return users[index]
-        
-    }
+   
 }

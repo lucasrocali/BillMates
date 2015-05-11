@@ -20,7 +20,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func buttonAddUser(sender: UIButton) {
         if !model.isTotallyEmpty(txtName.text) {
-            model.saveUser(name:txtName.text)
             txtName.text = ""
             self.view.endEditing(true)
             self.addedUsersTableView.reloadData()
@@ -35,8 +34,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         txtName.text = ""
     }
     
-//    @IBOutlet weak var addUserContactImage: UIImageView!
-    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         let appDelegate =
@@ -47,34 +44,21 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
             
-            model.deleteUser(indexPath.row)
-            
             self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
         
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of cells
-        return model.friendObjects.count
+        return model.friendString.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("addedUsersCell", forIndexPath: indexPath) as! UITableViewCell
         
-        var object : PFObject = self.model.friendObjects.objectAtIndex(indexPath.row) as! PFObject
-        cell.textLabel!.text = object["friendName"] as? String
-        
-        //let userName = model.getUser(indexPath.row).attName
-        //var userImage : UIImage = UIImage(named: "blankContact.jpg")!
-        
-        //if ((UIImage(named: userName + ".jpg")) != nil) {
-            //println("Achou Imagem")
-            //userImage = UIImage(named: userName + ".jpg")!
-        //}
-        
-        //cell.imageView!.image = userImage
-        //cell.textLabel!.text = userName
+        var friendName: String = self.model.friendString[indexPath.row]
+        cell.textLabel!.text = friendName
+
         return cell
     }
 
@@ -84,7 +68,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //model.getUsers()
     }
     
     override func didReceiveMemoryWarning() {
