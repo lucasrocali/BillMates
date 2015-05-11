@@ -181,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zuC-xC-PBj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3753" y="534"/>
+            <point key="canvasLocation" x="3733" y="558"/>
         </scene>
         <!--Item-->
         <scene sceneID="rnj-d3-euu">
@@ -200,10 +200,10 @@
             </objects>
             <point key="canvasLocation" x="2150" y="205"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Or Join Group View Controller-->
         <scene sceneID="dq1-Cd-nrj">
             <objects>
-                <viewController id="IU5-Sr-bl5" sceneMemberID="viewController">
+                <viewController id="IU5-Sr-bl5" userLabel="Create Or Join Group View Controller" customClass="GroupViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C9u-Ml-ETm"/>
                         <viewControllerLayoutGuide type="bottom" id="WJS-LH-kVm"/>
@@ -212,31 +212,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvL-Dw-jHb">
-                                <rect key="frame" x="256" y="148" width="89" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvL-Dw-jHb">
+                                <rect key="frame" x="36" y="441" width="157" height="30"/>
                                 <state key="normal" title="Join a Group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnJoinGroup:" destination="IU5-Sr-bl5" eventType="touchUpInside" id="3Lc-GH-Uri"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5z-Cz-DY1">
-                                <rect key="frame" x="248" y="309" width="105" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5z-Cz-DY1">
+                                <rect key="frame" x="441" y="441" width="105" height="30"/>
                                 <state key="normal" title="Create a Group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnCreateGroup:" destination="IU5-Sr-bl5" eventType="touchUpInside" id="3Bz-iw-d57"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ejz-K6-dlp">
+                                <rect key="frame" x="252" y="196" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group Key" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4AR-eT-crB">
+                                <rect key="frame" x="252" y="303" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yg9-ju-63a" userLabel="Somethi Wrong..">
+                                <rect key="frame" x="300" y="366" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="S5z-Cz-DY1" secondAttribute="centerX" constant="-0.5" id="Js9-fu-6eH"/>
-                            <constraint firstItem="S5z-Cz-DY1" firstAttribute="top" secondItem="QvL-Dw-jHb" secondAttribute="bottom" constant="131" id="Ta9-dc-pom"/>
-                            <constraint firstAttribute="centerX" secondItem="QvL-Dw-jHb" secondAttribute="centerX" constant="-0.5" id="aly-9R-8tG"/>
-                            <constraint firstItem="QvL-Dw-jHb" firstAttribute="top" secondItem="C9u-Ml-ETm" secondAttribute="bottom" constant="128" id="fLW-Da-Qra"/>
+                            <constraint firstItem="S5z-Cz-DY1" firstAttribute="leading" secondItem="QvL-Dw-jHb" secondAttribute="trailing" constant="248" id="5YT-uN-OE3"/>
+                            <constraint firstItem="Yg9-ju-63a" firstAttribute="top" secondItem="4AR-eT-crB" secondAttribute="bottom" constant="10" id="Aay-ZT-Rlz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="S5z-Cz-DY1" secondAttribute="trailing" constant="40" id="BvY-ug-CL5"/>
+                            <constraint firstItem="ejz-K6-dlp" firstAttribute="top" secondItem="C9u-Ml-ETm" secondAttribute="bottom" constant="50" id="Ec8-Ek-wZ2"/>
+                            <constraint firstItem="4AR-eT-crB" firstAttribute="top" secondItem="ejz-K6-dlp" secondAttribute="bottom" constant="50" id="K5A-a8-nga"/>
+                            <constraint firstItem="QvL-Dw-jHb" firstAttribute="top" secondItem="4AR-eT-crB" secondAttribute="bottom" constant="100" id="Lhu-HD-lg0"/>
+                            <constraint firstItem="QvL-Dw-jHb" firstAttribute="centerY" secondItem="S5z-Cz-DY1" secondAttribute="centerY" id="Nta-Y1-lWt"/>
+                            <constraint firstItem="Yg9-ju-63a" firstAttribute="leading" secondItem="Imc-ur-tod" secondAttribute="leadingMargin" constant="10" id="XBE-Hv-hK1"/>
+                            <constraint firstItem="QvL-Dw-jHb" firstAttribute="leading" secondItem="Imc-ur-tod" secondAttribute="leadingMargin" constant="40" id="d5i-Bp-VKr"/>
+                            <constraint firstAttribute="centerX" secondItem="4AR-eT-crB" secondAttribute="centerX" id="eM0-RR-5dP"/>
+                            <constraint firstItem="4AR-eT-crB" firstAttribute="centerX" secondItem="Yg9-ju-63a" secondAttribute="centerX" id="hqk-vj-YzZ"/>
+                            <constraint firstAttribute="centerX" secondItem="ejz-K6-dlp" secondAttribute="centerX" id="n3B-5y-uAi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Yg9-ju-63a" secondAttribute="trailing" constant="10" id="nSw-7Y-whr"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5YT-uN-OE3"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="Sl2-ce-Yoc"/>
+                    <connections>
+                        <outlet property="lblError" destination="Yg9-ju-63a" id="3zd-FV-Ick"/>
+                        <outlet property="txtGroupKey" destination="4AR-eT-crB" id="EwJ-nJ-fdg"/>
+                        <outlet property="txtGroupName" destination="ejz-K6-dlp" id="KTC-Qv-pu7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8tX-tR-Cvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1338" y="999"/>
+            <point key="canvasLocation" x="2078" y="2023"/>
         </scene>
         <!--Add User View Controller-->
         <scene sceneID="cDf-Sf-G4d">
@@ -310,12 +352,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hp-XA-tIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="935"/>
+            <point key="canvasLocation" x="2962" y="935"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="omb-Wz-QtB">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iD8-33-zEm" customClass="InitialViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="initialViewController" automaticallyAdjustsScrollViewInsets="NO" id="iD8-33-zEm" customClass="InitialViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="gD0-JW-Z5c">
@@ -330,6 +372,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5U-26-TRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1338" y="205"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7zZ-UB-m6g">
+            <objects>
+                <navigationController storyboardIdentifier="groupViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jYZ-hY-WDk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wti-Hu-441">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IU5-Sr-bl5" kind="relationship" relationship="rootViewController" id="FZd-51-sar"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Juq-ka-UhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1266" y="2023"/>
         </scene>
     </scenes>
 </document>

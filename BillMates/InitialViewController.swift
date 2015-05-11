@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
+class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIViewControllerTransitioningDelegate {
     
     var model = Model.sharedInstance
 
@@ -36,14 +36,101 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
             loginViewController.signUpController = signUpViewController
             
             self.presentViewController(loginViewController, animated: true, completion: nil)
+            
+
         } else {
             println("Alread Logged")
+            println(PFUser.currentUser()!)
             model.fetchAllObjectsFromLocalDataStore()
             model.fetchAllObjects()
+            
+            var userGroup = ""
+            var query = PFUser.query()
+            query!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
+            query!.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    var temp: NSArray = objects as! NSArray
+                    //println(temp)
+                    if temp.count > 0 {
+                        
+                        var txt: NSMutableArray = NSMutableArray()
+                        txt = temp.mutableCopy() as! NSMutableArray
+
+                        var user = txt.objectAtIndex(0)
+                        if user["group"]! == nil {
+                            
+                            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            
+                            var vc : UINavigationController = storyBoard.instantiateViewControllerWithIdentifier("groupViewController") as! UINavigationController
+                            
+                            self.presentViewController(vc, animated: true, completion: nil)
+                            /*
+                            var createOrJoinGroup = GroupViewController() as! UIViewController
+                            
+                            
+                            
+                            self.presentViewController(createOrJoinGroup, animated: true, completion: nil)*/
+
+                            userGroup = "0"
+                         
+                        } else {
+                            userGroup = user["group"]! as! String
+                        }
+                        //var aux = user["group"]!
+                        //userGroup = aux
+                        println(userGroup)
+                    }
+                    
+                } else {
+                    println(error?.userInfo)
+                }
+                
+            }/*
+            if userGroup == "0" { //No group
+                var createOrJoinGroup = CreateOrJoinGroupViewController()
+                
+                //createOrJoinGroup.delegate = self
+                
+                
+                self.presentViewController(createOrJoinGroup, animated: true, completion: nil)
+            }*/
+            /*
+            var queryBill: PFQuery = PFQuery(className: "User")
+            queryBill.fromLocalDatastore()
+            
+            var user : NSMutableArray = NSMutableArray()
+
+            
+            queryBill.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+
+            queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    var temp: NSArray = objects as! NSArray
+                    //println(temp)
+                    if temp.count > 0 {
+                        user = temp.mutableCopy() as! NSMutableArray
+                        println("User \(user)")
+                    }
+                    
+                } else {
+                    println(error?.userInfo)
+                }
+                
+            }// -*/
            /* var billsListTableViewController = BillsListTableViewController()
             billsListTableViewController.fetchAllObjectsFromLocalDataStore()
             billsListTableViewController.fetchAllObjects()*/
         }
+        
+                /*
+        if(PFUser.currentUser().group == nil){
+            println("No group")
+            
+        } else {
+            println("Alread Logged")
+        }*/
+        
+        
     }
     
     func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {

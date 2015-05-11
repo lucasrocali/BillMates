@@ -24,6 +24,8 @@ class Model {
     
     var billObjects: NSMutableArray = NSMutableArray()
     
+    var userObject: NSMutableArray = NSMutableArray()
+    
     
     func fetchAllObjectsFromLocalDataStore(){
         var queryBill: PFQuery = PFQuery(className: "Bill")
@@ -66,6 +68,206 @@ class Model {
             }
             
         }
+        /*
+        var queryUser = PFUser.query()
+        queryUser!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
+        queryUser!.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                var temp: NSArray = objects as! NSArray
+                //println(temp)
+                if temp.count > 0 {
+                
+                    self.userObject = temp.mutableCopy() as! NSMutableArray
+                    
+                    
+                    //println(self.userObject.objectAtIndex(0))
+                    /*if self.userObject.objectAtIndex(0)["group"] == nil {
+                        userGroup = "o"
+                    }
+                    else {
+                    userGroup = userObject["group"] as! String
+                    }
+                    //println(userGroup)*/
+                }
+                
+            } else {
+                println(error?.userInfo)
+            }
+            
+        }// -*/
+    }
+    
+    func createGroup(groupName:String,groupKey:String) -> Bool{
+        
+        var queryGroup: PFQuery = PFQuery(className: "Group")
+        
+        queryGroup.whereKey("groupName", equalTo: groupName)
+        
+        var temp: NSArray = queryGroup.findObjects() as! NSArray
+        println(temp)
+        if temp.count > 0 {
+            return false
+        }
+        
+        var object : PFObject!
+        
+        object = PFObject(className: "Group")
+        
+        object["whoCreate"] = PFUser.currentUser()!.username!
+        
+        object["groupName"] = groupName
+        object["groupKey"] = groupKey
+        
+        var groupFriends : [String] = []
+        groupFriends.append(PFUser.currentUser()!.username!)
+        
+        object["groupFriends"] = groupFriends
+        
+        
+        
+        var query = PFUser.query()
+        var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        
+        //user["group"] = groupName
+        
+        if object.save() && user.save() {
+            return true
+        } else {
+            return false
+        }
+
+        /*var object : PFObject!
+        
+        object = PFObject(className: "Group")
+        
+        object["whoCreate"] = PFUser.currentUser()!.username!
+        
+        object["groupName"] = groupName
+        object["groupKey"] = groupKey
+        
+        var groupFriends : [String] = []
+        groupFriends.append(PFUser.currentUser()!.username!)
+        
+        object["groupFriends"] = groupFriends
+        
+        
+        object.saveEventually { (success,error) -> Void in
+            if (error == nil){
+                println("Group Saved!")
+                var query = PFUser.query()
+                var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+                
+                //user["group"] = groupName
+                
+                user.saveEventually { (success,error) -> Void in
+                    if (error == nil){
+                        println("Group Saved on user")
+                    }
+                    else {
+                        println("Something wrong..")
+                    }
+                }
+            }
+            else {
+                println("Something wrong..")
+            }
+        }*/
+        
+        
+    }
+    
+    func joinGroup(groupName:String,groupKey:String) -> Bool{
+        
+        var queryGroup: PFQuery = PFQuery(className: "Group")
+        
+        queryGroup.whereKey("groupName", equalTo: groupName)
+        
+        var temp: NSArray = queryGroup.findObjects() as! NSArray
+        
+        println(temp)
+        var group : NSMutableArray = temp.mutableCopy() as! NSMutableArray
+        
+        if group.count > 0 {
+            println(group.objectAtIndex(0))
+            var g : PFObject = group.objectAtIndex(0) as! PFObject
+            
+            var key : String = g["groupKey"] as! String
+            
+            if key != groupKey {
+                return false
+            }
+            
+            var groupFriends : [String] = g["groupFriends"] as! [String]
+            
+            groupFriends.append(PFUser.currentUser()!.username!)
+            
+            g["groupFriends"] = groupFriends
+            
+            
+            var query = PFUser.query()
+            var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+            
+            //user["group"] = groupName
+            
+            if g.save() && user.save(){
+                return true
+            } else {
+                return false
+            }
+            
+
+        }
+        else {
+           return false 
+        }
+        /*
+        
+        var queryGroup: PFQuery = PFQuery(className: "Group")
+      
+        queryGroup.whereKey("groupName", equalTo: groupName)
+        
+        var temp: NSArray = queryGroup.findObjects() as! NSArray
+        
+        println(temp)
+        var group : NSMutableArray = temp.mutableCopy() as! NSMutableArray
+        
+        if group.count > 0 {
+            println(group.objectAtIndex(0))
+            var g : PFObject = group.objectAtIndex(0) as! PFObject
+        
+        
+            var groupFriends : [String] = g["groupFriends"] as! [String]
+        
+            groupFriends.append(PFUser.currentUser()!.username!)
+        
+            g["groupFriends"] = groupFriends
+        
+            g.saveEventually { (success,error) -> Void in
+            if (error == nil){
+                    println("Group Saved!")
+                    var query = PFUser.query()
+                    var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+                
+                    //user["group"] = groupName
+                
+                    user.saveEventually { (success,error) -> Void in
+                        if (error == nil){
+                            println("Group Saved on user")
+                        }
+                        else {
+                            println("Something wrong..")
+                    
+                        }
+                    }
+
+                }
+                else {
+                
+                    println("Something wrong..")
+
+                }
+            }
+        }*/
     }
     
     func fetchAllObjects(){
@@ -98,6 +300,16 @@ class Model {
         }
 
         
+    }
+    
+    func getCurrentUserGroup() -> String {
+        println(self.userObject.count)
+        if self.userObject.count != 0 {
+            return self.userObject.objectAtIndex(0)["group"] as! String
+        }
+        else {
+            return "."
+        }
     }
     //Singleton
     private struct Static {
@@ -156,7 +368,7 @@ class Model {
             abort()
         }*/
     }
-    
+    /*
     func getBills() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -173,7 +385,7 @@ class Model {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
     }
-    
+    */
     func saveBill(#description:String, value:String) {
         var object : PFObject!
         
@@ -273,7 +485,7 @@ class Model {
             println("Could not fetch \(error), \(error!.userInfo)")
         }*/
     }
-
+/*
     func getUsers() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -290,7 +502,7 @@ class Model {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
     }
-    
+    */
     func deleteUser(index:Int) {
         println("Delete at \(index)")
         //println(billObjects)
