@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Bill" representedClassName="BillMates.Bill" syncable="YES">
+        <attribute name="attDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="attValue" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="billOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+        <relationship name="billUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="BillMates.User" syncable="YES">
+        <attribute name="attName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bill" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="User" positionX="250" positionY="30" width="128" height="58"/>
+    </elements>
+</model>
