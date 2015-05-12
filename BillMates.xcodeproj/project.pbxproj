@@ -40,6 +40,7 @@
 		7829A36C1AEC267800CEFF35 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36B1AEC267800CEFF35 /* User.swift */; };
 		7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
+		78C2A4441B02609A00782F33 /* CalculateDebtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */; };
 		78CBAD981AF2029700C862D7 /* blankContact.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD921AF2029700C862D7 /* blankContact.jpg */; };
 		78CBAD991AF2029700C862D7 /* Fellipe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD931AF2029700C862D7 /* Fellipe.jpg */; };
 		78CBAD9A1AF2029700C862D7 /* Joao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD941AF2029700C862D7 /* Joao.jpg */; };
@@ -96,6 +97,7 @@
 		7829A36B1AEC267800CEFF35 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateDebtsViewController.swift; sourceTree = "<group>"; };
 		78CBAD921AF2029700C862D7 /* blankContact.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blankContact.jpg; sourceTree = "<group>"; };
 		78CBAD931AF2029700C862D7 /* Fellipe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fellipe.jpg; sourceTree = "<group>"; };
 		78CBAD941AF2029700C862D7 /* Joao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Joao.jpg; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				7829A3641AEC12CF00CEFF35 /* BillDetailViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
+				78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78C2A4441B02609A00782F33 /* CalculateDebtsViewController.swift in Sources */,
 				7810CAD81AEC0CF600FD00F0 /* BillsListTableViewController.swift in Sources */,
 				7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */,
 				7829A3651AEC12CF00CEFF35 /* BillDetailViewController.swift in Sources */,

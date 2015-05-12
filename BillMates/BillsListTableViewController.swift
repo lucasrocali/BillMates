@@ -23,7 +23,7 @@ class BillsListTableViewController: UITableViewController {
     
     
     override func viewDidAppear(animated: Bool) {
-        getData()
+        //getData()
         self.tableView.reloadData()
     }
     

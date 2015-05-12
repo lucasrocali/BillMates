@@ -29,6 +29,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
             self.model.saveBill(description: txtDescription.text, value: txtValue.text)
             self.navigationController?.popToRootViewControllerAnimated(true)
+            var billListViewController = BillsListTableViewController()
+            billListViewController.getData()
         }
     }
     

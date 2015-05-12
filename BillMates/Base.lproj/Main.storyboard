@@ -367,11 +367,46 @@
                     <connections>
                         <segue destination="Ote-QQ-Ppj" kind="relationship" relationship="viewControllers" id="Ep2-FV-HsG"/>
                         <segue destination="w1J-Au-jOP" kind="relationship" relationship="viewControllers" id="5D5-zQ-2PT"/>
+                        <segue destination="eHq-xk-xv6" kind="relationship" relationship="viewControllers" id="BH8-Wr-0ar"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5U-26-TRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1338" y="205"/>
+        </scene>
+        <!--Calculate Debts View Controller-->
+        <scene sceneID="XK0-6q-VFw">
+            <objects>
+                <viewController id="eHq-xk-xv6" userLabel="Calculate Debts View Controller" customClass="CalculateDebtsViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ah2-Q2-ku2"/>
+                        <viewControllerLayoutGuide type="bottom" id="b1g-Oj-m0n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vPO-jy-mon">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjJ-FQ-pJs">
+                                <rect key="frame" x="268" y="205" width="65" height="30"/>
+                                <state key="normal" title="Calculate">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnCalculateDebts:" destination="eHq-xk-xv6" eventType="touchUpInside" id="Bpm-wC-M8z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="jjJ-FQ-pJs" secondAttribute="centerX" id="fh9-xG-vBP"/>
+                            <constraint firstAttribute="centerY" secondItem="jjJ-FQ-pJs" secondAttribute="centerY" constant="80" id="hCi-s4-uJc"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="O4X-J9-57A"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SLb-uG-hvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540" y="1059"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7zZ-UB-m6g">
