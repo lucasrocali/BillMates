@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 
 class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var model = Model.sharedInstance
-    
-    
 
     @IBOutlet weak var txtDescription: UITextField!
     @IBOutlet weak var txtValue: UITextField!
@@ -30,7 +26,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.model.saveBill(description: txtDescription.text, value: txtValue.text)
             self.navigationController?.popToRootViewControllerAnimated(true)
             var billListViewController = BillsListTableViewController()
-            billListViewController.getData()
+            model.refreshData()
         }
     }
     

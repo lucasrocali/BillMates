@@ -17,8 +17,19 @@ class BillsListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //model.getBills()
-        getData()
+        model.refreshData()
         self.tableView.reloadData()
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        // Code to refresh table view
+        
+        //model.calculateDebts()
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+        model.refreshData()
     }
     
     
@@ -27,17 +38,7 @@ class BillsListTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func getData() {
-        if(PFUser.currentUser() != nil){
-            var query = PFUser.query()
-
-            var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-            if (PFUser.currentUser() != nil && user["group"] != nil){
-            model.fetchAllObjects()
-            //model.fetchAllObjectsFromLocalDataStore()
-            }
-        }
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
