@@ -22,6 +22,19 @@ class BillsListTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
+    @IBAction func logoutBtn(sender: UIBarButtonItem) {
+        PFUser.logOut()
+        //var initialVC = InitialViewController()
+        //initialVC.loginSetup()
+        
+        var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
+        
+        self.presentViewController(vc, animated: false, completion: nil)
+        
+    }
+
     func refresh(sender:AnyObject)
     {
         // Code to refresh table view
@@ -29,7 +42,7 @@ class BillsListTableViewController: UITableViewController {
         //model.calculateDebts()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-        model.refreshData()
+        //model.refreshData()
     }
     
     
@@ -79,27 +92,23 @@ class BillsListTableViewController: UITableViewController {
         }
         
     }
-    
+    /*
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("BillsListToBillDetail", sender: tableView)
+        self.performSegueWithIdentifier("listToEdit", sender: tableView)
     }
-    
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-        
-        if segue.identifier == "BillsListToBillDetail"
+        if segue.identifier == "listToEdit"
         {
             let indexPath = self.tableView.indexPathForSelectedRow()!
-            let object : PFObject = self.model.billObjects[indexPath.row] as! PFObject
-            var billDetail = segue.destinationViewController as! UIViewController
-            billDetail.title = object["description"] as? String
-
-           println("Cell n: \(indexPath.row)")
-            var chosenBill = segue.destinationViewController as! BillDetailViewController
-            chosenBill.billCellIndex = indexPath.row
             
+           println("Cell n: \(indexPath.row)")
+            var editBill = segue.destinationViewController as! AddBillViewController
+            editBill.billCellIndex = indexPath.row
+            
+        } else {
+            println("ADD")
         }
     }
-    
-
 }

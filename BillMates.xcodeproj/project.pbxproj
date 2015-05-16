@@ -26,7 +26,6 @@
 		782893111AFBEA7900966E62 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893101AFBEA7900966E62 /* MobileCoreServices.framework */; };
 		782893131AFBEA8100966E62 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893121AFBEA8100966E62 /* QuartzCore.framework */; };
 		782893151AFBEA8900966E62 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893141AFBEA8900966E62 /* Security.framework */; };
-		782893171AFBEA9100966E62 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893161AFBEA9100966E62 /* StoreKit.framework */; };
 		782893191AFBEA9A00966E62 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893181AFBEA9A00966E62 /* SystemConfiguration.framework */; };
 		7828931B1AFBEAC500966E62 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7828931A1AFBEAC500966E62 /* libz.dylib */; };
 		7828931D1AFBEACD00966E62 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7828931C1AFBEACD00966E62 /* libsqlite3.dylib */; };
@@ -34,10 +33,10 @@
 		782893211AFBEEF600966E62 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893201AFBEEF600966E62 /* Social.framework */; };
 		782893231AFBEFB500966E62 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782893221AFBEFB500966E62 /* InitialViewController.swift */; };
 		7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */; };
-		7829A3651AEC12CF00CEFF35 /* BillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3641AEC12CF00CEFF35 /* BillDetailViewController.swift */; };
+		7829A3651AEC12CF00CEFF35 /* RIPBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3641AEC12CF00CEFF35 /* RIPBillDetailViewController.swift */; };
 		7829A3681AEC176F00CEFF35 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3671AEC176F00CEFF35 /* Model.swift */; };
-		7829A36A1AEC177700CEFF35 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3691AEC177700CEFF35 /* Bill.swift */; };
-		7829A36C1AEC267800CEFF35 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36B1AEC267800CEFF35 /* User.swift */; };
+		7829A36A1AEC177700CEFF35 /* RIPBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3691AEC177700CEFF35 /* RIPBill.swift */; };
+		7829A36C1AEC267800CEFF35 /* RIPUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36B1AEC267800CEFF35 /* RIPUser.swift */; };
 		7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
 		78C2A4441B02609A00782F33 /* CalculateDebtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */; };
@@ -83,7 +82,6 @@
 		782893101AFBEA7900966E62 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		782893121AFBEA8100966E62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		782893141AFBEA8900966E62 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		782893161AFBEA9100966E62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		782893181AFBEA9A00966E62 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7828931A1AFBEAC500966E62 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7828931C1AFBEACD00966E62 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -91,10 +89,10 @@
 		782893201AFBEEF600966E62 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		782893221AFBEFB500966E62 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
-		7829A3641AEC12CF00CEFF35 /* BillDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillDetailViewController.swift; sourceTree = "<group>"; };
+		7829A3641AEC12CF00CEFF35 /* RIPBillDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPBillDetailViewController.swift; sourceTree = "<group>"; };
 		7829A3671AEC176F00CEFF35 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		7829A3691AEC177700CEFF35 /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
-		7829A36B1AEC267800CEFF35 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7829A3691AEC177700CEFF35 /* RIPBill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPBill.swift; sourceTree = "<group>"; };
+		7829A36B1AEC267800CEFF35 /* RIPUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPUser.swift; sourceTree = "<group>"; };
 		7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateDebtsViewController.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				7828931D1AFBEACD00966E62 /* libsqlite3.dylib in Frameworks */,
 				7828931B1AFBEAC500966E62 /* libz.dylib in Frameworks */,
 				782893191AFBEA9A00966E62 /* SystemConfiguration.framework in Frameworks */,
-				782893171AFBEA9100966E62 /* StoreKit.framework in Frameworks */,
 				782893151AFBEA8900966E62 /* Security.framework in Frameworks */,
 				782893131AFBEA8100966E62 /* QuartzCore.framework in Frameworks */,
 				782893111AFBEA7900966E62 /* MobileCoreServices.framework in Frameworks */,
@@ -150,7 +147,6 @@
 				7828931C1AFBEACD00966E62 /* libsqlite3.dylib */,
 				7828931A1AFBEAC500966E62 /* libz.dylib */,
 				782893181AFBEA9A00966E62 /* SystemConfiguration.framework */,
-				782893161AFBEA9100966E62 /* StoreKit.framework */,
 				782893141AFBEA8900966E62 /* Security.framework */,
 				782893121AFBEA8100966E62 /* QuartzCore.framework */,
 				782893101AFBEA7900966E62 /* MobileCoreServices.framework */,
@@ -225,7 +221,7 @@
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
-				7829A3641AEC12CF00CEFF35 /* BillDetailViewController.swift */,
+				7829A3641AEC12CF00CEFF35 /* RIPBillDetailViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
 				78C2A4431B02609A00782F33 /* CalculateDebtsViewController.swift */,
@@ -237,8 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				7829A3671AEC176F00CEFF35 /* Model.swift */,
-				7829A3691AEC177700CEFF35 /* Bill.swift */,
-				7829A36B1AEC267800CEFF35 /* User.swift */,
+				7829A3691AEC177700CEFF35 /* RIPBill.swift */,
+				7829A36B1AEC267800CEFF35 /* RIPUser.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -305,6 +301,12 @@
 				TargetAttributes = {
 					7810CAAE1AEC094F00FD00F0 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 8LELQL34M8;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					7810CAC61AEC094F00FD00F0 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -365,13 +367,13 @@
 				78C2A4441B02609A00782F33 /* CalculateDebtsViewController.swift in Sources */,
 				7810CAD81AEC0CF600FD00F0 /* BillsListTableViewController.swift in Sources */,
 				7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */,
-				7829A3651AEC12CF00CEFF35 /* BillDetailViewController.swift in Sources */,
+				7829A3651AEC12CF00CEFF35 /* RIPBillDetailViewController.swift in Sources */,
 				7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */,
 				7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */,
 				7829A3681AEC176F00CEFF35 /* Model.swift in Sources */,
 				782893231AFBEFB500966E62 /* InitialViewController.swift in Sources */,
-				7829A36C1AEC267800CEFF35 /* User.swift in Sources */,
-				7829A36A1AEC177700CEFF35 /* Bill.swift in Sources */,
+				7829A36C1AEC267800CEFF35 /* RIPUser.swift in Sources */,
+				7829A36A1AEC177700CEFF35 /* RIPBill.swift in Sources */,
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
 				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
 			);
@@ -502,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sdks/parse-library-1.7.2",
@@ -516,6 +519,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sdks/parse-library-1.7.2",

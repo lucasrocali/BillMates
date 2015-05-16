@@ -20,20 +20,13 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func buttonAddUser(sender: UIButton) {
         if !model.isTotallyEmpty(txtName.text) {
+            model.joinGroupWhithoutLogin(txtName.text)
             txtName.text = ""
             self.view.endEditing(true)
             self.addedUsersTableView.reloadData()
             txtName.text = ""
         }
     }
-    
-    @IBAction func buttonDeleteUser(sender: UIButton) {
-        //model.deleteUser(txtName.text)
-        self.addedUsersTableView.reloadData()
-        self.view.endEditing(true)
-        txtName.text = ""
-    }
-    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         let appDelegate =
@@ -44,19 +37,21 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
             
+            //println("delete at \(indexPath.row)")
+            model.deleteUserOfGroup(indexPath.row)
             self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
         
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.friendString.count
+        return model.groupFriendsString.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("addedUsersCell", forIndexPath: indexPath) as! UITableViewCell
         
-        var friendName: String = self.model.friendString[indexPath.row]
+        var friendName: String = self.model.groupFriendsString[indexPath.row]
         cell.textLabel!.text = friendName
 
         return cell

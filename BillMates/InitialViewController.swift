@@ -21,57 +21,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        if(PFUser.currentUser() == nil){
-            println("Log in")
-            var loginViewController = PFLogInViewController()
-            
-            loginViewController.delegate = self
-            
-            var signUpViewController = PFSignUpViewController()
-            
-            signUpViewController.delegate = self
-            
-            loginViewController.signUpController = signUpViewController
-            
-            self.presentViewController(loginViewController, animated: true, completion: nil)
-            
-
-        } else {
-            
-            
-            var query = PFUser.query()
-            query!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
-            query!.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                if (error == nil){
-                    var temp: NSArray = objects as! NSArray
-                    if temp.count > 0 {
-                        
-                        var txt: NSMutableArray = NSMutableArray()
-                        txt = temp.mutableCopy() as! NSMutableArray
-
-                        var user = txt.objectAtIndex(0)
-                        if user["group"]! == nil {
-                            
-                            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            
-                            var vc : UINavigationController = storyBoard.instantiateViewControllerWithIdentifier("groupViewController") as! UINavigationController
-                            
-                            self.presentViewController(vc, animated: true, completion: nil)
-
-                            println("Alread Logged")
-                            println(PFUser.currentUser()!)
-                            //self.model.fetchAllObjectsFromLocalDataStore()
-                            //self.model.fetchAllObjects()
-                         
-                        }
-                    }
-                } else {
-                    println(error?.userInfo)
-                }
-                
-            }
-        }
+        self.loginSetup()
     }
     
     func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
@@ -112,6 +62,60 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loginSetup() {
+        if(PFUser.currentUser() == nil){
+            println("Log in")
+            var loginViewController = PFLogInViewController()
+            
+            loginViewController.delegate = self
+            
+            var signUpViewController = PFSignUpViewController()
+            
+            signUpViewController.delegate = self
+            
+            loginViewController.signUpController = signUpViewController
+            
+            self.presentViewController(loginViewController, animated: true, completion: nil)
+            
+            
+        } else {
+            
+            
+            var query = PFUser.query()
+            query!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
+            query!.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    var temp: NSArray = objects as! NSArray
+                    if temp.count > 0 {
+                        
+                        var txt: NSMutableArray = NSMutableArray()
+                        txt = temp.mutableCopy() as! NSMutableArray
+                        
+                        var user = txt.objectAtIndex(0)
+                        if user["group"]! == nil {
+                            
+                            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            
+                            var vc : UINavigationController = storyBoard.instantiateViewControllerWithIdentifier("groupViewController") as! UINavigationController
+                            
+                            self.presentViewController(vc, animated: true, completion: nil)
+                            
+                            println("Alread Logged")
+                            println(PFUser.currentUser()!)
+                            //self.model.fetchAllObjectsFromLocalDataStore()
+                            //self.model.fetchAllObjects()
+                            
+                        }
+                    }
+                } else {
+                    println(error?.userInfo)
+                }
+                
+            }
+        }
+
     }
 
 }

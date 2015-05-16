@@ -14,17 +14,15 @@ import ParseUI
 
 class Model {
     
-    var bills : [Bill] = [Bill]()
-    
-    var users : [User] = [User]()
-    
     var addedUsers: [String] = [String]()
-    
-    var friendString : [String] = [String]()
     
     var billObjects: NSMutableArray = NSMutableArray()
     
-    var userObject: NSMutableArray = NSMutableArray()
+    var userObject: PFUser?
+    
+    var groupObject : PFObject?
+    
+    var groupFriendsString : [String] = [String]()
     
     var debtObjects : NSMutableArray = NSMutableArray()
     
@@ -44,6 +42,7 @@ class Model {
         
         var query = PFUser.query()
         var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        self.userObject = user
         
         var queryBill: PFQuery = PFQuery(className: "Bill")
         queryBill.fromLocalDatastore()
@@ -63,18 +62,18 @@ class Model {
                 println(error?.userInfo)
             }
         }
-        var queyDebt: PFQuery = PFQuery(className: "Group")
-        queyDebt.fromLocalDatastore()
-        queyDebt.whereKey("groupName", equalTo: user["group"]!)
-        queyDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+        var queryGroup: PFQuery = PFQuery(className: "Group")
+        queryGroup.fromLocalDatastore()
+        queryGroup.whereKey("groupName", equalTo: user["group"]!)
+        queryGroup.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                 var temp: NSArray = objects as! NSArray
                 //println(temp)
                 if temp.count > 0 {
                     var aux : NSMutableArray = temp.mutableCopy() as! NSMutableArray
-                    var group : PFObject = aux.objectAtIndex(0) as! PFObject
-                    self.friendString = group["groupFriends"] as! [String]
-                    println("Friends \(self.friendString)")
+                    self.groupObject = aux.objectAtIndex(0) as! PFObject
+                    self.groupFriendsString = self.groupObject!["groupFriends"] as! [String]
+                    println("Friends \(self.groupFriendsString)")
                 }
                 
             } else {
@@ -93,6 +92,7 @@ class Model {
                 println(error?.userInfo)
             }
         }
+        
     }
     
     func fetchAllObjects(){
@@ -100,6 +100,7 @@ class Model {
         
         var query = PFUser.query()
         var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        self.userObject = user
         
         var queryBill: PFQuery = PFQuery(className: "Bill")
         queryBill.whereKey("groupName", equalTo: user["group"]!)
@@ -180,6 +181,33 @@ class Model {
         user["group"] = groupName
         
         if object.save() && user.save() {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func joinGroupWhithoutLogin(name:String) -> Bool{
+        /*var query = PFUser.query()
+        var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
+        
+        var queryGroup: PFQuery = PFQuery(className: "Group")
+        
+        queryGroup.whereKey("groupName", equalTo: user["group"]!)
+        
+        var temp: NSArray = queryGroup.findObjects() as! NSArray
+        
+        var group : NSMutableArray = temp.mutableCopy() as! NSMutableArray
+
+        var g : PFObject = group.objectAtIndex(0) as! PFObject*/
+        
+       
+            
+        self.groupFriendsString.append(name)
+            
+        groupObject!["groupFriends"] = self.groupFriendsString
+        if groupObject!.save(){
+            refreshData()
             return true
         } else {
             return false
@@ -271,13 +299,42 @@ class Model {
         
         self.billObjects.removeObjectAtIndex(index)
     }
+    func deleteUserOfGroup(index: Int) {
+        println("----------Delete at \(index)")
+        //println(billObjects)
+        println(self.groupFriendsString)
+        println(self.groupObject!)
+        
+        self.groupFriendsString.removeAtIndex(index)
+        
+        self.groupObject!["groupFriends"] = self.groupFriendsString
+        
+        self.groupObject!.save()
+        
+        
+        /*
+        var bill = billObjects.objectAtIndex(index) as! PFObject
+        
+        
+        
+        var query = PFQuery(className:"Bill")
+        query.getObjectInBackgroundWithId(bill.objectId!) {
+            (bill: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                println(error)
+            } else {
+                bill?.deleteInBackground()
+            }}
+        
+        //self.billObjects.removeObjectAtIndex(index)*/
+    }
     
     func saveBill(#description:String, value:String) {
         var object : PFObject!
         
         object = PFObject(className: "Bill")
         
-        object["username"] = PFUser.currentUser()?.username
+        object["whoCreated"] = self.userObject!["username"] as! String
         
         object["description"] = description
         object["value"] = NSString(string: value).floatValue
@@ -302,7 +359,33 @@ class Model {
                 println("Nao mandou..")
             }
         }
-        addedUsers.removeAll(keepCapacity: false)
+        //addedUsers.removeAll(keepCapacity: false)
+    }
+    func editBill(#description:String, value:String, billId: String) {
+        
+        println(description)
+        println(value)
+        println(billId)
+        var queryBill: PFQuery = PFQuery(className: "Bill")
+        queryBill.getObjectInBackgroundWithId(billId) {
+            (billToEdit: PFObject?, error: NSError?) -> Void in
+            if error == nil && billToEdit != nil {
+                println(billToEdit)
+                billToEdit!["whoCreated"] = self.userObject!["username"] as! String
+                
+                billToEdit!["description"] = description
+                billToEdit!["value"] = NSString(string: value).floatValue
+                
+                billToEdit!["sharedWith"] = self.addedUsers
+                billToEdit!.saveEventually()
+                
+                
+                self.addedUsers.removeAll(keepCapacity: false)
+            } else {
+                println(error)
+            }
+        }
+        
     }
     func addAddedUsers(name: String){
         self.addedUsers.append(name)
@@ -350,11 +433,11 @@ class Model {
     
     func createDebtRelations(groupFriends: [String],groupName:String) {
         
-        var queryBill: PFQuery = PFQuery(className: "Debts")
+        var queryDebts: PFQuery = PFQuery(className: "Debts")
         
-        queryBill.whereKey("groupName", equalTo: groupName)
+        queryDebts.whereKey("groupName", equalTo: groupName)
         
-        queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+        queryDebts.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                     var temp: NSArray = objects as! NSArray
                 var debtsToDelete : NSMutableArray = temp.mutableCopy() as! NSMutableArray
@@ -363,18 +446,17 @@ class Model {
                     var group : PFObject = debtToDelte as! PFObject
                     group.deleteInBackground()
                 }
-                
             } else {
                 println(error?.userInfo)
             }
         }
-    
-    
-        var queryDebts: PFQuery = PFQuery(className: "Debts")
+        
+
+        /*var queryDebts: PFQuery = PFQuery(className: "Debts")
         
         queryDebts.whereKey("groupName", equalTo: groupName)
 
-        var tempDebts: NSArray = queryDebts.findObjects() as! NSArray
+        var tempDebts: NSArray = queryDebts.findObjects() as! NSArray*/
         //println(groupName)
         for i in 1..<groupFriends.count {
                 for j in (i+1)...groupFriends.count {
@@ -391,6 +473,7 @@ class Model {
                     object.save()
             }
         }
+        
     }
     
     func getDebtId(paidBy:String,sharedUser:String,groupFriends:[String]) -> (debtId: String, direction: Int){
@@ -419,6 +502,7 @@ class Model {
     }
     
     func refreshDebts(groupFriends: [String],groupName: String) {
+        self.debtObjects.removeAllObjects()
         var localDebtStorage = Dictionary<String, Float>()
         for i in 1..<groupFriends.count {
             for j in (i+1)...groupFriends.count {
@@ -436,7 +520,7 @@ class Model {
             var paidBy : String = bill["paidBy"] as! String
             var sharedWith : [String] = bill["sharedWith"] as! [String]
             var value : Float = bill["value"] as! Float
-            //println(paidBy + sharedWith[0])
+            println(paidBy + sharedWith[0])
             for sharedUser in sharedWith {
                 if sharedUser != paidBy {
                     var (dbId,direction) = getDebtId(paidBy, sharedUser: sharedUser, groupFriends: groupFriends)
@@ -458,6 +542,7 @@ class Model {
                     var debToUpdate : PFObject = temp.objectAtIndex(0) as! PFObject
                     debToUpdate["value"] = localDebt.1
                     debToUpdate.saveEventually()
+                    self.debtObjects.addObject(debToUpdate)
                     println("Group: \(groupName) billCode \(localDebt.0) value: \(localDebt.1)")
                     
                 } else {
@@ -485,14 +570,14 @@ class Model {
             num = num + 1
         }
         println(self.debtObjects.count)
-        if self.debtObjects.count == getNumOfDebts(groupFriends.count) {
-            println("GET RELATIONS")
-            refreshDebts(groupFriends,groupName:userGroupName)
-        } else {
+        if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
             println("CREATE RELATIONS")
             //groupFriends.append("a")
             createDebtRelations(groupFriends,groupName:userGroupName)
         }
+        println("GET RELATIONS")
+        refreshDebts(groupFriends,groupName:userGroupName)
+
         
     }
    
