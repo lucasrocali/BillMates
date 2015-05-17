@@ -110,8 +110,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                                 
                             println("Alread Logged")
                             println(PFUser.currentUser()!)
-                            //self.model.fetchAllObjectsFromLocalDataStore()
-                            //self.model.fetchAllObjects()
+                            self.model.refreshData()
                         }
                     
                     } else {

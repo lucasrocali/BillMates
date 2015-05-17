@@ -24,7 +24,11 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
             println("deletou!")
             self.logout()
         } else {
-            println("You cannot leave the group!")
+            let alert = UIAlertView()
+            alert.title = "You cannot leave the group"
+            alert.message = "Because you share a bill"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
         }
     }
     
@@ -43,16 +47,28 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     @IBAction func buttonAddUser(sender: UIButton) {
         if !model.isTotallyEmpty(txtName.text) {
-            model.joinGroupWhithoutLogin(txtName.text)
-            txtName.text = ""
-            self.view.endEditing(true)
-            self.addedUsersTableView.reloadData()
-            txtName.text = ""
+            if model.joinGroupWhithoutLogin(txtName.text) {
+                txtName.text = ""
+                self.view.endEditing(true)
+                self.addedUsersTableView.reloadData()
+                txtName.text = ""
+            }
+            else {
+                let alert = UIAlertView()
+                alert.title = "You cannot add an user that have an account"
+                alert.message = "The user should join the group"
+                alert.addButtonWithTitle("Ok")
+                alert.show()
+            }
         }
+    }
+    override func viewDidAppear(animated: Bool) {
+        self.addedUsersTableView.reloadData()
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if model.deleteUserOfGroup(indexPath.row) {
+        var response : Int = model.deleteUserOfGroup(indexPath.row)
+        if response == 0{
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
             let managedContext = appDelegate.managedObjectContext!
@@ -64,11 +80,17 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
                 //model.deleteUserOfGroup(indexPath.row)
                 self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }
-        } else {
+        } else if response == 1{
             let alert = UIAlertView()
-            alert.title = "Alert"
-            alert.message = "Here's a message"
-            alert.addButtonWithTitle("Understod")
+            alert.title = "You cannot delete the user"
+            alert.message = "Because the user shares a bill"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        } else if response  == 2{
+            let alert = UIAlertView()
+            alert.title = "You cannot delete the user"
+            alert.message = "The user should leave the group"
+            alert.addButtonWithTitle("Ok")
             alert.show()
         }
         

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate{
     
     var model = Model.sharedInstance
 
@@ -18,6 +18,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var txtValue: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblPaidBy: UILabel!
+    @IBOutlet weak var lblPerPerson: UILabel!
     
      var billCellIndex: Int = -1
     var billId : String?
@@ -31,9 +32,6 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
             if billCellIndex < 0{
                 self.model.saveBill(description: txtDescription.text, value: txtValue.text)
-                //elf.navigationController?.popToRootViewControllerAnimated(true)
-                //var billListViewController = BillsListTableViewController()
-                //model.refreshData()
             } else {
                 self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex)
                 
@@ -41,7 +39,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         var user : PFUser = model.userObject!
@@ -64,8 +62,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             lblPaidBy.text = "Paid by: " + paidByStr
             model.addedUsers = object["sharedWith"] as! [String]
             billId = object.objectId
-        
-            //txtValue.text = String(object["value"] as! Float)
+            var perPerson : Float = valueFloat/Float(model.addedUsers.count)
+            lblPerPerson.text = String(format: " %.2f per peson",perPerson)
         }
     }
 
@@ -79,6 +77,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        self.view.endEditing(true)
         
         var friendName: String = self.model.groupFriendsString[indexPath.row]
         
@@ -87,7 +86,13 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             model.addAddedUsers(friendName)
         }
-
+        if (!model.isTotallyEmpty(txtValue.text)) && model.addedUsers.count > 0{
+            var value : Float =  NSString(string: txtValue.text).floatValue
+            var perPerson : Float = value/Float(model.addedUsers.count)
+            lblPerPerson.text = String(format: " %.2f per peson",perPerson)
+        } else {
+            lblPerPerson.text = "0.00 per peson"
+        }
         tableView.reloadData()
     }
     
