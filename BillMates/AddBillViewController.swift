@@ -35,7 +35,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                 //var billListViewController = BillsListTableViewController()
                 //model.refreshData()
             } else {
-                self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!)
+                self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex)
                 
             }
             self.navigationController?.popToRootViewControllerAnimated(true)
@@ -46,11 +46,12 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         var user : PFUser = model.userObject!
         var paidByUsername : String = user["username"]! as! String
-        lblPaidBy.text = "Paid by: " + paidByUsername
+        
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.delegate = self
         
         if billCellIndex < 0{
+            lblPaidBy.text = "Paid by: " + paidByUsername
             println("Add")
             model.addedUsers.removeAll(keepCapacity: false)
         } else {
@@ -59,8 +60,11 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             txtDescription.text = object["description"] as! String
             var valueFloat : Float = object["value"] as! Float
             txtValue.text = "\(valueFloat)"
+            var paidByStr = object["paidBy"] as! String
+            lblPaidBy.text = "Paid by: " + paidByStr
             model.addedUsers = object["sharedWith"] as! [String]
             billId = object.objectId
+        
             //txtValue.text = String(object["value"] as! Float)
         }
     }

@@ -17,22 +17,27 @@ class BillsListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //model.getBills()
+        
         model.refreshData()
         self.tableView.reloadData()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     @IBAction func logoutBtn(sender: UIBarButtonItem) {
+        self.logout()
+    }
+    
+    func logout() {
+        println("Log out e chama view")
         PFUser.logOut()
-        //var initialVC = InitialViewController()
-        //initialVC.loginSetup()
+        model.resetModel()
         
         var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
         
         self.presentViewController(vc, animated: false, completion: nil)
-        
+
     }
 
     func refresh(sender:AnyObject)
@@ -42,7 +47,7 @@ class BillsListTableViewController: UITableViewController {
         //model.calculateDebts()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-        //model.refreshData()
+        model.refreshData()
     }
     
     

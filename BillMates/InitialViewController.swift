@@ -21,7 +21,8 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.loginSetup()
+        //model.resetModel()
+        loginSetup()
     }
     
     func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
@@ -93,26 +94,30 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                         var txt: NSMutableArray = NSMutableArray()
                         txt = temp.mutableCopy() as! NSMutableArray
                         
-                        var user = txt.objectAtIndex(0)
-                        if user["group"]! == nil {
-                            
+                        var user : PFUser = txt.objectAtIndex(0) as! PFUser
+                         var userGroup : String = "x"
+                        if user["group"] != nil {
+                            userGroup = user["group"] as! String
+                            println(userGroup)
+                        }
+                        if user["group"] == nil || userGroup == "nil"{
+                        
                             var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            
+                        
                             var vc : UINavigationController = storyBoard.instantiateViewControllerWithIdentifier("groupViewController") as! UINavigationController
                             
                             self.presentViewController(vc, animated: true, completion: nil)
-                            
+                                
                             println("Alread Logged")
                             println(PFUser.currentUser()!)
                             //self.model.fetchAllObjectsFromLocalDataStore()
                             //self.model.fetchAllObjects()
-                            
                         }
-                    }
-                } else {
-                    println(error?.userInfo)
+                    
+                    } else {
+                            println(error?.userInfo)
+                        }
                 }
-                
             }
         }
 

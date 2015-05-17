@@ -11,6 +11,7 @@ import Parse
 import ParseUI
 
 class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
 
     var model = Model.sharedInstance
     
@@ -18,6 +19,28 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var txtName: UITextField!
     
+    @IBAction func btnLeaveGroup(sender: UIButton) {
+        if model.deleteGroupOfUser() {
+            println("deletou!")
+            self.logout()
+        } else {
+            println("You cannot leave the group!")
+        }
+    }
+    
+    func logout() {
+        println("chama ini view")
+        //PFUser.logOut()
+        //var initialVC = InitialViewController()
+        //initialVC.loginSetup()
+        
+        var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
+        
+        self.presentViewController(vc, animated: false, completion: nil)
+        
+    }
     @IBAction func buttonAddUser(sender: UIButton) {
         if !model.isTotallyEmpty(txtName.text) {
             model.joinGroupWhithoutLogin(txtName.text)
@@ -29,17 +52,24 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        if model.deleteUserOfGroup(indexPath.row) {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let managedContext = appDelegate.managedObjectContext!
+            let managedContext = appDelegate.managedObjectContext!
         
-        if editingStyle == UITableViewCellEditingStyle.Delete
-        {
+            if editingStyle == UITableViewCellEditingStyle.Delete
+            {
             
-            //println("delete at \(indexPath.row)")
-            model.deleteUserOfGroup(indexPath.row)
-            self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                //println("delete at \(indexPath.row)")
+                //model.deleteUserOfGroup(indexPath.row)
+                self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
+        } else {
+            let alert = UIAlertView()
+            alert.title = "Alert"
+            alert.message = "Here's a message"
+            alert.addButtonWithTitle("Understod")
+            alert.show()
         }
         
     }
