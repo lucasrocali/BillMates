@@ -174,11 +174,11 @@
             </objects>
             <point key="canvasLocation" x="3757" y="205"/>
         </scene>
-        <!--Item-->
+        <!--Bills List-->
         <scene sceneID="rnj-d3-euu">
             <objects>
                 <navigationController id="Ote-QQ-Ppj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="wkG-Tu-mD1"/>
+                    <tabBarItem key="tabBarItem" title="Bills List" image="BillList.png" id="wkG-Tu-mD1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bTd-Le-2bu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -222,7 +222,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMl-ia-jwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2134" y="1191"/>
+            <point key="canvasLocation" x="4054" y="1831"/>
         </scene>
         <!--Relational BIlls Table View Controller-->
         <scene sceneID="FA0-Yl-bJj">
@@ -262,7 +262,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgX-QH-NaR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2778" y="1191"/>
+            <point key="canvasLocation" x="4698" y="1831"/>
         </scene>
         <!--Create Or Join Group View Controller-->
         <scene sceneID="dq1-Cd-nrj">
@@ -448,11 +448,39 @@
                         <segue destination="Ote-QQ-Ppj" kind="relationship" relationship="viewControllers" id="Ep2-FV-HsG"/>
                         <segue destination="gdR-T8-hRw" kind="relationship" relationship="viewControllers" id="5D5-zQ-2PT"/>
                         <segue destination="7gI-AI-R7B" kind="relationship" relationship="viewControllers" id="jJB-3J-lvN"/>
+                        <segue destination="t33-ue-2rl" kind="relationship" relationship="viewControllers" id="TFb-Nc-Jx6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5U-26-TRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1338" y="205"/>
+        </scene>
+        <!--To Do List Table View Controller-->
+        <scene sceneID="yht-NC-wyp">
+            <objects>
+                <tableViewController id="t33-ue-2rl" userLabel="To Do List Table View Controller" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NDv-Ux-yrN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H4v-cg-ejb">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H4v-cg-ejb" id="eX7-Uj-Tvf">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="t33-ue-2rl" id="roz-iP-dOC"/>
+                            <outlet property="delegate" destination="t33-ue-2rl" id="icH-61-TVK"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="To-do List" image="TodoList.png" id="6cF-Yq-VCi"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qd2-7H-Iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1511" y="1204"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7zZ-UB-m6g">
@@ -472,11 +500,11 @@
             </objects>
             <point key="canvasLocation" x="1266" y="2023"/>
         </scene>
-        <!--Item-->
+        <!--Balance-->
         <scene sceneID="kSW-2b-yxc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gI-AI-R7B" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="UZM-rZ-Ans"/>
+                    <tabBarItem key="tabBarItem" title="Balance" image="BalanceIcon.png" id="UZM-rZ-Ans"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mlv-My-R6Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -489,13 +517,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6m-Vy-f0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350" y="1185"/>
+            <point key="canvasLocation" x="3406" y="1849"/>
         </scene>
-        <!--Item-->
+        <!--Add User-->
         <scene sceneID="RaO-BN-KCj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gdR-T8-hRw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="meS-56-2J8"/>
+                    <tabBarItem key="tabBarItem" title="Add User" image="AddUser.png" id="meS-56-2J8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qY7-Ng-k1Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -511,6 +539,12 @@
             <point key="canvasLocation" x="3774" y="935"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AddUser.png" width="30" height="30"/>
+        <image name="BalanceIcon.png" width="30" height="30"/>
+        <image name="BillList.png" width="30" height="30"/>
+        <image name="TodoList.png" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Uug-fY-bCx"/>
     </inferredMetricsTieBreakers>
