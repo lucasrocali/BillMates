@@ -45,6 +45,9 @@
 		78CBAD9B1AF2029700C862D7 /* Lucas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD951AF2029700C862D7 /* Lucas.jpg */; };
 		78CBAD9C1AF2029700C862D7 /* Mateus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD961AF2029700C862D7 /* Mateus.jpg */; };
 		78CBAD9D1AF2029700C862D7 /* Vinicius.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78CBAD971AF2029700C862D7 /* Vinicius.jpg */; };
+		DFA5E51C1B0A3D5F00EECC62 /* BillMatesIcon58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */; };
+		DFA5E51D1B0A3D5F00EECC62 /* BillMatesIcon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */; };
+		DFA5E51E1B0A3D5F00EECC62 /* BillMatesIcon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,9 @@
 		78CBAD951AF2029700C862D7 /* Lucas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lucas.jpg; sourceTree = "<group>"; };
 		78CBAD961AF2029700C862D7 /* Mateus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Mateus.jpg; sourceTree = "<group>"; };
 		78CBAD971AF2029700C862D7 /* Vinicius.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vinicius.jpg; sourceTree = "<group>"; };
+		DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon58x58.png; sourceTree = "<group>"; };
+		DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon80x80.png; sourceTree = "<group>"; };
+		DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon120x120.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +246,9 @@
 			isa = PBXGroup;
 			children = (
 				78CBAD921AF2029700C862D7 /* blankContact.jpg */,
+				DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */,
+				DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */,
+				DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */,
 				78CBAD931AF2029700C862D7 /* Fellipe.jpg */,
 				78CBAD941AF2029700C862D7 /* Joao.jpg */,
 				78CBAD951AF2029700C862D7 /* Lucas.jpg */,
@@ -336,14 +345,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				78CBAD9C1AF2029700C862D7 /* Mateus.jpg in Resources */,
+				DFA5E51C1B0A3D5F00EECC62 /* BillMatesIcon58x58.png in Resources */,
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
 				78CBAD9A1AF2029700C862D7 /* Joao.jpg in Resources */,
 				78CBAD991AF2029700C862D7 /* Fellipe.jpg in Resources */,
 				78CBAD9B1AF2029700C862D7 /* Lucas.jpg in Resources */,
+				DFA5E51D1B0A3D5F00EECC62 /* BillMatesIcon80x80.png in Resources */,
 				7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */,
 				78CBAD981AF2029700C862D7 /* blankContact.jpg in Resources */,
 				78CBAD9D1AF2029700C862D7 /* Vinicius.jpg in Resources */,
+				DFA5E51E1B0A3D5F00EECC62 /* BillMatesIcon120x120.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
