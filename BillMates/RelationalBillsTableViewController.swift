@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-
+//Comments na RelationBills
 class RelationalBillsTableViewController: UITableViewController {
 
     var model = Model.sharedInstance
