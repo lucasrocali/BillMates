@@ -34,10 +34,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func logout() {
         println("chama ini view")
-        //PFUser.logOut()
-        //var initialVC = InitialViewController()
-        //initialVC.loginSetup()
-        
         var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
@@ -75,9 +71,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         
             if editingStyle == UITableViewCellEditingStyle.Delete
             {
-            
-                //println("delete at \(indexPath.row)")
-                //model.deleteUserOfGroup(indexPath.row)
                 self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }
         } else if response == 1{
@@ -115,17 +108,14 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //resignFirstResponder()
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
     }
     func DismissKeyboard(){
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

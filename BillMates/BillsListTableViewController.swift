@@ -97,11 +97,6 @@ class BillsListTableViewController: UITableViewController {
         }
         
     }
-    /*
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("listToEdit", sender: tableView)
-    }
-    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if segue.identifier == "listToEdit"

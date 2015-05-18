@@ -14,11 +14,7 @@ import ParseUI
 
 class Model {
     
-    struct Relation {
-        var debtStringCell : String = ""
-        var user1 : String = ""
-        var user2 : String = ""
-    }
+    
     var addedUsers: [String] = [String]()
     
     var billObjects: NSMutableArray = NSMutableArray()
@@ -65,8 +61,6 @@ class Model {
                  if temp.count > 0 {
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
                     println("\tbillObjects saved \(self.billObjects.count)")
-                    //var vc = BillsListTableViewController()
-                    //vc.tableView.reloadData()
                 }
                 
             } else {
@@ -357,8 +351,7 @@ class Model {
         if temp.count > 0 {
             return 2
         }
-        //println(user)
-        
+ 
         println("Delete user at \(index)")
     
         self.groupFriendsString.removeAtIndex(index)
@@ -404,11 +397,6 @@ class Model {
         //addedUsers.removeAll(keepCapacity: false)
     }
     func editBill(#description:String, value:String, billId: String,cellId:Int) {
-        
-        /*println(description)
-        println(value)
-        println(billId)*/
-        
         var queryBill: PFQuery = PFQuery(className: "Bill")
         queryBill.getObjectInBackgroundWithId(billId) {
             (billToEdit: PFObject?, error: NSError?) -> Void in
@@ -495,33 +483,7 @@ class Model {
             
         }
         self.debtObjects.removeAllObjects()
-        /*
-        var queryDebts: PFQuery = PFQuery(className: "Debts")
-        
-        queryDebts.whereKey("groupName", equalTo: groupName)
-        
-        queryDebts.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                    var temp: NSArray = objects as! NSArray
-                var debtsToDelete : NSMutableArray = temp.mutableCopy() as! NSMutableArray
-                for debtToDelte in debtsToDelete {
-                    println("delete IHAAAA")
-                    var debt : PFObject = debtToDelte as! PFObject
-                    debt.deleteInBackground()
-                }
-            } else {
-                println(error?.userInfo)
-            }
-        }
-        */
-
-        /*var queryDebts: PFQuery = PFQuery(className: "Debts")
-        
-        queryDebts.whereKey("groupName", equalTo: groupName)
-
-        var tempDebts: NSArray = queryDebts.findObjects() as! NSArray*/
-        //println(groupName)
-        for i in 1..<groupFriends.count {
+                for i in 1..<groupFriends.count {
                 for j in (i+1)...groupFriends.count {
                     println("Relation between \(i) and \(j)")
                     var object : PFObject!
@@ -575,11 +537,7 @@ class Model {
                 localDebtStorage[dbtID] = 0.0 as Float
             }
         }
-        //println(self.billObjects)
         for billObject in self.billObjects {  //----
-            //println(billObject)
-            
-            
             var bill : PFObject = billObject as! PFObject
             
             var paidBy : String = bill["paidBy"] as! String
@@ -616,8 +574,6 @@ class Model {
                     }
                 }
             }
-            
-            //println(self.debtStringCell)
         } else {
             for localDebt in localDebtStorage {
                 var queryDebts: PFQuery = PFQuery(className: "Debts")
@@ -661,7 +617,6 @@ class Model {
                     }
                 }
             }
-            
         }
         println(filteredBills)
     }
@@ -686,33 +641,9 @@ class Model {
             relation.debtStringCell = debtStr
             relation.user1 = user1
             relation.user2 = user2
+            relation.value = value
             self.relations.append(relation)
-            
         }
-
-        
-        /*
-        self.debtStringCell.removeAll(keepCapacity: false)
-        var debts = self.debtObjects
-        
-        //println(debts)
-        var debtStr : String = ""
-        for debt in debts {
-            var user1 : String = debt["user1"] as! String
-            var user2 : String = debt["user2"] as! String
-            var value : Float = debt["value"] as! Float
-            if value < 0 {
-                debtStr = user1 + " --> " + user2 + " = " +  String(format: "%.2f",value*(-1))
-            } else if value > 0{
-                debtStr = user1 + " <-- " + user2 + " = " +  String(format: "%.2f",value)
-            } else {
-                debtStr =  user1 + " -- " + user2 + " = " +  String(format: "%.2f",value)
-            }
-            self.debtStringCell.append(debtStr)
-            
-        }
-        println(self.debtStringCell)*/
-
     }
     func getDebtStringCell(index:Int) -> String {
         return self.relations[index].debtStringCell
