@@ -93,10 +93,12 @@ class Model {
         queryDebt.whereKey("groupName", equalTo: user["group"]!)
         queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
+                println("THREAD PRA PEGAR OS DEBTS!!!!!")
                 var temp: NSArray = objects as! NSArray
                 self.debtObjects  = temp.mutableCopy() as! NSMutableArray
                 println("\tdebtObjects saved \(self.debtObjects)")
-                if self.debtObjects.count > 0 {
+                 if self.debtObjects.count > 0 {
+                    println("CHAMOU FUDEU")
                     self.calculateDebts(true)
                 }
             } else {
@@ -622,6 +624,7 @@ class Model {
     }
     
     func generateDebtStrings() {
+        println("GENERATE")
         self.relations = []
         var debts = self.debtObjects
         
@@ -645,9 +648,10 @@ class Model {
             self.relations.append(relation)
         }
     }
+    /*
     func getDebtStringCell(index:Int) -> String {
         return self.relations[index].debtStringCell
-    }
+    }*/
     
     func calculateDebts(background:Bool) {
         if self.groupObject != nil{
