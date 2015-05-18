@@ -139,6 +139,38 @@
             endingLineNumber = "418"
             landmarkName = "editBill(description:value:billId:cellId:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BillMates.Model.(editBill (BillMates.Model) -&gt; (description : Swift.String, value : Swift.String, billId : Swift.String, cellId : Swift.Int) -&gt; ()).(closure #1)"
+                  moduleName = "BillMates"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rocali/Documents/BillMates/BillMates/Model.swift"
+                  timestampString = "453662906.247733"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "418"
+                  endingLineNumber = "418"
+                  offsetFromSymbolStart = "2665">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BillMates.Model.(editBill (BillMates.Model) -&gt; (description : Swift.String, value : Swift.String, billId : Swift.String, cellId : Swift.Int) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "BillMates"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rocali/Documents/BillMates/BillMates/Model.swift"
+                  timestampString = "453662906.248035"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "419"
+                  endingLineNumber = "419"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
