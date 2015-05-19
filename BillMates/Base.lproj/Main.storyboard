@@ -66,7 +66,7 @@
         <!--Add Bill View Controller-->
         <scene sceneID="p6B-BB-Ury">
             <objects>
-                <viewController id="gLj-HQ-rlL" userLabel="Add Bill View Controller" customClass="AddBillViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddBillViewController" storyboardIdentifier="AddBillViewController" id="gLj-HQ-rlL" userLabel="Add Bill View Controller" customClass="AddBillViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7gD-Yc-D6K"/>
                         <viewControllerLayoutGuide type="bottom" id="tF4-tT-y5j"/>
@@ -101,7 +101,7 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GWK-UM-HMn" userLabel="txtValue">
-                                <rect key="frame" x="412" y="94" width="97" height="30"/>
+                                <rect key="frame" x="226" y="94" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
@@ -123,30 +123,67 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baZ-cb-ZyT">
+                                <rect key="frame" x="421" y="98" width="55" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8bw-AO-aag"/>
+                                    <constraint firstAttribute="height" constant="50" id="rDT-ab-uui"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2E-bS-7Pc" userLabel="Add Image">
+                                <rect key="frame" x="364" y="98" width="30" height="23"/>
+                                <state key="normal" image="Camera.png"/>
+                                <connections>
+                                    <action selector="addPicture:" destination="gLj-HQ-rlL" eventType="touchUpInside" id="xrK-H7-vWa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GWK-UM-HMn" firstAttribute="centerY" secondItem="F2E-bS-7Pc" secondAttribute="centerY" id="73n-hz-Cvu"/>
+                            <constraint firstItem="GWK-UM-HMn" firstAttribute="centerY" secondItem="F2E-bS-7Pc" secondAttribute="centerY" id="7FA-kx-AYC"/>
+                            <constraint firstItem="F2E-bS-7Pc" firstAttribute="leading" secondItem="baZ-cb-ZyT" secondAttribute="trailing" constant="10" id="8XO-xG-Es3"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="leading" secondItem="GWK-UM-HMn" secondAttribute="trailing" constant="10" id="H6e-kf-kbG"/>
                             <constraint firstItem="pdl-JS-JnU" firstAttribute="top" secondItem="kbk-kr-YlJ" secondAttribute="bottom" constant="20" id="HcR-iO-ejn"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="width" secondItem="F2E-bS-7Pc" secondAttribute="width" id="Ltr-L3-a1A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GWK-UM-HMn" secondAttribute="trailing" constant="50" id="NDW-Ml-C1b"/>
-                            <constraint firstItem="kbk-kr-YlJ" firstAttribute="leading" secondItem="GkG-FE-WHr" secondAttribute="leadingMargin" constant="50" id="Ron-c2-Jzf"/>
+                            <constraint firstItem="kbk-kr-YlJ" firstAttribute="leading" secondItem="GkG-FE-WHr" secondAttribute="leadingMargin" constant="20" id="Ron-c2-Jzf"/>
                             <constraint firstItem="avO-eB-zdc" firstAttribute="top" secondItem="pdl-JS-JnU" secondAttribute="bottom" constant="10" id="SGG-9J-D0f"/>
                             <constraint firstItem="mer-qc-mRg" firstAttribute="top" secondItem="GWK-UM-HMn" secondAttribute="bottom" constant="31" id="T0c-MD-cHe"/>
                             <constraint firstAttribute="centerX" secondItem="nnl-kX-ehS" secondAttribute="centerX" id="Xur-YK-9Pn"/>
-                            <constraint firstItem="GWK-UM-HMn" firstAttribute="leading" secondItem="kbk-kr-YlJ" secondAttribute="trailing" constant="50" id="XyU-BW-i9d"/>
+                            <constraint firstItem="GWK-UM-HMn" firstAttribute="leading" secondItem="kbk-kr-YlJ" secondAttribute="trailing" constant="20" id="XyU-BW-i9d"/>
                             <constraint firstAttribute="centerX" secondItem="mer-qc-mRg" secondAttribute="centerX" id="ZS5-Eu-9pa"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="centerY" secondItem="F2E-bS-7Pc" secondAttribute="centerY" id="aJv-Ce-lsW"/>
+                            <constraint firstItem="F2E-bS-7Pc" firstAttribute="leading" secondItem="GWK-UM-HMn" secondAttribute="trailing" constant="20" id="aUG-FG-QfA"/>
                             <constraint firstItem="mer-qc-mRg" firstAttribute="top" secondItem="avO-eB-zdc" secondAttribute="bottom" id="cBe-uM-UQY"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="leading" secondItem="F2E-bS-7Pc" secondAttribute="trailing" constant="10" id="d5Q-cl-XpM"/>
                             <constraint firstItem="tF4-tT-y5j" firstAttribute="top" secondItem="nnl-kX-ehS" secondAttribute="bottom" constant="10" id="goy-3H-Tf0"/>
                             <constraint firstAttribute="centerX" secondItem="avO-eB-zdc" secondAttribute="centerX" id="hQz-dd-rYG"/>
+                            <constraint firstItem="GWK-UM-HMn" firstAttribute="centerY" secondItem="baZ-cb-ZyT" secondAttribute="centerY" id="hUc-3l-dGb"/>
                             <constraint firstItem="tF4-tT-y5j" firstAttribute="top" secondItem="mer-qc-mRg" secondAttribute="bottom" constant="50" id="iSW-lp-5iK"/>
                             <constraint firstItem="kbk-kr-YlJ" firstAttribute="top" secondItem="7gD-Yc-D6K" secondAttribute="bottom" constant="30" id="mLj-U3-MuO"/>
                             <constraint firstItem="GWK-UM-HMn" firstAttribute="top" secondItem="7gD-Yc-D6K" secondAttribute="bottom" constant="30" id="sGf-Da-SWD"/>
+                            <constraint firstItem="F2E-bS-7Pc" firstAttribute="leading" secondItem="GWK-UM-HMn" secondAttribute="trailing" constant="10" id="tDh-LY-Vb1"/>
                             <constraint firstItem="mer-qc-mRg" firstAttribute="top" secondItem="pdl-JS-JnU" secondAttribute="bottom" id="u3w-Pr-hwP"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="height" secondItem="F2E-bS-7Pc" secondAttribute="height" id="uV9-ql-sbZ"/>
                             <constraint firstAttribute="centerX" secondItem="pdl-JS-JnU" secondAttribute="centerX" id="y1A-8q-UJa"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="leading" secondItem="F2E-bS-7Pc" secondAttribute="trailing" constant="10" id="z11-Yc-lfD"/>
+                            <constraint firstItem="baZ-cb-ZyT" firstAttribute="centerY" secondItem="F2E-bS-7Pc" secondAttribute="centerY" id="zpe-SV-VY7"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="7FA-kx-AYC"/>
+                                <exclude reference="NDW-Ml-C1b"/>
+                                <exclude reference="hUc-3l-dGb"/>
                                 <exclude reference="T0c-MD-cHe"/>
                                 <exclude reference="u3w-Pr-hwP"/>
+                                <exclude reference="8XO-xG-Es3"/>
+                                <exclude reference="aUG-FG-QfA"/>
+                                <exclude reference="H6e-kf-kbG"/>
+                                <exclude reference="Ltr-L3-a1A"/>
+                                <exclude reference="aJv-Ce-lsW"/>
+                                <exclude reference="d5Q-cl-XpM"/>
+                                <exclude reference="uV9-ql-sbZ"/>
                             </mask>
                         </variation>
                     </view>
@@ -163,11 +200,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="baZ-cb-ZyT" id="ocH-VD-n5Z"/>
                         <outlet property="lblPaidBy" destination="pdl-JS-JnU" id="ecg-hS-iUQ"/>
                         <outlet property="lblPerPerson" destination="nnl-kX-ehS" id="R95-OD-LAm"/>
                         <outlet property="tableView" destination="mer-qc-mRg" id="6ef-dR-ii9"/>
                         <outlet property="txtDescription" destination="kbk-kr-YlJ" id="wHC-cd-kUH"/>
                         <outlet property="txtValue" destination="GWK-UM-HMn" id="Qmx-z0-obi"/>
+                        <segue destination="mlM-YO-v77" kind="popover" identifier="toImageDetail" popoverAnchorView="GkG-FE-WHr" id="mjh-a0-YlU">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74y-ux-jyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -177,7 +218,7 @@
         <!--Bills List-->
         <scene sceneID="rnj-d3-euu">
             <objects>
-                <navigationController id="Ote-QQ-Ppj" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="BillsListNaviagationController" storyboardIdentifier="BillsListNaviagationController" id="Ote-QQ-Ppj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bills List" image="BillList.png" id="wkG-Tu-mD1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bTd-Le-2bu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -343,6 +384,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8tX-tR-Cvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2078" y="2023"/>
+        </scene>
+        <!--Image Detail View Controller-->
+        <scene sceneID="c8B-zd-g7T">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tvM-V7-Frt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController restorationIdentifier="ImageDetailViewController" storyboardIdentifier="ImageDetailViewController" id="mlM-YO-v77" customClass="ImageDetailViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mpT-au-L2d"/>
+                        <viewControllerLayoutGuide type="bottom" id="zBm-Un-QbQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OQ4-sD-CIv">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="imageDetailViewController" translatesAutoresizingMaskIntoConstraints="NO" id="clW-TR-ySU">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="vP1-2l-w15"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="clW-TR-ySU" secondAttribute="height" id="11D-QV-g2t"/>
+                            <constraint firstItem="zBm-Un-QbQ" firstAttribute="top" secondItem="clW-TR-ySU" secondAttribute="bottom" id="4Uk-vC-6og"/>
+                            <constraint firstAttribute="width" secondItem="clW-TR-ySU" secondAttribute="width" id="7YH-Dm-DB4"/>
+                            <constraint firstAttribute="width" secondItem="clW-TR-ySU" secondAttribute="width" id="9FM-IK-aAf"/>
+                            <constraint firstItem="clW-TR-ySU" firstAttribute="top" secondItem="mpT-au-L2d" secondAttribute="bottom" constant="10" id="9Us-yi-76T"/>
+                            <constraint firstAttribute="height" secondItem="clW-TR-ySU" secondAttribute="height" id="HXS-Dz-btW"/>
+                            <constraint firstItem="clW-TR-ySU" firstAttribute="top" secondItem="mpT-au-L2d" secondAttribute="bottom" constant="20" id="JYQ-mS-fMP"/>
+                            <constraint firstItem="zBm-Un-QbQ" firstAttribute="top" secondItem="clW-TR-ySU" secondAttribute="bottom" id="z0h-d6-GdR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="11D-QV-g2t"/>
+                                <exclude reference="7YH-Dm-DB4"/>
+                                <exclude reference="HXS-Dz-btW"/>
+                                <exclude reference="JYQ-mS-fMP"/>
+                                <exclude reference="4Uk-vC-6og"/>
+                                <exclude reference="z0h-d6-GdR"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageDetail" destination="clW-TR-ySU" id="Tdh-c9-INz"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="5006" y="218"/>
         </scene>
         <!--Add User View Controller-->
         <scene sceneID="cDf-Sf-G4d">
@@ -543,6 +633,7 @@
         <image name="AddUser.png" width="30" height="30"/>
         <image name="BalanceIcon.png" width="30" height="30"/>
         <image name="BillList.png" width="30" height="30"/>
+        <image name="Camera.png" width="30" height="23"/>
         <image name="TodoList.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

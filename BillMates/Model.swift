@@ -33,6 +33,8 @@ class Model {
     
     var relations : [Relation] = [Relation]()
     
+    var image:UIImage?
+    
     func refreshData() {
         if(PFUser.currentUser() != nil){
             var query = PFUser.query()

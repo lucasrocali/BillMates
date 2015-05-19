@@ -39,14 +39,12 @@
 		7849DC761B0A0723008039F0 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849DC751B0A0723008039F0 /* Relation.swift */; };
 		78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
-		789B17D91B0A5F2D005026A1 /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B17D51B0A5F2D005026A1 /* AddUser.png */; };
-		789B17DA1B0A5F2D005026A1 /* BalanceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B17D61B0A5F2D005026A1 /* BalanceIcon.png */; };
-		789B17DB1B0A5F2D005026A1 /* BillList.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B17D71B0A5F2D005026A1 /* BillList.png */; };
-		789B17DC1B0A5F2D005026A1 /* TodoList.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B17D81B0A5F2D005026A1 /* TodoList.png */; };
-		DFA5E51C1B0A3D5F00EECC62 /* BillMatesIcon58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */; };
-		DFA5E51D1B0A3D5F00EECC62 /* BillMatesIcon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */; };
-		DFA5E51E1B0A3D5F00EECC62 /* BillMatesIcon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */; };
-		DFA5E5361B0A577700EECC62 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = DFA5E5351B0A577700EECC62 /* Images */; };
+		7886472F1B0B75DD00B916BD /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472A1B0B75DD00B916BD /* AddUser.png */; };
+		788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472B1B0B75DD00B916BD /* BalanceIcon.png */; };
+		788647311B0B75DD00B916BD /* BillList.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472C1B0B75DD00B916BD /* BillList.png */; };
+		788647321B0B75DD00B916BD /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472D1B0B75DD00B916BD /* Camera.png */; };
+		788647331B0B75DD00B916BD /* TodoList.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472E1B0B75DD00B916BD /* TodoList.png */; };
+		788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788647341B0B8E8100B916BD /* ImageDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,14 +94,12 @@
 		7849DC751B0A0723008039F0 /* Relation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
 		78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationalBillsTableViewController.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
-		789B17D51B0A5F2D005026A1 /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddUser.png; path = Images/TableBarIcons30x30/AddUser.png; sourceTree = "<group>"; };
-		789B17D61B0A5F2D005026A1 /* BalanceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BalanceIcon.png; path = Images/TableBarIcons30x30/BalanceIcon.png; sourceTree = "<group>"; };
-		789B17D71B0A5F2D005026A1 /* BillList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BillList.png; path = Images/TableBarIcons30x30/BillList.png; sourceTree = "<group>"; };
-		789B17D81B0A5F2D005026A1 /* TodoList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TodoList.png; path = Images/TableBarIcons30x30/TodoList.png; sourceTree = "<group>"; };
-		DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon58x58.png; sourceTree = "<group>"; };
-		DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon80x80.png; sourceTree = "<group>"; };
-		DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillMatesIcon120x120.png; sourceTree = "<group>"; };
-		DFA5E5351B0A577700EECC62 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		7886472A1B0B75DD00B916BD /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddUser.png; sourceTree = "<group>"; };
+		7886472B1B0B75DD00B916BD /* BalanceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BalanceIcon.png; sourceTree = "<group>"; };
+		7886472C1B0B75DD00B916BD /* BillList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BillList.png; sourceTree = "<group>"; };
+		7886472D1B0B75DD00B916BD /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
+		7886472E1B0B75DD00B916BD /* TodoList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TodoList.png; sourceTree = "<group>"; };
+		788647341B0B8E8100B916BD /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +175,7 @@
 		7810CAB11AEC094F00FD00F0 /* BillMates */ = {
 			isa = PBXGroup;
 			children = (
-				78CBAD911AF2027500C862D7 /* Images */,
+				788647291B0B75AF00B916BD /* Images */,
 				7829A3661AEC175A00CEFF35 /* Model */,
 				7829A3611AEC129D00CEFF35 /* Controller */,
 				7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */,
@@ -227,6 +223,7 @@
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
 				78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */,
+				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -240,17 +237,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		78CBAD911AF2027500C862D7 /* Images */ = {
+		788647291B0B75AF00B916BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				DFA5E5351B0A577700EECC62 /* Images */,
-				789B17D51B0A5F2D005026A1 /* AddUser.png */,
-				789B17D61B0A5F2D005026A1 /* BalanceIcon.png */,
-				789B17D71B0A5F2D005026A1 /* BillList.png */,
-				789B17D81B0A5F2D005026A1 /* TodoList.png */,
-				DFA5E5191B0A3D5F00EECC62 /* BillMatesIcon58x58.png */,
-				DFA5E51A1B0A3D5F00EECC62 /* BillMatesIcon80x80.png */,
-				DFA5E51B1B0A3D5F00EECC62 /* BillMatesIcon120x120.png */,
+				7886472A1B0B75DD00B916BD /* AddUser.png */,
+				7886472B1B0B75DD00B916BD /* BalanceIcon.png */,
+				7886472C1B0B75DD00B916BD /* BillList.png */,
+				7886472D1B0B75DD00B916BD /* Camera.png */,
+				7886472E1B0B75DD00B916BD /* TodoList.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -341,17 +335,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				789B17DB1B0A5F2D005026A1 /* BillList.png in Resources */,
-				DFA5E51C1B0A3D5F00EECC62 /* BillMatesIcon58x58.png in Resources */,
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
-				DFA5E5361B0A577700EECC62 /* Images in Resources */,
+				788647331B0B75DD00B916BD /* TodoList.png in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
-				DFA5E51D1B0A3D5F00EECC62 /* BillMatesIcon80x80.png in Resources */,
+				788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */,
+				788647321B0B75DD00B916BD /* Camera.png in Resources */,
+				7886472F1B0B75DD00B916BD /* AddUser.png in Resources */,
+				788647311B0B75DD00B916BD /* BillList.png in Resources */,
 				7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */,
-				789B17DA1B0A5F2D005026A1 /* BalanceIcon.png in Resources */,
-				789B17D91B0A5F2D005026A1 /* AddUser.png in Resources */,
-				789B17DC1B0A5F2D005026A1 /* TodoList.png in Resources */,
-				DFA5E51E1B0A3D5F00EECC62 /* BillMatesIcon120x120.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +367,7 @@
 				7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */,
 				780740901B075CCD006E2C30 /* DebtsTableViewController.swift in Sources */,
 				7829A3681AEC176F00CEFF35 /* Model.swift in Sources */,
+				788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */,
 				782893231AFBEFB500966E62 /* InitialViewController.swift in Sources */,
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
 				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
