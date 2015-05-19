@@ -1,8 +1,9 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "BillMatesIcon58x58.png",
       "scale" : "2x"
     },
     {
@@ -16,8 +17,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "BillMatesIcon120x120.png",
       "scale" : "3x"
     },
     {
@@ -46,8 +48,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "BillMatesIcon80x80.png",
       "scale" : "2x"
     },
     {
