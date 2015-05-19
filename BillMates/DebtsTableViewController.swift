@@ -43,8 +43,10 @@ class DebtsTableViewController: UITableViewController {
         
         cell.textLabel!.text = relation.debtStringCell
         
-        if relation.value > 0 {
+        if relation.value != 0 {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        } else {
+            cell.userInteractionEnabled = false
         }
         return cell
     }

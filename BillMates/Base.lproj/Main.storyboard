@@ -61,7 +61,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhT-1F-9gi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2970" y="205"/>
+            <point key="canvasLocation" x="2914" y="-1243"/>
         </scene>
         <!--Add Bill View Controller-->
         <scene sceneID="p6B-BB-Ury">
@@ -188,7 +188,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="9Lt-tU-RqR">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="2mS-jI-ua4">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="2mS-jI-ua4">
                             <connections>
                                 <action selector="cancelAddBill:" destination="gLj-HQ-rlL" id="5u6-LF-L0p"/>
                             </connections>
@@ -200,9 +200,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnAddImg" destination="F2E-bS-7Pc" id="si8-wQ-73U"/>
                         <outlet property="imageView" destination="baZ-cb-ZyT" id="ocH-VD-n5Z"/>
                         <outlet property="lblPaidBy" destination="pdl-JS-JnU" id="ecg-hS-iUQ"/>
                         <outlet property="lblPerPerson" destination="nnl-kX-ehS" id="R95-OD-LAm"/>
+                        <outlet property="leftBarBtn" destination="2mS-jI-ua4" id="kK3-gg-7hC"/>
                         <outlet property="tableView" destination="mer-qc-mRg" id="6ef-dR-ii9"/>
                         <outlet property="txtDescription" destination="kbk-kr-YlJ" id="wHC-cd-kUH"/>
                         <outlet property="txtValue" destination="GWK-UM-HMn" id="Qmx-z0-obi"/>
@@ -213,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74y-ux-jyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3757" y="205"/>
+            <point key="canvasLocation" x="3701" y="-1243"/>
         </scene>
         <!--Bills List-->
         <scene sceneID="rnj-d3-euu">
@@ -230,7 +232,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFF-sG-uZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="205"/>
+            <point key="canvasLocation" x="2094" y="-1243"/>
         </scene>
         <!--Debts Table View Controller-->
         <scene sceneID="pO9-3z-cDU">
@@ -263,7 +265,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMl-ia-jwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4054" y="1831"/>
+            <point key="canvasLocation" x="2814" y="187"/>
         </scene>
         <!--Relational BIlls Table View Controller-->
         <scene sceneID="FA0-Yl-bJj">
@@ -274,7 +276,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="relationalBillCell" textLabel="XeM-up-vvs" detailTextLabel="68Q-OX-QfP" style="IBUITableViewCellStyleSubtitle" id="OcI-9t-2S0">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="relationalBillCell" textLabel="XeM-up-vvs" detailTextLabel="68Q-OX-QfP" style="IBUITableViewCellStyleSubtitle" id="OcI-9t-2S0">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OcI-9t-2S0" id="7Pa-Yy-KCy">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -293,6 +295,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="gLj-HQ-rlL" kind="push" identifier="toDetailBills" id="jWr-8R-dON"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -303,7 +308,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgX-QH-NaR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4698" y="1831"/>
+            <point key="canvasLocation" x="3618" y="195"/>
         </scene>
         <!--Create Or Join Group View Controller-->
         <scene sceneID="dq1-Cd-nrj">
@@ -432,7 +437,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="5006" y="218"/>
+            <point key="canvasLocation" x="4355" y="-1238"/>
         </scene>
         <!--Add User View Controller-->
         <scene sceneID="cDf-Sf-G4d">
@@ -522,7 +527,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hp-XA-tIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4586" y="935"/>
+            <point key="canvasLocation" x="2898" y="-545"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="omb-Wz-QtB">
@@ -570,7 +575,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qd2-7H-Iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="1204"/>
+            <point key="canvasLocation" x="2175" y="940"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7zZ-UB-m6g">
@@ -607,7 +612,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6m-Vy-f0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3406" y="1849"/>
+            <point key="canvasLocation" x="2166" y="205"/>
         </scene>
         <!--Add User-->
         <scene sceneID="RaO-BN-KCj">
@@ -626,7 +631,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5z-3t-Lv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3774" y="935"/>
+            <point key="canvasLocation" x="2086" y="-545"/>
         </scene>
     </scenes>
     <resources>

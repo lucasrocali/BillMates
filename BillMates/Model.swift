@@ -33,7 +33,8 @@ class Model {
     
     var relations : [Relation] = [Relation]()
     
-    var image:UIImage?
+    var imageToSave : UIImage?
+
     
     func refreshData() {
         if(PFUser.currentUser() != nil){
@@ -46,7 +47,6 @@ class Model {
             }
         }
     }
-    
     func fetchAllObjectsFromLocalDataStore(){
         
         var query = PFUser.query()
@@ -101,7 +101,14 @@ class Model {
                 println("\tdebtObjects saved \(self.debtObjects)")
                  if self.debtObjects.count > 0 {
                     println("CHAMOU FUDEU")
-                    self.calculateDebts(true)
+                    if self.groupObject != nil {
+                        var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
+                        if self.debtObjects.count != self.getNumOfDebts(groupFriends.count) {
+                            self.calculateDebts(true)
+                        } else {
+                            self.calculateDebts(true)
+                        }
+                    }
                 }
             } else {
                 //println(error?.userInfo)
@@ -382,14 +389,25 @@ class Model {
         
         object["sharedWith"] = addedUsers
         
+        
+        //let scaledImage = scaleImageWith(pickedImage)
+        //var defautImg : UIImage = UIImage(named: "0")!
+        
         var query = PFUser.query()
         var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
         
         object["groupName"] =  user["group"]!
         
-        self.billObjects.addObject(object)
         
-        object.saveEventually { (success,error) -> Void in
+        if self.imageToSave != nil {
+            println("tem imagem pra salvar")
+            var image : UIImage = self.imageToSave!
+            var imageData = UIImagePNGRepresentation(image)
+            var imageFile = PFFile(data:imageData)
+            object["img"] = imageFile
+        }
+        object.saveInBackgroundWithBlock({
+            (success:Bool,error:NSError?) -> Void in
             if (error == nil){
                 println("Salvou!")
                 self.calculateDebts(true)
@@ -397,7 +415,8 @@ class Model {
             else {
                 println("NAO SALVOU BILL")
             }
-        }
+        })
+        self.billObjects.addObject(object)
         //addedUsers.removeAll(keepCapacity: false)
     }
     func editBill(#description:String, value:String, billId: String,cellId:Int) {

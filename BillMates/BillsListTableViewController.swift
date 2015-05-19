@@ -106,9 +106,12 @@ class BillsListTableViewController: UITableViewController {
            println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
+            editBill.writeRead = 1
             
         } else {
-            println("ADD")
+            var editBill = segue.destinationViewController as! AddBillViewController
+            editBill.writeRead = 0
+
         }
     }
 }

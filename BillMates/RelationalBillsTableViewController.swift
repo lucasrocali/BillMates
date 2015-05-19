@@ -42,4 +42,16 @@ class RelationalBillsTableViewController: UITableViewController {
 
         return cell
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        if segue.identifier == "toDetailBills"
+        {
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            
+            println("Cell n: \(indexPath.row)")
+            var editBill = segue.destinationViewController as! AddBillViewController
+            editBill.billCellIndex = indexPath.row
+            editBill.writeRead = 2
+        }
+    }
 }

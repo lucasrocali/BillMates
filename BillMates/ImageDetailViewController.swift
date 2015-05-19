@@ -11,19 +11,17 @@ import UIKit
 class ImageDetailViewController: UIViewController {
 
     var model = Model.sharedInstance
-    @IBAction func goBack(sender: UIBarButtonItem) {
-        println("goBack")
-        self.navigationController?.popViewControllerAnimated(true)
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-    }
+
     @IBOutlet weak var imageDetail: UIImageView!
-    var text : String?
+    var billIndex:Int?
+    var createBill : Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //println(text!)
         
-        self.imageDetail.image = model.image!
+        self.imageDetail.image = model.imageToSave
+        
 
         // Do any additional setup after loading the view.
     }

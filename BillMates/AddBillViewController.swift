@@ -15,13 +15,14 @@ import MobileCoreServices
 class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate,UINavigationControllerDelegate {
     
     var model = Model.sharedInstance
+    
     var picker:UIImagePickerController?=UIImagePickerController()
     var popover:UIPopoverController?=nil
 
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
     {
-        self.imageView.contentMode = .ScaleAspectFit
+        
         lastChosenMediaType = info[UIImagePickerControllerMediaType] as? String
         println("1")
         if let mediaType = lastChosenMediaType {
@@ -34,7 +35,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController!)
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -100,20 +101,28 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblPaidBy: UILabel!
     @IBOutlet weak var lblPerPerson: UILabel!
+    @IBOutlet weak var leftBarBtn: UIBarButtonItem!
     
-     var billCellIndex: Int = -1
+    @IBOutlet weak var btnAddImg: UIButton!
+     var billCellIndex: Int = 0
     var billId : String?
+    var writeRead : Int? //0 for write, 1 for write/read and 2 for read
+    
     var image:UIImage?
     var lastChosenMediaType:String?
     
     @IBAction func cancelAddBill(sender: UIBarButtonItem) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        if writeRead == 0 || writeRead == 1 {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        } else if writeRead == 2 {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     @IBAction func doneAddBill(sender: UIBarButtonItem) {
         
         if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
-            if billCellIndex < 0{
+            if writeRead == 0{
                 self.model.saveBill(description: txtDescription.text, value: txtValue.text)
             } else {
                 self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex)
@@ -126,15 +135,16 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
        
         if self.imageView!.image != nil {
-        performSegueWithIdentifier("toImageDetail", sender: self)
-        println("Cliquei na image view")
-        if let mediaType = lastChosenMediaType {
-            if mediaType == kUTTypeImage as NSString {
-                println("Vai fuder")
-                model.image = image!
-                //vc.imageDetail!.image = image!
-                println("fudeu")
-                //vc.imageDetail!.hidden = false
+            performSegueWithIdentifier("toImageDetail", sender: self)
+            println("Cliquei na image view")
+            if let mediaType = lastChosenMediaType {
+                if mediaType == kUTTypeImage as NSString {
+                    println("Vai fuder")
+                    model.imageToSave = image!
+                    //vc.imageDetail!.image = image!
+                    println("fudeu")
+                    //vc.imageDetail!.hidden = false
+                    
                 }
             }
         }
@@ -142,6 +152,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageView.contentMode = .ScaleAspectFit
+        
         var user : PFUser = model.userObject!
         var paidByUsername : String = user["username"]! as! String
         //var imageView = self.imageView
@@ -152,11 +164,13 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.delegate = self
         
-        if billCellIndex < 0{
+        if writeRead == 0{  //to add    (write)
             lblPaidBy.text = "Paid by: " + paidByUsername
             println("Add")
             model.addedUsers.removeAll(keepCapacity: false)
-        } else {
+            leftBarBtn.title = "Cancel"
+            
+        } else if writeRead == 1{   //to edit   (write/read)
             println("Edit")
             let object : PFObject = self.model.billObjects[billCellIndex] as! PFObject
             txtDescription.text = object["description"] as! String
@@ -168,6 +182,38 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             billId = object.objectId
             var perPerson : Float = valueFloat/Float(model.addedUsers.count)
             lblPerPerson.text = String(format: " %.2f per peson",perPerson)
+            
+            if object["img"] != nil {
+                println("Tem foto")
+                var imgFile : PFFile = object["img"] as! PFFile
+                //phoPFIle.getData()
+                var imgNS : NSData = imgFile.getData()! as NSData
+                let imgUI : UIImage = UIImage(data: imgNS)!
+                imageView.image = imgUI
+                model.imageToSave = imgUI
+                //var detailImg = ImageDetailViewController()
+                //detailImg.imageDetail.image = imgUI
+                //detailImg.createBill! = false
+            }
+        } else {    //to see (read)
+            println("See")
+            let object : PFObject = self.model.filteredBills[billCellIndex] as! PFObject
+            txtDescription.text = object["description"] as! String
+            var valueFloat : Float = object["value"] as! Float
+            txtValue.text = "\(valueFloat)"
+            var paidByStr = object["paidBy"] as! String
+            lblPaidBy.text = "Paid by: " + paidByStr
+            model.addedUsers = object["sharedWith"] as! [String]
+            billId = object.objectId
+            var perPerson : Float = valueFloat/Float(model.addedUsers.count)
+            lblPerPerson.text = String(format: " %.2f per peson",perPerson)
+            
+            txtDescription.userInteractionEnabled = false
+            txtValue.userInteractionEnabled = false
+            btnAddImg.hidden = true
+            let rightButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            navigationItem.rightBarButtonItem = rightButton
+            
         }
     }
 
@@ -226,7 +272,9 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         else{
             cell.accessoryType = .None
         }
-    
+        if writeRead == 2 {
+            cell.userInteractionEnabled = false
+        }
 
         return cell
     }
