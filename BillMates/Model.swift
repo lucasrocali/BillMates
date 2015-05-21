@@ -36,6 +36,8 @@ class Model {
     
     var imageToSave : UIImage?
     
+    var imageTBNToSave : UIImage?
+    
     var connectionStatus : Bool? //true has connectio, false otherwise
 
     func refreshNetworkStatus() {
@@ -111,6 +113,24 @@ class Model {
         var queryDebt : PFQuery = PFQuery(className: "Debts")
         queryDebt.fromLocalDatastore()
         queryDebt.whereKey("groupName", equalTo: user["group"]!)
+        
+        var temp: NSArray = queryDebt.findObjects() as! NSArray
+        if temp.count > 0{
+            self.debtObjects  = temp.mutableCopy() as! NSMutableArray
+            println("\tdebtObjects saved \(self.debtObjects)")
+            if self.groupObject != nil {
+                var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
+                if self.debtObjects.count != self.getNumOfDebts(groupFriends.count) {
+                    self.calculateDebts(true)
+                    //println("DEBTS DIFERENTS NA THREAD")
+                } else {
+                    self.calculateDebts(true)
+                    println("DEBTS IGUAIS NA THREAD")
+                }
+                
+            }
+            
+        }/*
         queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                 self.debtObjects.removeAllObjects()
@@ -135,7 +155,7 @@ class Model {
                 //println(error?.userInfo)
                 println("ERROR NO FECTH FROM LOCAL - DEBTS")
             }
-        }
+        }*/
         
     }
     
@@ -241,7 +261,11 @@ class Model {
             return false
         }
         self.groupFriendsString.append(name)
-            
+        
+        var groupFriendsString = self.groupFriendsString
+        var sortedNames = groupFriendsString.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        println(sortedNames)
+         self.groupFriendsString = sortedNames
         groupObject!["groupFriends"] = self.groupFriendsString
         if connectionStatus! {
             if groupObject!.save(){
@@ -288,6 +312,14 @@ class Model {
             
             groupFriends.append(PFUser.currentUser()!.username!)
             
+            self.groupFriendsString = groupFriends
+            var groupFriendsString = self.groupFriendsString
+            var sortedNames = groupFriendsString.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+            println(sortedNames)
+            
+            self.groupFriendsString = sortedNames
+            
+            groupFriends = self.groupFriendsString
             g["groupFriends"] = groupFriends
             
             var query = PFUser.query()
@@ -457,6 +489,20 @@ class Model {
             var imageData = UIImagePNGRepresentation(image)
             var imageFile = PFFile(data:imageData)
             object["img"] = imageFile
+            
+            var imageTBN : UIImage = self.imageToSave!
+            let widthTBN: CGFloat = 50.0
+            let heightTBN: CGFloat = 50.0
+            var sizeTBN = CGSizeMake(widthTBN, heightTBN)
+            let scaleTBN: CGFloat = 1.0
+            UIGraphicsBeginImageContextWithOptions(sizeTBN, false, scaleTBN) //---
+            imageTBN.drawInRect(CGRect(origin: CGPointZero, size: sizeTBN))
+            let scaledImageTBN = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            var imageTBNData = UIImagePNGRepresentation(scaledImageTBN)
+            var imageTBNFile = PFFile(data:imageTBNData)
+            object["imgTBN"] = imageTBNFile
+
         }
         if connectionStatus! {
             object.saveInBackgroundWithBlock({
@@ -748,6 +794,8 @@ class Model {
         for debt in debts {
             var user1 : String = debt["user1"] as! String
             var user2 : String = debt["user2"] as! String
+            var idStr : String = debt["debtId"] as! String
+            var idInt : Int = idStr.toInt()!
             var value : Float = debt["value"] as! Float
             if value < 0 {
                 debtStr = user1 + " --> " + user2 + " = " +  String(format: "%.2f",value*(-1))
@@ -761,8 +809,31 @@ class Model {
             relation.user1 = user1
             relation.user2 = user2
             relation.value = value
+            
+            relation.id = idInt
             self.relations.append(relation)
         }
+        println(self.relations)
+        var relationsToOrder = self.relations
+        
+        
+        let sortedRelations = relationsToOrder.sorted { (lhs:Relation, rhs:Relation) in
+            //return lhs.user1.localizedCaseInsensitiveCompare(rhs.user1) == NSComparisonResult.OrderedAscending
+            return lhs.id < rhs.id
+        }
+        self.relations = sortedRelations
+        for relation in self.relations{
+            println(relation.debtStringCell)
+        }
+        /*var stringCells : [String] = []
+        for relationCell in self.relations {
+            stringCells.append(relationCell.debtStringCell)
+        }
+        var orderedCells = stringCells
+        var sortedNames = orderedCells.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        println(sortedNames)8*/
+        
+        
     }
     /*
     func getDebtStringCell(index:Int) -> String {

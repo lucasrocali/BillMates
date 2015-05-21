@@ -224,6 +224,16 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     func updateImage() {
         if let mediaType = lastChosenMediaType {
             if mediaType == kUTTypeImage as NSString {
+                var size = CGSizeMake(image!.size.width, image!.size.height)
+                let scale: CGFloat = 0.5
+                UIGraphicsBeginImageContextWithOptions(size, false, scale) //---
+                image!.drawInRect(CGRect(origin: CGPointZero, size: size))
+                let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                model.imageToSave = scaledImage
+                
+                
+                
                 imageView.image = image!
                 imageView.hidden = false
             }

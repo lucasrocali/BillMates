@@ -12,5 +12,6 @@ struct Relation {
     var debtStringCell : String = ""
     var user1 : String = ""
     var user2 : String = ""
+    var id : Int = 0
     var value : Float = 0
 }
