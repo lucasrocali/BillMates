@@ -15,8 +15,12 @@ class GroupViewController: UIViewController {
     @IBOutlet weak var lblError: UILabel!
     @IBOutlet weak var txtGroupName: UITextField!
     @IBOutlet weak var txtGroupKey: UITextField!
+    let alert = UIAlertView()
+    
     @IBAction func btnCreateGroup(sender: UIButton) {
-        lblError.hidden = true
+        alert.title = "You cannot create the group"
+        alert.addButtonWithTitle("Ok")
+        //lblError.hidden = true
         if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
             if self.model.createGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
                 println(" GROUP CREATED")
@@ -27,16 +31,22 @@ class GroupViewController: UIViewController {
         
                 self.presentViewController(vc, animated: false, completion: nil)
             } else {
-                lblError.hidden = false
-                lblError.text = "Please, try again with another name"
+                //lblError.hidden = false
+                alert.message = "This name has alread been used as group name"
+                alert.show()
             }
         } else {
-            lblError.hidden = false
-            lblError.text = "Please fill Group Name and Group Key"
+            //lblError.hidden = false
+            //lblError.text = "Please fill Group Name and Group Key"
+            alert.message = "PPlease fill Group Name and Group Key"
+            alert.show()
         }
     }
+    
     @IBAction func btnJoinGroup(sender: UIButton) {
-        lblError.hidden = true
+        alert.title = "You cannot join the group"
+        alert.addButtonWithTitle("Ok")
+        //lblError.hidden = true
         if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
             if self.model.joinGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
                 println(" GROUP JOINED")
@@ -47,18 +57,23 @@ class GroupViewController: UIViewController {
             
                 self.presentViewController(vc, animated: false, completion: nil)
             } else {
-                lblError.hidden = false
-                lblError.text = "Group Name and Group Key not found"
+                //lblError.hidden = false
+                //lblError.text = "Group Name and Group Key not found"
+                alert.message = "Group Name and/or Group Key not found"
+                alert.show()
             }
         }
         else {
-            lblError.hidden = false
-            lblError.text = "Please fill Group Name and Group Key"
+            //lblError.hidden = false
+            //lblError.text = "Please fill Group Name and Group Key"
+            alert.message = "Please fill Group Name and Group Key"
+            alert.show()
         }
 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,7 +18,7 @@ class BillsListTableViewController: UITableViewController {
         super.viewDidLoad()
         //model.getBills()
         
-        model.refreshData()
+        //model.refreshData()
         self.tableView.reloadData()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -28,15 +28,23 @@ class BillsListTableViewController: UITableViewController {
     }
     
     func logout() {
-        println("Log out e chama view")
-        PFUser.logOut()
-        model.resetModel()
-        
-        var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
-        
-        self.presentViewController(vc, animated: false, completion: nil)
+        if model.connectionStatus! {
+            println("Log out e chama view")
+            PFUser.logOut()
+            model.resetModel()
+            
+            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
+            
+            self.presentViewController(vc, animated: false, completion: nil)
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.message = "You cannot log out"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        }
 
     }
 
@@ -48,6 +56,15 @@ class BillsListTableViewController: UITableViewController {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
         model.refreshData()
+        /*
+        if model.isConnectedToNetwork() == true{
+            println("Internet Status = ON")
+            model.refreshData(true)
+        } else {
+            println("Internet Status = OFF")
+            model.refreshData(false)
+        }*/
+        
     }
     
     

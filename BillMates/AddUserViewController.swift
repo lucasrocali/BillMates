@@ -14,6 +14,7 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
    
 
     var model = Model.sharedInstance
+    let alert = UIAlertView()
     
     @IBOutlet weak var addedUsersTableView: UITableView!
     
@@ -63,30 +64,29 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        var response : Int = model.deleteUserOfGroup(indexPath.row)
-        if response == 0{
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-            let managedContext = appDelegate.managedObjectContext!
-        
-            if editingStyle == UITableViewCellEditingStyle.Delete
-            {
-                self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        if model.connectionStatus! {
+            var response : Int = model.deleteUserOfGroup(indexPath.row)
+            if response == 0{
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                let managedContext = appDelegate.managedObjectContext!
+                
+                if editingStyle == UITableViewCellEditingStyle.Delete
+                {
+                    self.addedUsersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }
+            } else if response == 1{
+                alert.message = "Because the user shares a bill"
+                alert.show()
+            } else if response  == 2{
+                alert.message = "The user should leave the group"
+                alert.show()
             }
-        } else if response == 1{
-            let alert = UIAlertView()
-            alert.title = "You cannot delete the user"
-            alert.message = "Because the user shares a bill"
-            alert.addButtonWithTitle("Ok")
-            alert.show()
-        } else if response  == 2{
-            let alert = UIAlertView()
-            alert.title = "You cannot delete the user"
-            alert.message = "The user should leave the group"
-            alert.addButtonWithTitle("Ok")
+        } else {
+            alert.title = "No internet connection"
+            alert.message = "A user cannot be deleted now since another operation can be in progress"
             alert.show()
         }
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,6 +99,9 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         var friendName: String = self.model.groupFriendsString[indexPath.row]
         cell.textLabel!.text = friendName
 
+        if model.userObject?.username == self.model.groupFriendsString[indexPath.row] {
+            cell.userInteractionEnabled = false
+        }
         return cell
     }
 
@@ -110,6 +113,10 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        alert.title = "You cannot delete the user"
+        alert.addButtonWithTitle("Ok")
+
     }
     func DismissKeyboard(){
         view.endEditing(true)

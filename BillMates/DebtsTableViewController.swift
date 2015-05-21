@@ -24,7 +24,15 @@ class DebtsTableViewController: UITableViewController {
 
     func refresh(sender:AnyObject)
     {
+        if model.connectionStatus! {
         model.calculateDebts(false)
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.message = "Debts cannot be calculated whithout information from other users"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        }
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }

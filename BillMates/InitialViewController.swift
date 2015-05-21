@@ -22,7 +22,14 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //model.resetModel()
-        loginSetup()
+        if model.isConnectedToNetwork() == true{
+            println("pica branca")
+            loginSetup()
+        } else {
+            println("pica preta")
+            model.refreshData()
+        }
+        
     }
     
     func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
@@ -66,6 +73,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     }
     
     func loginSetup() {
+        println("pica branca")
         if(PFUser.currentUser() == nil){
             println("Log in")
             var loginViewController = PFLogInViewController()
@@ -82,7 +90,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
             
             
         } else {
-            
+            model.userObject = PFUser.currentUser()
             
             var query = PFUser.query()
             query!.whereKey("username", equalTo:PFUser.currentUser()!.username!)
@@ -99,6 +107,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                         if user["group"] != nil {
                             userGroup = user["group"] as! String
                             println(userGroup)
+                            self.model.refreshData()
                         }
                         if user["group"] == nil || userGroup == "nil"{
                         
@@ -115,11 +124,10 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                     
                     } else {
                             println(error?.userInfo)
+                            println("Mae to no erro e cagado")
                         }
                 }
             }
         }
-
     }
-
 }

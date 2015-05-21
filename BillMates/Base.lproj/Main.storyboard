@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iD8-33-zEm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iD8-33-zEm">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -111,7 +111,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paid by: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-JS-JnU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid by: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-JS-JnU">
                                 <rect key="frame" x="267" y="144" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,20 +123,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2E-bS-7Pc" userLabel="Add Image">
+                                <rect key="frame" x="364" y="98" width="30" height="23"/>
+                                <state key="normal" title="Add Photo" image="Camera.png"/>
+                                <connections>
+                                    <action selector="addPicture:" destination="gLj-HQ-rlL" eventType="touchUpInside" id="xrK-H7-vWa"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baZ-cb-ZyT">
-                                <rect key="frame" x="421" y="98" width="55" height="46"/>
+                                <rect key="frame" x="424" y="87" width="55" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="8bw-AO-aag"/>
                                     <constraint firstAttribute="height" constant="50" id="rDT-ab-uui"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2E-bS-7Pc" userLabel="Add Image">
-                                <rect key="frame" x="364" y="98" width="30" height="23"/>
-                                <state key="normal" image="Camera.png"/>
-                                <connections>
-                                    <action selector="addPicture:" destination="gLj-HQ-rlL" eventType="touchUpInside" id="xrK-H7-vWa"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -208,9 +208,7 @@
                         <outlet property="tableView" destination="mer-qc-mRg" id="6ef-dR-ii9"/>
                         <outlet property="txtDescription" destination="kbk-kr-YlJ" id="wHC-cd-kUH"/>
                         <outlet property="txtValue" destination="GWK-UM-HMn" id="Qmx-z0-obi"/>
-                        <segue destination="mlM-YO-v77" kind="popover" identifier="toImageDetail" popoverAnchorView="GkG-FE-WHr" id="mjh-a0-YlU">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="mlM-YO-v77" kind="push" identifier="toImageDetail" id="mjh-a0-YlU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74y-ux-jyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -393,18 +391,17 @@
         <!--Image Detail View Controller-->
         <scene sceneID="c8B-zd-g7T">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tvM-V7-Frt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController restorationIdentifier="ImageDetailViewController" storyboardIdentifier="ImageDetailViewController" id="mlM-YO-v77" customClass="ImageDetailViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mpT-au-L2d"/>
                         <viewControllerLayoutGuide type="bottom" id="zBm-Un-QbQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OQ4-sD-CIv">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="imageDetailViewController" translatesAutoresizingMaskIntoConstraints="NO" id="clW-TR-ySU">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="vP1-2l-w15"/>
                                 </constraints>
@@ -436,6 +433,7 @@
                         <outlet property="imageDetail" destination="clW-TR-ySU" id="Tdh-c9-INz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tvM-V7-Frt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4355" y="-1238"/>
         </scene>
