@@ -377,7 +377,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Sl2-ce-Yoc"/>
+                    <navigationItem key="navigationItem" id="Sl2-ce-Yoc">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="FaI-qu-0Lo">
+                            <connections>
+                                <action selector="btnLogout:" destination="IU5-Sr-bl5" id="YSC-Gs-K4C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lblError" destination="Yg9-ju-63a" id="3zd-FV-Ick"/>
                         <outlet property="txtGroupKey" destination="4AR-eT-crB" id="EwJ-nJ-fdg"/>

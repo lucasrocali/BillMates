@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class GroupViewController: UIViewController {
 
@@ -17,6 +19,29 @@ class GroupViewController: UIViewController {
     @IBOutlet weak var txtGroupKey: UITextField!
     let alert = UIAlertView()
     
+    @IBAction func btnLogout(sender: UIBarButtonItem) {
+        self.logout()
+    }
+    func logout() {
+        if model.isConnectedToNetwork() {
+            println("Log out e chama view")
+            PFUser.logOut()
+            model.resetModel()
+            
+            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
+            
+            self.presentViewController(vc, animated: false, completion: nil)
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.message = "You cannot log out"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        }
+        
+    }
     @IBAction func btnCreateGroup(sender: UIButton) {
         alert.title = "You cannot create the group"
         alert.addButtonWithTitle("Ok")

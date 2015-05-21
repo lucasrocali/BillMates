@@ -22,12 +22,18 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //model.resetModel()
-        if model.isConnectedToNetwork() == true{
+        model.refreshNetworkStatus()
+        if model.isConnectedToNetwork(){
             println("pica branca")
             loginSetup()
         } else {
             println("pica preta")
-            model.refreshData()
+            if(PFUser.currentUser() == nil){
+                println("frudeu negao")
+                loginSetup()
+            } else {
+                model.refreshData()
+            }
         }
         
     }

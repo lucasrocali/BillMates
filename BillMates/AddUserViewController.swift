@@ -21,14 +21,18 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var txtName: UITextField!
     
     @IBAction func btnLeaveGroup(sender: UIButton) {
-        if model.deleteGroupOfUser() {
-            println("deletou!")
-            self.logout()
+        if model.isConnectedToNetwork() {
+            if model.deleteGroupOfUser() {
+                println("deletou!")
+                self.logout()
+            } else {
+                alert.title = "You cannot leave the group"
+                alert.message = "Because you share a bill"
+                alert.show()
+            }
         } else {
-            let alert = UIAlertView()
-            alert.title = "You cannot leave the group"
-            alert.message = "Because you share a bill"
-            alert.addButtonWithTitle("Ok")
+            alert.title = "No internet connection"
+            alert.message = "You cannot leave the group"
             alert.show()
         }
     }

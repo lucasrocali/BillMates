@@ -28,7 +28,7 @@ class BillsListTableViewController: UITableViewController {
     }
     
     func logout() {
-        if model.connectionStatus! {
+        if model.isConnectedToNetwork() {
             println("Log out e chama view")
             PFUser.logOut()
             model.resetModel()

@@ -51,19 +51,19 @@ class Model {
         println(connectionStatus)
         var queryy = PFUser.query()
         queryy!.fromLocalDatastore()
-        var user = queryy!.getObjectWithId(PFUser.currentUser()!.objectId!)
-        self.userObject = user! as? PFUser
-        println(self.userObject)
-        if(self.userObject != nil){
-            var query = PFUser.query()
-            var userr : PFUser = self.userObject!
-            if (self.userObject != nil){
-                if userr["group"] != nil {
-                self.fetchAllObjects()
-                self.fetchAllObjectsFromLocalDataStore()
+            var user = queryy!.getObjectWithId(PFUser.currentUser()!.objectId!)
+            self.userObject = user! as? PFUser
+            println(self.userObject)
+            if(self.userObject != nil){
+                var query = PFUser.query()
+                var userr : PFUser = self.userObject!
+                if (self.userObject != nil){
+                    if userr["group"] != nil {
+                        self.fetchAllObjects()
+                        self.fetchAllObjectsFromLocalDataStore()
+                    }
                 }
             }
-        }
     }
     func fetchAllObjectsFromLocalDataStore(){
         
