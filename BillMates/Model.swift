@@ -776,12 +776,39 @@ class Model {
             var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
             println("DDEBT OBJECTS : \(self.debtObjects.count)")
             println(self.getNumOfDebts(groupFriends.count))
-            if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
-                println("\t\t\t\t\t#############CREATE RELATIONS")
-                createDebtRelations(groupFriends,groupName:userGroupName)
+            var queryDebt : PFQuery = PFQuery(className: "Debts")
+            //queryDebt.fromLocalDatastore()
+            queryDebt.whereKey("groupName", equalTo: userGroupName)
+
+            if background {
+                queryDebt.findObjectsInBackgroundWithBlock{(objects,error) -> Void in
+                if (error == nil){
+                    var temp: NSArray = objects! as NSArray
+                    println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
+                    if temp.count != self.getNumOfDebts(groupFriends.count) {
+                        println("\t\t\t\t\t#############CREATE RELATIONS")
+                        self.createDebtRelations(groupFriends,groupName:userGroupName)
+                    }
+                    println("GET RELATIONS")
+                    self.refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
+                    
+                } else {
+                    println("FUDEU NO REFRESH EM BACKGROUND")
+                }
             }
-            println("GET RELATIONS")
-            refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
+
+            
+            } else {
+                var temp: NSArray = queryDebt.findObjects()! as NSArray
+                println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
+                if temp.count != getNumOfDebts(groupFriends.count) {
+                    println("\t\t\t\t\t#############CREATE RELATIONS")
+                    createDebtRelations(groupFriends,groupName:userGroupName)
+                }
+                println("GET RELATIONS")
+                refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
+            }
+            
             
             //generateDebtStrings()
             println("FINISH TO CALCULATE \(self.relations)")
