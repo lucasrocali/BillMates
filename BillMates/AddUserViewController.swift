@@ -25,7 +25,7 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
             if model.deleteGroupOfUser() {
                 println("deletou!")
                 self.logout()
-            } else {
+            } else {//
                 alert.title = "You cannot leave the group"
                 alert.message = "Because you share a bill"
                 alert.show()

@@ -113,6 +113,7 @@ class Model {
         queryDebt.whereKey("groupName", equalTo: user["group"]!)
         queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
+                self.debtObjects.removeAllObjects()
                 println("\nTHREAD PRA PEGAR OS DEBTS!!!!!")
                 var temp: NSArray = objects! as NSArray
                 self.debtObjects  = temp.mutableCopy() as! NSMutableArray
@@ -265,7 +266,7 @@ class Model {
     func joinGroup(groupName:String,groupKey:String) -> Bool{
         refreshNetworkStatus()
         var queryGroup: PFQuery = PFQuery(className: "Group")
-        queryGroup.fromLocalDatastore()
+        //queryGroup.fromLocalDatastore()
         queryGroup.whereKey("groupName", equalTo: groupName)
         
         var temp: NSArray = queryGroup.findObjects()! as NSArray
@@ -771,19 +772,19 @@ class Model {
     func calculateDebts(background:Bool) {
         refreshNetworkStatus()
         if self.groupObject != nil{
-        var userGroupName : String = self.groupObject!["groupName"] as! String
-        var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
-        println("DDEBT OBJECTS : \(self.debtObjects.count)")
-        println(self.getNumOfDebts(groupFriends.count))
-        if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
-            println("\t\t\t\t\t#############CREATE RELATIONS")
-            createDebtRelations(groupFriends,groupName:userGroupName)
-        }
-        println("GET RELATIONS")
-        refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
-        
-        //generateDebtStrings()
-        println("FINISH TO CALCULATE \(self.relations)")
+            var userGroupName : String = self.groupObject!["groupName"] as! String
+            var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
+            println("DDEBT OBJECTS : \(self.debtObjects.count)")
+            println(self.getNumOfDebts(groupFriends.count))
+            if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
+                println("\t\t\t\t\t#############CREATE RELATIONS")
+                createDebtRelations(groupFriends,groupName:userGroupName)
+            }
+            println("GET RELATIONS")
+            refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
+            
+            //generateDebtStrings()
+            println("FINISH TO CALCULATE \(self.relations)")
         }
     }
     func isConnectedToNetwork() -> Bool {
