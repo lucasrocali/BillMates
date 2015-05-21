@@ -69,6 +69,7 @@ class Model {
     }
     func fetchAllObjectsFromLocalDataStore(){
         
+        
         //var query = PFUser.query()
         //var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
         //self.userObject = user
