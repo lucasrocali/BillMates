@@ -259,10 +259,28 @@
                             <outlet property="delegate" destination="kPj-un-TwK" id="9y6-Rz-kyj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="dWm-Nu-WPg"/>
+                    <navigationItem key="navigationItem" id="dWm-Nu-WPg">
+                        <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Pfj-fV-daT">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="HgJ-J6-Fnd">
+                                <rect key="frame" x="180" y="7" width="240" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Personal"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeBalanceBtns:" destination="kPj-un-TwK" eventType="valueChanged" id="vvF-MH-u17"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Wwa-Lq-F0b">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <outlet property="tableControl" destination="HgJ-J6-Fnd" id="ahe-wd-yY5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMl-ia-jwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -649,6 +667,6 @@
         <image name="TodoList.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uug-fY-bCx"/>
+        <segue reference="jWr-8R-dON"/>
     </inferredMetricsTieBreakers>
 </document>

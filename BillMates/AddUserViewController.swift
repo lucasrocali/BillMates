@@ -105,6 +105,8 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         if model.userObject?.username == self.model.groupFriendsString[indexPath.row] {
             cell.userInteractionEnabled = false
+        } else {
+             cell.userInteractionEnabled = true
         }
         return cell
     }

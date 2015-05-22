@@ -153,7 +153,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if mediaType == kUTTypeImage as NSString {
                     println("Vai fuder")
                     model.resetImages()
-                    model.imageToSave = image!
+                    model.setImages(image!)
                     //vc.imageDetail!.image = image!
                     println("fudeu")
                     //vc.imageDetail!.hidden = false
@@ -204,7 +204,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                         var imgNS: NSData = object! as NSData
                         let imgUI : UIImage = UIImage(data: imgNS)!
                         self.model.resetImages()
-                        self.model.imageToSave = imgUI
+                        self.model.setImages(imgUI)
                         
                     } else {
                         println("FUDEU NO REFRESH EM BACKGROUND")
@@ -252,7 +252,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                         var imgNS: NSData = object! as NSData
                         let imgUI : UIImage = UIImage(data: imgNS)!
                         self.model.resetImages()
-                        self.model.imageToSave = imgUI
+                        self.model.setImages(imgUI)
+                       // self.model.imageToSave = imgUI
                         
                     } else {
                         println("FUDEU NO REFRESH EM BACKGROUND")
@@ -282,7 +283,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.imageView.userInteractionEnabled = true
         tableView.delegate = self
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
-        
+        self.model.resetImages()
         
         if billState == 0{  //to add    (write)
             createBillInterface()
@@ -317,7 +318,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 model.resetImages()
-                model.imageToSave = scaledImage
+                model.setImages(scaledImage)
+                //model.imageToSave = scaledImage
                 
                 
                 

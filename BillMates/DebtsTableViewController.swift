@@ -9,6 +9,27 @@
 import UIKit
 
 class DebtsTableViewController: UITableViewController {
+    @IBOutlet weak var tableControl: UISegmentedControl!
+    
+    var debtsState : Int = 0 //0 for all, 1 for personal
+    
+    @IBAction func changeBalanceBtns(sender: UISegmentedControl) {
+        switch tableControl.selectedSegmentIndex {
+        case 0:
+            println("ALL");
+            debtsState = 0
+            //self.viewDidLoad()
+            self.tableView.reloadData()
+        case 1:
+            println("Personal");
+            model.getPersonalRelations()
+            debtsState = 1
+            //self.viewDidLoad()
+            self.tableView.reloadData()
+        default:
+            println("Algo errado");
+        }
+    }
 
     var model = Model.sharedInstance
     override func viewDidLoad() {
@@ -21,7 +42,7 @@ class DebtsTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        model.generateDebtStrings()
+       // model.generateDebtStrings()
         self.tableView.reloadData()
     }
 
@@ -43,25 +64,36 @@ class DebtsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.relations.count
+        var n : Int?
+        if debtsState == 0 {
+            n = model.relations.count
+        } else {
+            n = model.personalRelations.count
+
+        }
+        return n!
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("debtCell", forIndexPath: indexPath) as! UITableViewCell
-
+        var relation : Relation?
+        if debtsState == 0 {
         //var cellLabel : String = model.getDebtStringCell(indexPath.row)
-        var relation : Relation = model.relations[indexPath.row]
+            relation = model.relations[indexPath.row]
+        } else {
+              relation  = model.personalRelations[indexPath.row]
+        }
         
-        cell.textLabel!.text = relation.debtStringCell
+        cell.textLabel!.text = relation!.debtStringCell
         
         cell.userInteractionEnabled = true
-        if relation.value != 0 {
+        if relation!.value != 0 {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         } else {
             cell.accessoryType = .None
         }
         
-       if relation.value != 0 {
+       if relation!.value == 0 {
             cell.userInteractionEnabled = false
         } else {
             cell.userInteractionEnabled = true
@@ -83,15 +115,26 @@ class DebtsTableViewController: UITableViewController {
             let indexPath = self.tableView.indexPathForSelectedRow()!
             
             var filteredBills = segue.destinationViewController as! RelationalBillsTableViewController
-            filteredBills.user1 = model.relations[indexPath.row].user1
-            filteredBills.user2 = model.relations[indexPath.row].user2
+            if debtsState == 0 {
+                filteredBills.user1 = model.relations[indexPath.row].user1
+                filteredBills.user2 = model.relations[indexPath.row].user2
+            } else {
+                filteredBills.user1 = model.personalRelations[indexPath.row].user1
+                filteredBills.user2 = model.personalRelations[indexPath.row].user2
+            }
         }
     }
     override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
         if identifier == "relationsToFilteredBills" {
             let indexPath = self.tableView.indexPathForSelectedRow()!
-            var relation : Relation = model.relations[indexPath.row]
-            if relation.value == 0 {
+            var relation : Relation?
+            if debtsState == 0 {
+                //var cellLabel : String = model.getDebtStringCell(indexPath.row)
+                relation = model.relations[indexPath.row]
+            } else {
+                relation  = model.personalRelations[indexPath.row]
+            }
+            if relation!.value == 0 {
                 return false
             }
         }

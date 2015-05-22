@@ -30,13 +30,15 @@ class Model {
     
     var debtObjects : NSMutableArray = NSMutableArray()
     
-    var debtStringCell : [String] = [String]()
-    
     var relations : [Relation] = [Relation]()
+    
+    var personalRelations : [Relation] = [Relation]()
     
     var imageToSave : UIImage?
     
     var imageTBNToSave : UIImage?
+    
+    var hasImg : Bool = false
     
     var connectionStatus : Bool? //true has connectio, false otherwise
 
@@ -436,9 +438,11 @@ class Model {
         return 0
     }
     func resetImages() {
-        var img : UIImage?
-        self.imageToSave = img
-        self.imageTBNToSave = img
+        hasImg = false
+    }
+    func setImages(imageToSet:UIImage) {
+        imageToSave = imageToSet
+        hasImg = true
     }
     
     func saveBill(#description:String, value:String) {
@@ -466,7 +470,7 @@ class Model {
         object["groupName"] =  user["group"]!
         
         
-        if self.imageToSave != nil {
+        if hasImg {
             println("tem imagem pra salvar")
             var image : UIImage = self.imageToSave!
             var imageData = UIImagePNGRepresentation(image)
@@ -521,6 +525,30 @@ class Model {
                 billToEdit!["value"] = NSString(string: value).floatValue
                 
                 billToEdit!["sharedWith"] = self.addedUsers
+                if self.hasImg {
+                    println("tem imagem pra salvar")
+                    var image : UIImage = self.imageToSave!
+                    var imageData = UIImagePNGRepresentation(image)
+                    var imageFile = PFFile(data:imageData)
+                    billToEdit!["img"] = imageFile
+                    
+                    var imageTBN : UIImage = self.imageToSave!
+                    let widthTBN: CGFloat = 50.0
+                    let heightTBN: CGFloat = 50.0
+                    var sizeTBN = CGSizeMake(widthTBN, heightTBN)
+                    let scaleTBN: CGFloat = 1.0
+                    UIGraphicsBeginImageContextWithOptions(sizeTBN, false, scaleTBN) //---
+                    imageTBN.drawInRect(CGRect(origin: CGPointZero, size: sizeTBN))
+                    let scaledImageTBN = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    var imageTBNData = UIImagePNGRepresentation(scaledImageTBN)
+                    var imageTBNFile = PFFile(data:imageTBNData)
+                    billToEdit!["imgTBN"] = imageTBNFile
+                    
+                    self.resetImages()
+                    
+                    
+                }
                 self.billObjects.removeObjectAtIndex(cellId)
                 self.billObjects.insertObject(billToEdit!, atIndex: cellId)
                 
@@ -588,9 +616,10 @@ class Model {
         return numOfDebts
     }
     
-    func createDebtRelations(groupFriends: [String],groupName:String) {
+    func createDebtRelations(groupFriends: [String],groupName:String,create:Bool) {
         refreshNetworkStatus()
         //var debtsToDelte : NSArray = self.debtObjects as NSArray
+        
         var queryDebts: PFQuery = PFQuery(className: "Debts")
         //queryDebts.fromLocalDatastore()
         queryDebts.whereKey("groupName", equalTo: groupName)
@@ -598,14 +627,18 @@ class Model {
         queryDebts.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                 var temp: NSArray = objects! as NSArray
-                var debToDelete  = temp.mutableCopy() as! NSMutableArray
-                for debt in debToDelete {
-                    var pfdebt : PFObject = debt as! PFObject
-                    if self.connectionStatus! {
-                        pfdebt.delete()
-                    } else {
-                        pfdebt.deleteEventually()
+                var refreshedDebts  = temp.mutableCopy() as! NSMutableArray
+                if create{
+                    for debt in refreshedDebts {
+                        var pfdebt : PFObject = debt as! PFObject
+                        if self.connectionStatus! {
+                            pfdebt.delete()
+                        } else {
+                            pfdebt.deleteEventually()
+                        }
                     }
+                } else {
+                    self.debtObjects = refreshedDebts
                 }
                 
             } else {
@@ -617,8 +650,9 @@ class Model {
             debtToDelete.delete()
             
         }*/
-        self.debtObjects.removeAllObjects()
-                for i in 1..<groupFriends.count {
+        if create {
+            self.debtObjects.removeAllObjects()
+            for i in 1..<groupFriends.count {
                 for j in (i+1)...groupFriends.count {
                     println("Relation between \(i) and \(j)")
                     var object : PFObject!
@@ -630,12 +664,13 @@ class Model {
                     object["user2"] = groupFriends[j-1]
                     object["value"] = 0
                     object["groupName"] = groupName
-                     self.debtObjects.addObject(object)
+                    self.debtObjects.addObject(object)
                     if connectionStatus! {
                         object.save()
                     } else {
                         object.saveEventually()
                     }
+                }
             }
         }
         
@@ -738,7 +773,26 @@ class Model {
         }
         println(filteredBills)
     }
-    
+    func getPersonalRelations(){
+        self.personalRelations.removeAll(keepCapacity: false)
+        var userName : String = userObject!["username"] as! String
+        for relation in self.relations {
+            if relation.user1 == userName {
+                self.personalRelations.append(relation)
+            }
+            if relation.user2 == userName {
+                var auxRelation = relation
+                if relation.value < 0 {
+                    auxRelation.debtStringCell = userName + " <-- " + relation.user1 + " = " +  String(format: "%.2f",relation.value*(-1))
+                } else if relation.value > 0 {
+                    auxRelation.debtStringCell = userName + " --> " + relation.user1 + " = " +  String(format: "%.2f",relation.value)
+                }else {
+                    auxRelation.debtStringCell = userName + " -- " + relation.user1 + " = " +  String(format: "%.2f",relation.value)
+                }
+                self.personalRelations.append(auxRelation)
+            }
+        }
+    }
     func generateDebtStrings() {
         println("GENERATE")
         //self.relations = []
@@ -785,8 +839,9 @@ class Model {
     func calculateDebts(background:Bool) {
         refreshNetworkStatus()
         if self.groupObject != nil{
+            
             var userGroupName : String = self.groupObject!["groupName"] as! String
-            var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
+            var groupFriends : [String] = self.groupFriendsString
             println("DDEBT OBJECTS : \(self.debtObjects.count)")
             println(self.getNumOfDebts(groupFriends.count))
             var queryDebt : PFQuery = PFQuery(className: "Debts")
@@ -799,8 +854,18 @@ class Model {
                     var temp: NSArray = objects! as NSArray
                     println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
                     if temp.count != self.getNumOfDebts(groupFriends.count) {
-                        println("\t\t\t\t\t#############CREATE RELATIONS")
-                        self.createDebtRelations(groupFriends,groupName:userGroupName)
+                        var queryGroup: PFQuery = PFQuery(className: "Group")
+                        queryGroup.whereKey("groupName", equalTo: userGroupName)
+                        var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
+                        var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
+                        var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
+                        self.groupFriendsString = refreshedGroupFriends
+                        if temp.count != self.getNumOfDebts(refreshedGroupFriends.count){
+                            println("\t\t\t\t\t#############CREATE RELATIONS")
+                            self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: true)
+                        } else {
+                            self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: false)
+                        }
                     }
                     println("GET RELATIONS")
                     self.refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
@@ -808,15 +873,27 @@ class Model {
                 } else {
                     println("FUDEU NO REFRESH EM BACKGROUND")
                 }
-            }
 
-            
+                }
             } else {
                 var temp: NSArray = queryDebt.findObjects()! as NSArray
                 println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
                 if temp.count != getNumOfDebts(groupFriends.count) {
+                    
+                    var queryGroup: PFQuery = PFQuery(className: "Group")
+                    queryGroup.fromLocalDatastore()
+                    queryGroup.whereKey("groupName", equalTo: userGroupName)
+                    var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
+                    var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
                     println("\t\t\t\t\t#############CREATE RELATIONS")
-                    createDebtRelations(groupFriends,groupName:userGroupName)
+                    var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
+                    self.groupFriendsString = refreshedGroupFriends
+                    if temp.count != self.getNumOfDebts(refreshedGroupFriends.count){
+                        println("\t\t\t\t\t#############CREATE RELATIONS")
+                        self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: true)
+                    } else {
+                        self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: false)
+                    }
                 }
                 println("GET RELATIONS")
                 refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
