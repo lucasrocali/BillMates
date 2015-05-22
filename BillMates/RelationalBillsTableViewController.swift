@@ -51,7 +51,7 @@ class RelationalBillsTableViewController: UITableViewController {
             println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
-            editBill.writeRead = 2
+            editBill.billState = 3
         }
     }
 }

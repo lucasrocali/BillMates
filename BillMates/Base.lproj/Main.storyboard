@@ -207,6 +207,7 @@
                         <outlet property="lblPaidBy" destination="pdl-JS-JnU" id="ecg-hS-iUQ"/>
                         <outlet property="lblPerPerson" destination="nnl-kX-ehS" id="R95-OD-LAm"/>
                         <outlet property="leftBarBtn" destination="2mS-jI-ua4" id="kK3-gg-7hC"/>
+                        <outlet property="rightBarBtn" destination="pXg-bT-pBD" id="xoA-1y-anu"/>
                         <outlet property="tableView" destination="mer-qc-mRg" id="6ef-dR-ii9"/>
                         <outlet property="txtDescription" destination="kbk-kr-YlJ" id="wHC-cd-kUH"/>
                         <outlet property="txtValue" destination="GWK-UM-HMn" id="Qmx-z0-obi"/>

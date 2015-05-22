@@ -435,6 +435,11 @@ class Model {
         
         return 0
     }
+    func resetImages() {
+        var img : UIImage?
+        self.imageToSave = img
+        self.imageTBNToSave = img
+    }
     
     func saveBill(#description:String, value:String) {
         refreshNetworkStatus()
@@ -481,9 +486,8 @@ class Model {
             var imageTBNFile = PFFile(data:imageTBNData)
             object["imgTBN"] = imageTBNFile
             
-            var img : UIImage?
-            self.imageToSave = img
-            self.imageTBNToSave = img
+            resetImages()
+            
 
         }
         if connectionStatus! {

@@ -11,13 +11,13 @@ import Parse
 import ParseUI
 
 class BillsListTableViewController: UITableViewController {
-
+    
     var model = Model.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //model.getBills()
-         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
         
         //model.refreshData()
         self.tableView.reloadData()
@@ -46,11 +46,11 @@ class BillsListTableViewController: UITableViewController {
             alert.addButtonWithTitle("Ok")
             alert.show()
         }
-
+        
     }
     
     var cTimes:Int = 0
-
+    
     func refresh(sender:AnyObject)
     {
         cTimes++
@@ -64,11 +64,11 @@ class BillsListTableViewController: UITableViewController {
         
         /*
         if model.isConnectedToNetwork() == true{
-            println("Internet Status = ON")
-            model.refreshData(true)
+        println("Internet Status = ON")
+        model.refreshData(true)
         } else {
-            println("Internet Status = OFF")
-            model.refreshData(false)
+        println("Internet Status = OFF")
+        model.refreshData(false)
         }*/
         
     }
@@ -83,27 +83,27 @@ class BillsListTableViewController: UITableViewController {
         //load data here
         self.tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return model.bills.count
         return self.model.billObjects.count
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("billCell", forIndexPath: indexPath) as! UITableViewCell
-
+        
         var object : PFObject = self.model.billObjects.objectAtIndex(indexPath.row) as! PFObject
         cell.textLabel!.text = object["description"] as? String
-
+        
         cell.detailTextLabel!.text = object["value"]!.description as? String
-
+        
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-
+        
         return cell
     }
     
@@ -129,15 +129,15 @@ class BillsListTableViewController: UITableViewController {
         {
             let indexPath = self.tableView.indexPathForSelectedRow()!
             
-           println("Cell n: \(indexPath.row)")
+            println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
-            editBill.writeRead = 1
+            editBill.billState = 1
             
         } else {
             var editBill = segue.destinationViewController as! AddBillViewController
-            editBill.writeRead = 0
-
+            editBill.billState = 0
+            
         }
     }
 }

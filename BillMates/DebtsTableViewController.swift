@@ -58,7 +58,13 @@ class DebtsTableViewController: UITableViewController {
         if relation.value != 0 {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         } else {
+            cell.accessoryType = .None
+        }
+        
+       if relation.value != 0 {
             cell.userInteractionEnabled = false
+        } else {
+            cell.userInteractionEnabled = true
         }
         return cell
     }

@@ -102,33 +102,45 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var lblPaidBy: UILabel!
     @IBOutlet weak var lblPerPerson: UILabel!
     @IBOutlet weak var leftBarBtn: UIBarButtonItem!
+    @IBOutlet weak var rightBarBtn: UIBarButtonItem!
     
     @IBOutlet weak var btnAddImg: UIButton!
      var billCellIndex: Int = 0
     var billId : String?
-    var writeRead : Int? //0 for write, 1 for write/read and 2 for read
-    
+    var billState : Int?
+        // 0 to create
+        // 1 view that can edit,
+        // 2 edit mode
+        // 3 view only
     var image:UIImage?
     var lastChosenMediaType:String?
     
     @IBAction func cancelAddBill(sender: UIBarButtonItem) {
-        if writeRead == 0 || writeRead == 1 {
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        } else if writeRead == 2 {
+        if billState == 3  {
             self.navigationController?.popViewControllerAnimated(true)
+        } else {
+            self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
     
     @IBAction func doneAddBill(sender: UIBarButtonItem) {
         
         if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
-            if writeRead == 0{
+            if billState == 0{
+                println("0")
                 self.model.saveBill(description: txtDescription.text, value: txtValue.text)
-            } else {
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            } else if billState == 2 {
+                println("1")
                 self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex)
-                
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            } else {    //view tahata can edit state 1
+                println("2")
+                billState = 2
+                self.viewDidLoad()
+                self.tableView.reloadData()
             }
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            
         }
     }
     func imageTapped(img: AnyObject)
@@ -140,6 +152,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             if let mediaType = lastChosenMediaType {
                 if mediaType == kUTTypeImage as NSString {
                     println("Vai fuder")
+                    model.resetImages()
                     model.imageToSave = image!
                     //vc.imageDetail!.image = image!
                     println("fudeu")
@@ -149,88 +162,144 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    func createBillInterface(){
+        var user : PFUser = model.userObject!
+        var paidByUsername : String = user["username"]! as! String
+        lblPaidBy.text = "Paid by: " + paidByUsername
+        //println("Add")
+        model.addedUsers.removeAll(keepCapacity: false)
+        leftBarBtn.title = "Cancel"
+
+    }
+    
+    func editBillInterface(){
+        println("Edit")
+        txtDescription.userInteractionEnabled = true
+        txtValue.userInteractionEnabled = true
+        btnAddImg.hidden = false
+        let object : PFObject = self.model.billObjects[billCellIndex] as! PFObject
+        txtDescription.text = object["description"] as! String
+        var valueFloat : Float = object["value"] as! Float
+        txtValue.text = "\(valueFloat)"
+        var paidByStr = object["paidBy"] as! String
+        lblPaidBy.text = "Paid by: " + paidByStr
+        model.addedUsers = object["sharedWith"] as! [String]
+        billId = object.objectId
+        var perPerson : Float = valueFloat/Float(model.addedUsers.count)
+        lblPerPerson.text = String(format: " %.2f per peson",perPerson)
+        println("Nao fudeu ainda")
+        if object["img"] != nil{
+            if model.connectionStatus! {
+                println("Tem foto")
+                var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
+                println("Nao fudeu ainda")
+                var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
+                println("fudeu")
+                let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
+                imageView.image = imgTBNUI
+                
+                var imgFile : PFFile = object["img"] as! PFFile
+                imgFile.getDataInBackgroundWithBlock{(object,error) -> Void in
+                    if (error == nil){
+                        var imgNS: NSData = object! as NSData
+                        let imgUI : UIImage = UIImage(data: imgNS)!
+                        self.model.resetImages()
+                        self.model.imageToSave = imgUI
+                        
+                    } else {
+                        println("FUDEU NO REFRESH EM BACKGROUND")
+                        
+                    }
+                }
+            } else {
+                println("no internet") //tratar imagem
+            }
+        }
+
+    }
+    
+    func viewBillInterface(){
+        println("See")
+        let object : PFObject
+        if billState == 1{
+            object = self.model.billObjects[billCellIndex] as! PFObject
+        } else {
+            object = self.model.filteredBills[billCellIndex] as! PFObject
+        }
+        txtDescription.text = object["description"] as! String
+        var valueFloat : Float = object["value"] as! Float
+        txtValue.text = "\(valueFloat)"
+        var paidByStr = object["paidBy"] as! String
+        lblPaidBy.text = "Paid by: " + paidByStr
+        model.addedUsers = object["sharedWith"] as! [String]
+        billId = object.objectId
+        var perPerson : Float = valueFloat/Float(model.addedUsers.count)
+        lblPerPerson.text = String(format: " %.2f per peson",perPerson)
+        println("Nao fudeu ainda")
+        if object["img"] != nil{
+            if model.connectionStatus! {
+                println("Tem foto")
+                var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
+                println("Nao fudeu ainda")
+                var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
+                println("fudeu")
+                let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
+                imageView.image = imgTBNUI
+                
+                var imgFile : PFFile = object["img"] as! PFFile
+                imgFile.getDataInBackgroundWithBlock{(object,error) -> Void in
+                    if (error == nil){
+                        var imgNS: NSData = object! as NSData
+                        let imgUI : UIImage = UIImage(data: imgNS)!
+                        self.model.resetImages()
+                        self.model.imageToSave = imgUI
+                        
+                    } else {
+                        println("FUDEU NO REFRESH EM BACKGROUND")
+                        
+                    }
+                }
+            } else {
+                println("no internet") //tratar imagem
+            }
+        }
+
+        txtDescription.userInteractionEnabled = false
+        txtValue.userInteractionEnabled = false
+        btnAddImg.hidden = true
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.contentMode = .ScaleAspectFit
         
         var user : PFUser = model.userObject!
-        var paidByUsername : String = user["username"]! as! String
+        
         //var imageView = self.imageView
         var tgr = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
         self.imageView.addGestureRecognizer(tgr)
         self.imageView.userInteractionEnabled = true
-        
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.delegate = self
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         
-        if writeRead == 0{  //to add    (write)
-            lblPaidBy.text = "Paid by: " + paidByUsername
-            println("Add")
-            model.addedUsers.removeAll(keepCapacity: false)
-            leftBarBtn.title = "Cancel"
-            
-        } else if writeRead == 1{   //to edit   (write/read)
-            println("Edit")
-            let object : PFObject = self.model.billObjects[billCellIndex] as! PFObject
-            txtDescription.text = object["description"] as! String
-            var valueFloat : Float = object["value"] as! Float
-            txtValue.text = "\(valueFloat)"
-            var paidByStr = object["paidBy"] as! String
-            lblPaidBy.text = "Paid by: " + paidByStr
-            model.addedUsers = object["sharedWith"] as! [String]
-            billId = object.objectId
-            var perPerson : Float = valueFloat/Float(model.addedUsers.count)
-            lblPerPerson.text = String(format: " %.2f per peson",perPerson)
-            println("Nao fudeu ainda")
-            if object["img"] != nil{
-                if model.connectionStatus! {
-                    println("Tem foto")
-                    var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
-                    println("Nao fudeu ainda")
-                    var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
-                    println("fudeu")
-                    let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
-                    imageView.image = imgTBNUI
-                    
-                    var imgFile : PFFile = object["img"] as! PFFile
-                    imgFile.getDataInBackgroundWithBlock{(object,error) -> Void in
-                        if (error == nil){
-                            var imgNS: NSData = object! as NSData
-                            let imgUI : UIImage = UIImage(data: imgNS)!
-                            self.model.imageToSave = imgUI
-                            
-                        } else {
-                            println("FUDEU NO REFRESH EM BACKGROUND")
-                        }
-                    }
-                } else {
-                    
-                }
-                
-                //var detailImg = ImageDetailViewController()
-                //detailImg.imageDetail.image = imgUI
-                //detailImg.createBill! = false
-            }
+        
+        if billState == 0{  //to add    (write)
+            createBillInterface()
+        } else if billState == 1{   //view that can edit
+            viewBillInterface()
+            rightBarBtn.title = "Edit"
+            //let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            //navigationItem.rightBarButtonItem = rightButton
+        } else if billState == 2{
+            editBillInterface()
+            rightBarBtn.title = "Done"
+            //let rightButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+            //navigationItem.rightBarButtonItem = rightButton
         } else {    //to see (read)
-            println("See")
-            let object : PFObject = self.model.filteredBills[billCellIndex] as! PFObject
-            txtDescription.text = object["description"] as! String
-            var valueFloat : Float = object["value"] as! Float
-            txtValue.text = "\(valueFloat)"
-            var paidByStr = object["paidBy"] as! String
-            lblPaidBy.text = "Paid by: " + paidByStr
-            model.addedUsers = object["sharedWith"] as! [String]
-            billId = object.objectId
-            var perPerson : Float = valueFloat/Float(model.addedUsers.count)
-            lblPerPerson.text = String(format: " %.2f per peson",perPerson)
-            
-            txtDescription.userInteractionEnabled = false
-            txtValue.userInteractionEnabled = false
-            btnAddImg.hidden = true
+            viewBillInterface()
             let rightButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
             navigationItem.rightBarButtonItem = rightButton
-            
         }
     }
 
@@ -247,6 +316,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                 image!.drawInRect(CGRect(origin: CGPointZero, size: size))
                 let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
+                model.resetImages()
                 model.imageToSave = scaledImage
                 
                 
@@ -299,8 +369,10 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         else{
             cell.accessoryType = .None
         }
-        if writeRead == 2 {
+        if billState == 3 || billState == 1 {
             cell.userInteractionEnabled = false
+        } else {
+            cell.userInteractionEnabled = true
         }
 
         return cell
