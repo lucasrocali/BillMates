@@ -182,15 +182,32 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
             billId = object.objectId
             var perPerson : Float = valueFloat/Float(model.addedUsers.count)
             lblPerPerson.text = String(format: " %.2f per peson",perPerson)
-            
-            if object["img"] != nil {
-                println("Tem foto")
-                var imgFile : PFFile = object["img"] as! PFFile
-                //phoPFIle.getData()
-                var imgNS : NSData = imgFile.getData()! as NSData
-                let imgUI : UIImage = UIImage(data: imgNS)!
-                imageView.image = imgUI
-                model.imageToSave = imgUI
+            println("Nao fudeu ainda")
+            if object["img"] != nil{
+                if model.connectionStatus! {
+                    println("Tem foto")
+                    var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
+                    println("Nao fudeu ainda")
+                    var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
+                    println("fudeu")
+                    let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
+                    imageView.image = imgTBNUI
+                    
+                    var imgFile : PFFile = object["img"] as! PFFile
+                    imgFile.getDataInBackgroundWithBlock{(object,error) -> Void in
+                        if (error == nil){
+                            var imgNS: NSData = object! as NSData
+                            let imgUI : UIImage = UIImage(data: imgNS)!
+                            self.model.imageToSave = imgUI
+                            
+                        } else {
+                            println("FUDEU NO REFRESH EM BACKGROUND")
+                        }
+                    }
+                } else {
+                    
+                }
+                
                 //var detailImg = ImageDetailViewController()
                 //detailImg.imageDetail.image = imgUI
                 //detailImg.createBill! = false

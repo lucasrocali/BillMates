@@ -17,6 +17,7 @@ class BillsListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //model.getBills()
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
         
         //model.refreshData()
         self.tableView.reloadData()
@@ -47,15 +48,20 @@ class BillsListTableViewController: UITableViewController {
         }
 
     }
+    
+    var cTimes:Int = 0
 
     func refresh(sender:AnyObject)
     {
+        cTimes++
+        println(cTimes)
         // Code to refresh table view
-        
+        println("\nREFRESH")
         //model.calculateDebts()
+        model.refreshData()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-        model.refreshData()
+        
         /*
         if model.isConnectedToNetwork() == true{
             println("Internet Status = ON")
@@ -73,7 +79,10 @@ class BillsListTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    
+    func loadList(notification: NSNotification){
+        //load data here
+        self.tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

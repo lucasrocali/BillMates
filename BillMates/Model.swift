@@ -81,9 +81,11 @@ class Model {
             if (error == nil){
                 var temp: NSArray = objects! as NSArray
                 //println(temp)
+                self.billObjects.removeAllObjects()
                  if temp.count > 0 {
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
                     println("\tbillObjects saved \(self.billObjects.count)")
+                    NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
                 }
                 
             } else {
@@ -117,6 +119,7 @@ class Model {
         
         var temp: NSArray = queryDebt.findObjects() as! NSArray
         if temp.count > 0{
+            self.debtObjects.removeAllObjects()
             self.debtObjects  = temp.mutableCopy() as! NSMutableArray
             println("\tdebtObjects saved \(self.debtObjects)")
             if self.groupObject != nil {
@@ -131,33 +134,7 @@ class Model {
                 
             }
             
-        }/*
-        queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                self.debtObjects.removeAllObjects()
-                println("\nTHREAD PRA PEGAR OS DEBTS!!!!!")
-                var temp: NSArray = objects! as NSArray
-                self.debtObjects  = temp.mutableCopy() as! NSMutableArray
-                println("\tdebtObjects saved \(self.debtObjects)")
-                 if self.debtObjects.count > 0 {
-                    println("CHAMOU FUDEU")
-                    if self.groupObject != nil {
-                        var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
-                        if self.debtObjects.count != self.getNumOfDebts(groupFriends.count) {
-                            self.calculateDebts(true)
-                            //println("DEBTS DIFERENTS NA THREAD")
-                        } else {
-                            self.calculateDebts(true)
-                            println("DEBTS IGUAIS NA THREAD")
-                        }
-                    }
-                }
-            } else {
-                //println(error?.userInfo)
-                println("ERROR NO FECTH FROM LOCAL - DEBTS")
-            }
-        }*/
-        
+        }
     }
     
     func fetchAllObjects(){
@@ -503,6 +480,10 @@ class Model {
             var imageTBNData = UIImagePNGRepresentation(scaledImageTBN)
             var imageTBNFile = PFFile(data:imageTBNData)
             object["imgTBN"] = imageTBNFile
+            
+            var img : UIImage?
+            self.imageToSave = img
+            self.imageTBNToSave = img
 
         }
         if connectionStatus! {
@@ -607,7 +588,7 @@ class Model {
         refreshNetworkStatus()
         //var debtsToDelte : NSArray = self.debtObjects as NSArray
         var queryDebts: PFQuery = PFQuery(className: "Debts")
-        queryDebts.fromLocalDatastore()
+        //queryDebts.fromLocalDatastore()
         queryDebts.whereKey("groupName", equalTo: groupName)
         
         queryDebts.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
@@ -683,14 +664,17 @@ class Model {
     
     func refreshDebts(groupFriends: [String],groupName: String,backGround:Bool) {
         refreshNetworkStatus()
-        self.debtObjects.removeAllObjects()
+        
+        //self.debtObjects.removeAllObjects()
+        //self.debtObjects.objectAtIndex(<#index: Int#>)
         
         var localDebtStorage = Dictionary<String, Float>()
+        localDebtStorage.removeAll(keepCapacity: false)
         for i in 1..<groupFriends.count {
             for j in (i+1)...groupFriends.count {
                 var dbtID : String = String(i) + String(j)
                 //println("-----> \(dbtID)")
-                println(dbtID)
+                //println(dbtID)
                 localDebtStorage[dbtID] = 0.0 as Float
             }
         }
@@ -710,54 +694,19 @@ class Model {
             }
         }
         println("LOCALLLLL::: \(localDebtStorage)")
-        if backGround {
+        for debt in self.debtObjects {
+            var value : Float = 0
+            var debtObj : PFObject = debt as! PFObject
             for localDebt in localDebtStorage {
-                
-                
-                var queryDebts: PFQuery = PFQuery(className: "Debts")
-                //queryDebts.fromLocalDatastore()
-                queryDebts.whereKey("groupName", equalTo: groupName)
-                queryDebts.whereKey("debtId", equalTo: localDebt.0)
-                
-                queryDebts.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                    if (error == nil){
-                        var temp: NSArray = objects! as NSArray
-                        var debToUpdate : PFObject = temp.objectAtIndex(0) as! PFObject
-                        self.debtObjects.addObject(debToUpdate)
-                        debToUpdate["value"] = localDebt.1
-                        debToUpdate.saveEventually()
-                        //self.generateDebtStrings()
-                        println("Group: \(groupName) billCode \(localDebt.0) value: \(localDebt.1)")
-
-                    } else {
-                        println("FUDEU NO REFRESH EM BACKGROUND")
-                    }
+                //var debtIdStr : String = debt["debtId"] as String
+                if debtObj["debtId"] as! String == localDebt.0{
+                    value = localDebt.1
                 }
             }
-        } else {
-            for localDebt in localDebtStorage {
-                var queryDebts: PFQuery = PFQuery(className: "Debts")
-                //queryDebts.fromLocalDatastore()
-                queryDebts.whereKey("groupName", equalTo: groupName)
-                queryDebts.whereKey("debtId", equalTo: localDebt.0)
-                println(groupName+localDebt.0)
-                var temp: NSArray = queryDebts.findObjects()! as NSArray
-
-                if temp.count > 0 {
-                    var debToUpdate : PFObject = temp.firstObject as! PFObject
-                    debToUpdate["value"] = localDebt.1
-                    self.debtObjects.addObject(debToUpdate)
-                    if connectionStatus! {
-                        debToUpdate.save()
-                    } else {
-                        debToUpdate.saveEventually()
-                    }
-                    println("Group: \(groupName) billCode \(localDebt.0) value: \(localDebt.1)")
-                }
-        
-            }
-            self.generateDebtStrings()
+            debtObj["value"] = value
+            debtObj.saveEventually()
         }
+        self.generateDebtStrings()
     }
     
     func filterBillsByRelation(user1:String,user2:String){
@@ -788,9 +737,9 @@ class Model {
     
     func generateDebtStrings() {
         println("GENERATE")
-        self.relations = []
+        //self.relations = []
         var debts = self.debtObjects
-        
+        self.relations.removeAll(keepCapacity: false)
         var debtStr : String = ""
         for debt in debts {
             var user1 : String = debt["user1"] as! String
@@ -826,20 +775,8 @@ class Model {
         for relation in self.relations{
             println(relation.debtStringCell)
         }
-        /*var stringCells : [String] = []
-        for relationCell in self.relations {
-            stringCells.append(relationCell.debtStringCell)
-        }
-        var orderedCells = stringCells
-        var sortedNames = orderedCells.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-        println(sortedNames)8*/
-        
-        
+        NSNotificationCenter.defaultCenter().postNotificationName("loadDebts", object: nil)
     }
-    /*
-    func getDebtStringCell(index:Int) -> String {
-        return self.relations[index].debtStringCell
-    }*/
     
     func calculateDebts(background:Bool) {
         refreshNetworkStatus()

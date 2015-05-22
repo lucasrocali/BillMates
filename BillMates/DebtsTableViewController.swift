@@ -15,6 +15,9 @@ class DebtsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.reloadData()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"loadDebts", object: nil)
+        
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -60,6 +63,11 @@ class DebtsTableViewController: UITableViewController {
         return cell
     }
     //-
+    
+    func loadList(notification: NSNotification){
+        //load data here
+        self.tableView.reloadData()
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {

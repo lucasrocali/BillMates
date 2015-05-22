@@ -38,6 +38,8 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
         
     }
     
+    
+    
     func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
         if(!username.isEmpty || !password.isEmpty){
             return true
