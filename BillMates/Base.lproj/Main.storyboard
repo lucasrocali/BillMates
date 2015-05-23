@@ -244,13 +244,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="debtCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="debtCell" id="Du3-BA-ge2">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="relationsToFilteredBills" id="Lwt-Ry-oWE" customClass="debtCellTableViewCell" customModule="BillMates" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Du3-BA-ge2" id="0CT-WW-91q">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lwt-Ry-oWE" id="lrl-tb-kkQ">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="j4D-gB-Bov" kind="show" identifier="relationsToFilteredBills" id="vck-6v-Ki2"/>
+                                    <segue destination="j4D-gB-Bov" kind="show" identifier="relationsToFilteredBills" id="Lmh-mz-Qv1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -261,25 +262,23 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="dWm-Nu-WPg">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Pfj-fV-daT">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="HgJ-J6-Fnd">
-                                <rect key="frame" x="180" y="7" width="240" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="All"/>
-                                    <segment title="Personal"/>
-                                </segments>
-                                <connections>
-                                    <action selector="changeBalanceBtns:" destination="kPj-un-TwK" eventType="valueChanged" id="vvF-MH-u17"/>
-                                </connections>
-                            </segmentedControl>
-                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="LSQ-7h-Hh4">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Personal"/>
+                            </segments>
+                            <connections>
+                                <action selector="changeBalanceBtns:" destination="kPj-un-TwK" eventType="valueChanged" id="jC4-3k-ne1"/>
+                            </connections>
+                        </segmentedControl>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Wwa-Lq-F0b">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="tableControl" destination="HgJ-J6-Fnd" id="ahe-wd-yY5"/>
+                        <outlet property="tableControl" destination="LSQ-7h-Hh4" id="cpv-za-GGW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMl-ia-jwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -456,6 +455,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="EOV-kC-qSg"/>
                     <connections>
                         <outlet property="imageDetail" destination="clW-TR-ySU" id="Tdh-c9-INz"/>
                     </connections>

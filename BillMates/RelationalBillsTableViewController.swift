@@ -19,7 +19,9 @@ class RelationalBillsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.filterBillsByRelation(user1!,user2:user2!)
+        if user1 != nil && user2 != nil {
+            model.filterBillsByRelation(user1!,user2:user2!)
+        }
     }
 
     override func didReceiveMemoryWarning() {

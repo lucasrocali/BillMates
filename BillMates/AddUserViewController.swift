@@ -111,10 +111,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
 
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")

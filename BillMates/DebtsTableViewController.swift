@@ -38,7 +38,16 @@ class DebtsTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"loadDebts", object: nil)
         
+        //Register Custom Cell
+        var nib = UINib(nibName: "debtCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "debtCell")
+        
+        self.shouldPerformSegueWithIdentifier("relationsToFilteredBills", sender: nil)
 
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -75,7 +84,10 @@ class DebtsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("debtCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell : debtCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("debtCell") as! debtCellTableViewCell
+        
+        
+        
         var relation : Relation?
         if debtsState == 0 {
         //var cellLabel : String = model.getDebtStringCell(indexPath.row)
@@ -84,6 +96,37 @@ class DebtsTableViewController: UITableViewController {
               relation  = model.personalRelations[indexPath.row]
         }
         
+        cell.lblUser1.text = relation!.user1
+        cell.lblUser2.text = relation!.user2
+        cell.lblValue.text = NSString(format: "%.2f",relation!.value) as String
+        cell.btnSettledUp.layer.cornerRadius = 4
+        cell.btnSettledUp.addTarget(self, action: "settleUp:", forControlEvents: .TouchUpInside)
+        cell.btnSettledUp.tag = indexPath.row
+        
+        cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        if relation!.value == 0 {
+            cell.userInteractionEnabled = false
+            cell.imgDirection.hidden = (true)
+            cell.btnSettledUp.hidden = (true)
+            //cell.lblValue.alpha = CGFloat(0.5)
+            //cell.lblUser1.alpha = CGFloat(0.5)
+            //cell.lblUser2.alpha = CGFloat(0.5)
+            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+            //cell.imgDirection.image = UIImage(named: "AddUser.png")
+        } else if relation!.value < 0 {
+            cell.userInteractionEnabled = true
+            cell.imgDirection.hidden = (false)
+            cell.btnSettledUp.hidden = (false)
+            cell.lblValue.text = NSString(format: "%.2f",relation!.value*(-1)) as String
+            cell.imgDirection.image = UIImage(named: "arrow2to1.png")
+        } else {
+            cell.userInteractionEnabled = true
+            cell.imgDirection.hidden = (false)
+            cell.btnSettledUp.hidden = (false)
+            cell.imgDirection.image = UIImage(named: "arrow1to2.png")
+        }
+        
+        /*
         cell.textLabel!.text = relation!.debtStringCell
         
         cell.userInteractionEnabled = true
@@ -97,10 +140,21 @@ class DebtsTableViewController: UITableViewController {
             cell.userInteractionEnabled = false
         } else {
             cell.userInteractionEnabled = true
-        }
+        }*/
         return cell
     }
     //-
+    
+    func settleUp(sender: UIButton!) {
+        var relation : Relation?
+        if debtsState == 0 {
+            //var cellLabel : String = model.getDebtStringCell(indexPath.row)
+            relation = model.relations[sender.tag]
+        } else {
+            relation  = model.personalRelations[sender.tag]
+        }
+        println("Settle Up for \(relation!.user1) and \(relation!.user2)")
+    }
     
     func loadList(notification: NSNotification){
         //load data here
@@ -109,10 +163,11 @@ class DebtsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-        if segue.identifier == "relationsToFilteredBills"
+         println("segue")
+        if segue.identifier == "relationsToFilteredBills" && sender != nil
         {
             println("Bora muleKOTE")
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = sender
             
             var filteredBills = segue.destinationViewController as! RelationalBillsTableViewController
             if debtsState == 0 {
@@ -124,8 +179,19 @@ class DebtsTableViewController: UITableViewController {
             }
         }
     }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("relationsToFilteredBills", sender: indexPath)
+    }
+    /*
     override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
-        if identifier == "relationsToFilteredBills" {
+       
+        if sender != nil {
+            println("nil")
+            return false
+        }
+        if identifier == "relationsToFilteredBills" && sender != nil{
             let indexPath = self.tableView.indexPathForSelectedRow()!
             var relation : Relation?
             if debtsState == 0 {
@@ -139,5 +205,5 @@ class DebtsTableViewController: UITableViewController {
             }
         }
         return true
-    }
+    }*/
 }

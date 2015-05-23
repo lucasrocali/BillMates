@@ -45,6 +45,10 @@
 		788647321B0B75DD00B916BD /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472D1B0B75DD00B916BD /* Camera.png */; };
 		788647331B0B75DD00B916BD /* TodoList.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472E1B0B75DD00B916BD /* TodoList.png */; };
 		788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788647341B0B8E8100B916BD /* ImageDetailViewController.swift */; };
+		78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0191B10C094000093E8 /* debtCell.xib */; };
+		78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0211B10C74D000093E8 /* arrow1to2.png */; };
+		78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0221B10C74D000093E8 /* arrow2to1.png */; };
+		78F4C0261B10CF33000093E8 /* debtCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +104,10 @@
 		7886472D1B0B75DD00B916BD /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		7886472E1B0B75DD00B916BD /* TodoList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TodoList.png; sourceTree = "<group>"; };
 		788647341B0B8E8100B916BD /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
+		78F4C0191B10C094000093E8 /* debtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = debtCell.xib; sourceTree = "<group>"; };
+		78F4C0211B10C74D000093E8 /* arrow1to2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow1to2.png; sourceTree = "<group>"; };
+		78F4C0221B10C74D000093E8 /* arrow2to1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2to1.png; sourceTree = "<group>"; };
+		78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debtCellTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +188,7 @@
 				7829A3611AEC129D00CEFF35 /* Controller */,
 				7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */,
 				7810CABB1AEC094F00FD00F0 /* Main.storyboard */,
+				78F4C0191B10C094000093E8 /* debtCell.xib */,
 				7810CABE1AEC094F00FD00F0 /* Images.xcassets */,
 				7810CAC01AEC094F00FD00F0 /* LaunchScreen.xib */,
 				7810CAB61AEC094F00FD00F0 /* BillMates.xcdatamodeld */,
@@ -224,6 +233,7 @@
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
 				78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */,
 				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
+				78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -240,6 +250,8 @@
 		788647291B0B75AF00B916BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				78F4C0211B10C74D000093E8 /* arrow1to2.png */,
+				78F4C0221B10C74D000093E8 /* arrow2to1.png */,
 				7886472A1B0B75DD00B916BD /* AddUser.png */,
 				7886472B1B0B75DD00B916BD /* BalanceIcon.png */,
 				7886472C1B0B75DD00B916BD /* BillList.png */,
@@ -338,9 +350,12 @@
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
 				788647331B0B75DD00B916BD /* TodoList.png in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
+				78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */,
 				788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */,
 				788647321B0B75DD00B916BD /* Camera.png in Resources */,
 				7886472F1B0B75DD00B916BD /* AddUser.png in Resources */,
+				78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */,
+				78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */,
 				788647311B0B75DD00B916BD /* BillList.png in Resources */,
 				7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */,
 			);
@@ -361,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7810CAD81AEC0CF600FD00F0 /* BillsListTableViewController.swift in Sources */,
+				78F4C0261B10CF33000093E8 /* debtCellTableViewCell.swift in Sources */,
 				7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */,
 				78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */,
 				7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */,

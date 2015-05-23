@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class BillsListTableViewController: UITableViewController {
+class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     
     var model = Model.sharedInstance
     
@@ -29,24 +29,42 @@ class BillsListTableViewController: UITableViewController {
     }
     
     func logout() {
-        if model.isConnectedToNetwork() {
-            println("Log out e chama view")
-            PFUser.logOut()
-            model.resetModel()
-            
-            var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
-            
-            self.presentViewController(vc, animated: false, completion: nil)
-        } else {
-            let alert = UIAlertView()
-            alert.title = "No internet connection"
-            alert.message = "You cannot log out"
-            alert.addButtonWithTitle("Ok")
-            alert.show()
-        }
+        let alert = UIAlertView()
+        alert.title = "Log out?"
+        alert.addButtonWithTitle("Cancel")
+        alert.addButtonWithTitle("Ok")
+        alert.delegate = self
+        alert.show()
+
+       
         
+    }
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        let buttonTitle = alertView.buttonTitleAtIndex(buttonIndex)
+        println("\(buttonTitle) pressed")
+        if buttonTitle == "Ok" {
+           println("Ok pressed")
+            if model.isConnectedToNetwork() {
+                println("Log out e chama view")
+                PFUser.logOut()
+                model.resetModel()
+                
+                var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController
+                
+                self.presentViewController(vc, animated: false, completion: nil)
+            } else {
+                let alert = UIAlertView()
+                alert.title = "No internet connection"
+                alert.message = "You cannot log out"
+                alert.addButtonWithTitle("Ok")
+                alert.show()
+            }
+            
+        } else {
+            println("Cancel pressed")
+        }
     }
     
     var cTimes:Int = 0
