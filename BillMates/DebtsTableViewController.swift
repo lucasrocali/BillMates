@@ -137,9 +137,9 @@ class DebtsTableViewController: UITableViewController {
             cell.userInteractionEnabled = false
             cell.imgDirection.hidden = (true)
             //cell.btnSettledUp.hidden = (true)
-            cell.lblValue.alpha = CGFloat(0.6)
-            cell.lblUser1.alpha = CGFloat(0.6)
-            cell.lblUser2.alpha = CGFloat(0.6)
+            cell.lblValue.alpha = CGFloat(0.4)
+            cell.lblUser1.alpha = CGFloat(0.4)
+            cell.lblUser2.alpha = CGFloat(0.4)
             //cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             //cell.imgDirection.image = UIImage(named: "AddUser.png")
         } else if relation!.value > 0 {
@@ -211,9 +211,11 @@ class DebtsTableViewController: UITableViewController {
             if debtsState == 0 {
                 filteredBills.user1 = model.relations[indexPath.row].user1
                 filteredBills.user2 = model.relations[indexPath.row].user2
+                filteredBills.value = model.relations[indexPath.row].value
             } else {
                 filteredBills.user1 = model.personalRelations[indexPath.row].user1
                 filteredBills.user2 = model.personalRelations[indexPath.row].user2
+                filteredBills.value = model.personalRelations[indexPath.row].value
             }
         }
     }

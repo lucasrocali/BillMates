@@ -13,9 +13,23 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     var model = Model.sharedInstance
 
+    @IBOutlet weak var lblDirection: UILabel!
+    @IBOutlet weak var lblUser1: UILabel!
+    @IBOutlet weak var lblUser2: UILabel!
+    @IBOutlet weak var lblValue: UILabel!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var btnSettleUp: UIButton!
+    @IBAction func btnSettleUp(sender: UIButton) {
+        btnSettleUp.backgroundColor = cellColor4
+    }
+    @IBAction func btnSettledDown(sender: UIButton) {
+        btnSettleUp.backgroundColor = cellColor3
+    }
+    
     @IBOutlet weak var filteredTableView: UITableView!
     var user1 : String?
     var user2 : String?
+    var value : Float?
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +40,26 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         println(self.model.filteredBills.count)
         self.filteredTableView.reloadData()
 
+        lblUser1.text = user1!
+        lblUser2.text = user2!
+        lblDirection.text = user1! + " owns to" + " " + user2!
+        lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
+        lblTitle.text = "Related bills"
+        
+        //Layout
+        lblUser1.font = fontText
+        lblUser2.font = fontText
+        lblDirection.font = fontDetails
+        lblValue.font = fontNumbers
+        lblTitle.font = fontText
+        
+        btnSettleUp.titleLabel!.text = "Settle up"
+        btnSettleUp.titleLabel!.font = fontButton
+        btnSettleUp.backgroundColor = cellColor4
+        btnSettleUp.titleLabel!.textColor = cellColor255
+        btnSettleUp.titleLabel?.highlightedTextColor = cellColor3
+        
+        
         // Do any additional setup after loading the view.
     }
 

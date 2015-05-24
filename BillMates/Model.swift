@@ -465,6 +465,8 @@ class Model {
         
         object["sharedWith"] = addedUsers
         
+        object["activated"] = true
+        
         
         //let scaledImage = scaleImageWith(pickedImage)
         //var defautImg : UIImage = UIImage(named: "0")!

@@ -43,6 +43,8 @@ let textOrange:UIColor = UIColor(red: 204/255, green: 102/255, blue: 0/255, alph
 let fontNumbers : UIFont = UIFont(name: "Copperplate-Bold", size:20)!
 let fontDetails : UIFont = UIFont(name: "Copperplate-Light", size:12)!
 let fontText : UIFont = UIFont(name: "Copperplate-Bold", size:18)!
+let fontButton: UIFont = UIFont(name: "Copperplate-Bold", size: 22)!
+
 
 //let cellColor2:UIColor = UIColor(red: 109/255, green: 122/255, blue: 118/255, alpha: 1)
 //let cellColor2:UIColor = UIColor(red: 109/255, green: 122/255, blue: 118/255, alpha: 1)
