@@ -42,7 +42,7 @@ class DebtsTableViewController: UITableViewController {
         var nib = UINib(nibName: "debtCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "debtCell")
         
-        self.shouldPerformSegueWithIdentifier("relationsToFilteredBills", sender: nil)
+        self.shouldPerformSegueWithIdentifier("balanceToBalanceDetail", sender: nil)
 
     }
     
@@ -99,18 +99,29 @@ class DebtsTableViewController: UITableViewController {
         
         cell.lblUser1.text = relation!.user1
         cell.lblUser2.text = relation!.user2
-        cell.lblValue.text = NSString(format: "%.2f",relation!.value) as String
-        cell.btnSettledUp.layer.cornerRadius = 4
-        cell.btnSettledUp.addTarget(self, action: "settleUp:", forControlEvents: .TouchUpInside)
-        cell.btnSettledUp.tag = indexPath.row
+        cell.lblValue.text = "$ "+(NSString(format: "%.2f",abs(relation!.value)) as String)
+        cell.lblDirection.hidden = false
+        cell.lblLeftUser.hidden = false
+        cell.lblRightUser.hidden = false
+        
+        //cell.btnSettledUp.layer.cornerRadius = 4
+        //cell.btnSettledUp.addTarget(self, action: "settleUp:", forControlEvents: .TouchUpInside)
+        //cell.btnSettledUp.tag = indexPath.row
         
         //Standart Cell Layout
         
         tableView.separatorColor = UIColor.clearColor()
-       // cell.backgroundColor = cellColor1
         cell.lblValue.alpha = CGFloat(1)
         cell.lblUser1.alpha = CGFloat(1)
         cell.lblUser2.alpha = CGFloat(1)
+        cell.lblValue.textColor = cellColor0
+        
+        cell.lblValue.font = fontNumbers
+        cell.lblDirection.font = fontDetails
+        cell.lblLeftUser.font = fontDetails
+        cell.lblRightUser.font = fontDetails
+        cell.lblUser1.font = fontText
+        cell.lblUser2.font = fontText
         
         
         if(indexPath.row % 2 == 0) {
@@ -120,24 +131,36 @@ class DebtsTableViewController: UITableViewController {
         }
         
         if relation!.value == 0 {
+            cell.lblDirection.hidden = true
+            cell.lblLeftUser.hidden = true
+            cell.lblRightUser.hidden = true
             cell.userInteractionEnabled = false
             cell.imgDirection.hidden = (true)
-            cell.btnSettledUp.hidden = (true)
-            cell.lblValue.alpha = CGFloat(0.3)
-            cell.lblUser1.alpha = CGFloat(0.3)
-            cell.lblUser2.alpha = CGFloat(0.3)
+            //cell.btnSettledUp.hidden = (true)
+            cell.lblValue.alpha = CGFloat(0.6)
+            cell.lblUser1.alpha = CGFloat(0.6)
+            cell.lblUser2.alpha = CGFloat(0.6)
             //cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             //cell.imgDirection.image = UIImage(named: "AddUser.png")
-        } else if relation!.value < 0 {
+        } else if relation!.value > 0 {
             cell.userInteractionEnabled = true
             cell.imgDirection.hidden = (false)
-            cell.btnSettledUp.hidden = (false)
-            cell.lblValue.text = NSString(format: "%.2f",relation!.value*(-1)) as String
+            cell.lblLeftUser.text = relation!.user2
+            //cell.lblLeftUser.textColor = textGreen
+            cell.lblDirection.text = " owes to"
+            cell.lblRightUser.text = " " + relation!.user1
+            cell.lblValue.textColor = textGreen
+            //cell.lblRightUser.textColor = textOrange
             cell.imgDirection.image = UIImage(named: "arrow2to1.png")
         } else {
             cell.userInteractionEnabled = true
             cell.imgDirection.hidden = (false)
-            cell.btnSettledUp.hidden = (false)
+            cell.lblLeftUser.text = relation!.user1
+            //cell.lblLeftUser.textColor = textOrange
+            cell.lblDirection.text = " owes to"
+            cell.lblRightUser.text = " " + relation!.user2
+            cell.lblValue.textColor = textOrange
+            //cell.btnSettledUp.hidden = (false)
             cell.imgDirection.image = UIImage(named: "arrow1to2.png")
         }
         
@@ -159,7 +182,7 @@ class DebtsTableViewController: UITableViewController {
         return cell
     }
     //-
-    
+    /*
     func settleUp(sender: UIButton!) {
         var relation : Relation?
         if debtsState == 0 {
@@ -170,7 +193,7 @@ class DebtsTableViewController: UITableViewController {
         }
         println("Settle Up for \(relation!.user1) and \(relation!.user2)")
     }
-    
+    */
     func loadList(notification: NSNotification){
         //load data here
         self.tableView.reloadData()
@@ -179,12 +202,12 @@ class DebtsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
          println("segue")
-        if segue.identifier == "relationsToFilteredBills" && sender != nil
+        if segue.identifier == "balanceToBalanceDetail" && sender != nil
         {
             println("Bora muleKOTE")
             let indexPath : NSIndexPath = sender as! NSIndexPath
             
-            var filteredBills = segue.destinationViewController as! RelationalBillsTableViewController
+            var filteredBills = segue.destinationViewController as! BalanceDetailViewController
             if debtsState == 0 {
                 filteredBills.user1 = model.relations[indexPath.row].user1
                 filteredBills.user2 = model.relations[indexPath.row].user2
@@ -197,7 +220,7 @@ class DebtsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        performSegueWithIdentifier("relationsToFilteredBills", sender: indexPath)
+        performSegueWithIdentifier("balanceToBalanceDetail", sender: indexPath)
     }
     /*
     override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {

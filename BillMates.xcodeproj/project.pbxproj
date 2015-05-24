@@ -38,6 +38,7 @@
 		7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */; };
 		7849DC761B0A0723008039F0 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849DC751B0A0723008039F0 /* Relation.swift */; };
 		78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */; };
+		787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787281161B122A8C00564C87 /* BalanceDetailViewController.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
 		7886472F1B0B75DD00B916BD /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472A1B0B75DD00B916BD /* AddUser.png */; };
 		788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472B1B0B75DD00B916BD /* BalanceIcon.png */; };
@@ -99,6 +100,7 @@
 		7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		7849DC751B0A0723008039F0 /* Relation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
 		78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationalBillsTableViewController.swift; sourceTree = "<group>"; };
+		787281161B122A8C00564C87 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		7886472A1B0B75DD00B916BD /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddUser.png; sourceTree = "<group>"; };
 		7886472B1B0B75DD00B916BD /* BalanceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BalanceIcon.png; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
+				787281161B122A8C00564C87 /* BalanceDetailViewController.swift */,
 				78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */,
 				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
 				78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */,
@@ -387,6 +390,7 @@
 				7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */,
 				78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */,
 				7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */,
+				787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */,
 				7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */,
 				780740901B075CCD006E2C30 /* DebtsTableViewController.swift in Sources */,
 				7829A3681AEC176F00CEFF35 /* Model.swift in Sources */,
