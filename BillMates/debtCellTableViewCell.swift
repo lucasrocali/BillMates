@@ -23,7 +23,7 @@ class debtCellTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        btnSettledUp.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0.2, alpha: 1)
+        btnSettledUp.backgroundColor = cellColor4
         //backgroundColor = UIColor(red: 0, green: 0, blue: 0.2, alpha: 0.1)
         //backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         // Configure the view for the selected state

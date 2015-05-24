@@ -86,7 +86,7 @@ class DebtsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : debtCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("debtCell") as! debtCellTableViewCell
         
-        
+        // Populating Cell
         
         var relation : Relation?
         if debtsState == 0 {
@@ -95,6 +95,7 @@ class DebtsTableViewController: UITableViewController {
         } else {
               relation  = model.personalRelations[indexPath.row]
         }
+       
         
         cell.lblUser1.text = relation!.user1
         cell.lblUser2.text = relation!.user2
@@ -103,15 +104,29 @@ class DebtsTableViewController: UITableViewController {
         cell.btnSettledUp.addTarget(self, action: "settleUp:", forControlEvents: .TouchUpInside)
         cell.btnSettledUp.tag = indexPath.row
         
-        cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        //Standart Cell Layout
+        
+        tableView.separatorColor = UIColor.clearColor()
+        cell.backgroundColor = cellColor1
+        cell.lblValue.alpha = CGFloat(1)
+        cell.lblUser1.alpha = CGFloat(1)
+        cell.lblUser2.alpha = CGFloat(1)
+        
+        
+        if(indexPath.row % 2 == 0) {
+            cell.backgroundColor = cellColor1
+        } else {
+            cell.backgroundColor = cellColor2
+        }
+        
         if relation!.value == 0 {
             cell.userInteractionEnabled = false
             cell.imgDirection.hidden = (true)
             cell.btnSettledUp.hidden = (true)
-            //cell.lblValue.alpha = CGFloat(0.5)
-            //cell.lblUser1.alpha = CGFloat(0.5)
-            //cell.lblUser2.alpha = CGFloat(0.5)
-            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+            cell.lblValue.alpha = CGFloat(0.3)
+            cell.lblUser1.alpha = CGFloat(0.3)
+            cell.lblUser2.alpha = CGFloat(0.3)
+            //cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             //cell.imgDirection.image = UIImage(named: "AddUser.png")
         } else if relation!.value < 0 {
             cell.userInteractionEnabled = true

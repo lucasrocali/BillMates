@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>162CBEB6-2F03-4BE3-89CF-A3F824DF3006</string>
 	<key>IDESourceControlProjectName</key>
-	<string>BillMates</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B1096FAA6484100D6A42B24D23AEAED15D2B525B</key>
 		<string>https://github.com/lrocali/BillMates.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BillMates.xcodeproj</string>
+	<string>BillMates.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B1096FAA6484100D6A42B24D23AEAED15D2B525B</key>

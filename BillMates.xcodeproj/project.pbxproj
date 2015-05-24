@@ -49,6 +49,8 @@
 		78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0211B10C74D000093E8 /* arrow1to2.png */; };
 		78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0221B10C74D000093E8 /* arrow2to1.png */; };
 		78F4C0261B10CF33000093E8 /* debtCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */; };
+		DF6C8F021B11F6DD0053BD7D /* billCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF6C8F011B11F6DD0053BD7D /* billCell.xib */; };
+		DF6C8F041B120C8B0053BD7D /* LayoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6C8F031B120C8B0053BD7D /* LayoutModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		78F4C0211B10C74D000093E8 /* arrow1to2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow1to2.png; sourceTree = "<group>"; };
 		78F4C0221B10C74D000093E8 /* arrow2to1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2to1.png; sourceTree = "<group>"; };
 		78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debtCellTableViewCell.swift; sourceTree = "<group>"; };
+		DF6C8F011B11F6DD0053BD7D /* billCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = billCell.xib; sourceTree = "<group>"; };
+		DF6C8F031B120C8B0053BD7D /* LayoutModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +161,6 @@
 				782893121AFBEA8100966E62 /* QuartzCore.framework */,
 				782893101AFBEA7900966E62 /* MobileCoreServices.framework */,
 				7828930E1AFBEA7000966E62 /* CoreLocation.framework */,
-				7828930C1AFBEA6800966E62 /* CoreGraphics.framework */,
 				7828930A1AFBEA5F00966E62 /* CFNetwork.framework */,
 				782893081AFBEA4700966E62 /* AudioToolbox.framework */,
 				782892FE1AFBE9DF00966E62 /* Bolts.framework */,
@@ -189,6 +192,7 @@
 				7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */,
 				7810CABB1AEC094F00FD00F0 /* Main.storyboard */,
 				78F4C0191B10C094000093E8 /* debtCell.xib */,
+				DF6C8F011B11F6DD0053BD7D /* billCell.xib */,
 				7810CABE1AEC094F00FD00F0 /* Images.xcassets */,
 				7810CAC01AEC094F00FD00F0 /* LaunchScreen.xib */,
 				7810CAB61AEC094F00FD00F0 /* BillMates.xcdatamodeld */,
@@ -227,6 +231,7 @@
 			children = (
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */,
+				7828930C1AFBEA6800966E62 /* CoreGraphics.framework */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
@@ -241,6 +246,7 @@
 		7829A3661AEC175A00CEFF35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DF6C8F031B120C8B0053BD7D /* LayoutModel.swift */,
 				7829A3671AEC176F00CEFF35 /* Model.swift */,
 				7849DC751B0A0723008039F0 /* Relation.swift */,
 			);
@@ -347,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF6C8F021B11F6DD0053BD7D /* billCell.xib in Resources */,
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
 				788647331B0B75DD00B916BD /* TodoList.png in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
@@ -388,6 +395,7 @@
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
 				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
 				7849DC761B0A0723008039F0 /* Relation.swift in Sources */,
+				DF6C8F041B120C8B0053BD7D /* LayoutModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
