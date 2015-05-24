@@ -14,10 +14,10 @@ import Foundation
 let cellColor0:UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
 
 // LigthGrayGreen
-let cellColor1:UIColor = UIColor(red: 146/255, green: 162/255, blue: 157/255, alpha: 1)
+let cellColor1:UIColor = UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1)
 
 // DarkGrayGreen
-let cellColor2:UIColor = UIColor(red: 109/255, green: 122/255, blue: 118/255, alpha: 1)
+let cellColor2:UIColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
 
 // LightGrenn
 let cellColor3:UIColor = UIColor(red: 133/255, green: 186/255, blue: 169/255, alpha: 1)

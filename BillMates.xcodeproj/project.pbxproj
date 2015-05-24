@@ -168,6 +168,7 @@
 				782893001AFBE9DF00966E62 /* ParseCrashReporting.framework */,
 				782893011AFBE9DF00966E62 /* ParseFacebookUtils.framework */,
 				782893021AFBE9DF00966E62 /* ParseUI.framework */,
+				7828930C1AFBEA6800966E62 /* CoreGraphics.framework */,
 				7810CAB11AEC094F00FD00F0 /* BillMates */,
 				7810CACA1AEC094F00FD00F0 /* BillMatesTests */,
 				7810CAB01AEC094F00FD00F0 /* Products */,
@@ -231,7 +232,6 @@
 			children = (
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */,
-				7828930C1AFBEA6800966E62 /* CoreGraphics.framework */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,

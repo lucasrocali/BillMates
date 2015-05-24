@@ -107,7 +107,7 @@ class DebtsTableViewController: UITableViewController {
         //Standart Cell Layout
         
         tableView.separatorColor = UIColor.clearColor()
-        cell.backgroundColor = cellColor1
+       // cell.backgroundColor = cellColor1
         cell.lblValue.alpha = CGFloat(1)
         cell.lblUser1.alpha = CGFloat(1)
         cell.lblUser2.alpha = CGFloat(1)
@@ -182,7 +182,7 @@ class DebtsTableViewController: UITableViewController {
         if segue.identifier == "relationsToFilteredBills" && sender != nil
         {
             println("Bora muleKOTE")
-            let indexPath = sender
+            let indexPath : NSIndexPath = sender as! NSIndexPath
             
             var filteredBills = segue.destinationViewController as! RelationalBillsTableViewController
             if debtsState == 0 {

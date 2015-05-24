@@ -127,10 +127,10 @@ class Model {
             if self.groupObject != nil {
                 var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
                 if self.debtObjects.count != self.getNumOfDebts(groupFriends.count) {
-                    self.calculateDebts(true)
+                    //self.calculateDebts(true)
                     ////println("DEBTS DIFERENTS NA THREAD")
                 } else {
-                    self.calculateDebts(true)
+                    //self.calculateDebts(true)
                     //println("DEBTS IGUAIS NA THREAD")
                 }
                 
@@ -849,7 +849,7 @@ class Model {
         if self.groupObject != nil {
             var groupFriends : [String] = self.groupFriendsString
             if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
-                println("\n 1 ≠ DIFERENTE DO PARSE BORA VER\n")
+                println("\n 1 ≠ DIFERENTE DO PARSE BORA - VER \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
                 var userGroupName : String = self.groupObject!["groupName"] as! String
                 var queryDebt : PFQuery = PFQuery(className: "Debts")
                 queryDebt.whereKey("groupName", equalTo: userGroupName)
@@ -871,11 +871,11 @@ class Model {
                 
                 if numOfRefreshedDebts == numOfDebtsThatShouldHave {
                     //refresh
-                     println("\n 1 ≠ = DEBTS UPDATE, REFRESH\n")
+                     println("\n 1 ≠ = DEBTS UPDATE, REFRESH - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
                     refreshDebts()
                     
                 } else if numOfRefreshedDebts == numOfDebtsThatShouldHaveForLessOneUser  {
-                    println("\n 1 ≠ < ADICIONAR RELACAO PRO ULTIMO USUAIO ADICIONADO\n")
+                    println("\n 1 ≠ < ADICIONAR RELACAO PRO ULTIMO USUAIO ADICIONADO  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
                     //add new debts for new user
                     var indexUser : Int = self.groupFriendsString.count
                     for i in 1..<self.groupFriendsString.count {
@@ -894,7 +894,7 @@ class Model {
                 } else {
                     
                     //delete all, aguar fi, vai chupar pica grande grossa
-                    println("\n 1 ≠ > USUARIO DELETADO DELETAR TUDO E CRIAR\n")
+                    println("\n 1 ≠ > USUARIO DELETADO DELETAR TUDO E CRIAR  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
                     for debt in self.debtObjects {
                         var debtPF : PFObject = debt as! PFObject
                         debtPF.deleteInBackground()
@@ -924,7 +924,7 @@ class Model {
                 refreshDebts()
             } else {
                 //refresh
-                 println("\n 1 = JUST REFRESH\n")
+                 println("\n 1 = JUST REFRESH \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
                 refreshDebts()
             }
         }
