@@ -45,6 +45,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         lblDirection.text = user1! + " owns to" + " " + user2!
         lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
         lblTitle.text = "Related bills"
+        lblTitle.backgroundColor = cellColor2
         
         //Layout
         lblUser1.font = fontText
@@ -57,7 +58,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         btnSettleUp.titleLabel!.font = fontButton
         btnSettleUp.backgroundColor = cellColor4
         btnSettleUp.titleLabel!.textColor = cellColor255
-        btnSettleUp.titleLabel?.highlightedTextColor = cellColor3
+        btnSettleUp.titleLabel!.highlightedTextColor = cellColor3
         
         
         // Do any additional setup after loading the view.
