@@ -13,6 +13,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     var model = Model.sharedInstance
 
+    @IBOutlet weak var imgDirection: UIImageView!
     @IBOutlet weak var lblDirection: UILabel!
     @IBOutlet weak var lblUser1: UILabel!
     @IBOutlet weak var lblUser2: UILabel!
@@ -27,6 +28,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBOutlet weak var filteredTableView: UITableView!
+    var currentUser : String?
     var user1 : String?
     var user2 : String?
     var value : Float?
@@ -39,15 +41,34 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         println(user1!+user2!)
         println(self.model.filteredBills.count)
         self.filteredTableView.reloadData()
+        
+        // Populating
+        
+        currentUser = model.userObject!["username"] as? String
+       // println(currentUser)
+       // println(user1!)
+        
+        if value > 0 {
+            lblUser1.text = user1
+            lblUser2.text = user2
+            lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
+            lblDirection.text = user2! + " owns to" + " " + user1!
+            lblValue.textColor = textGreen
+            imgDirection.image = UIImage(named: "arrow2to1.png")
+        } else {
+            lblUser1.text = user1
+            lblUser2.text = user2
+            lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
+            lblDirection.text = user2! + " owns to" + " " + user1!
+            lblValue.textColor = textOrange
+            imgDirection.image = UIImage(named: "arrow1to2.png")
+        }
 
-        lblUser1.text = user1!
-        lblUser2.text = user2!
-        lblDirection.text = user1! + " owns to" + " " + user2!
-        lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
         lblTitle.text = "Related bills"
         lblTitle.backgroundColor = cellColor2
         
         //Layout
+        
         lblUser1.font = fontText
         lblUser2.font = fontText
         lblDirection.font = fontDetails
@@ -82,6 +103,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         var object : PFObject = self.model.filteredBills.objectAtIndex(indexPath.row) as! PFObject
         cell.textLabel!.text = object["description"] as? String
+        
         
         //cell.detailTextLabel!.text = object["value"]!.description as! String
         

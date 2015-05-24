@@ -783,13 +783,9 @@ class Model {
             }
             if relation.user2 == userName {
                 var auxRelation = relation
-                if relation.value < 0 {
-                    auxRelation.debtStringCell = userName + " <-- " + relation.user1 + " = " +  String(format: "%.2f",relation.value*(-1))
-                } else if relation.value > 0 {
-                    auxRelation.debtStringCell = userName + " --> " + relation.user1 + " = " +  String(format: "%.2f",relation.value)
-                }else {
-                    auxRelation.debtStringCell = userName + " -- " + relation.user1 + " = " +  String(format: "%.2f",relation.value)
-                }
+                auxRelation.user1 = relation.user2
+                auxRelation.user2 = relation.user1
+                auxRelation.value = (-1)*auxRelation.value
                 self.personalRelations.append(auxRelation)
             }
         }
