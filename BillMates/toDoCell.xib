@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -13,8 +13,8 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rja-0y-heS" id="Ok3-55-TYD">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Executed by:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sm7-tL-Dmj">
-                        <rect key="frame" x="253" y="50" width="101" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Executed by:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sm7-tL-Dmj">
+                        <rect key="frame" x="252" y="48" width="101" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -32,8 +32,8 @@
                             <constraint firstAttribute="height" constant="35" id="5YU-HH-Kw2"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pl-TU-Qmx">
-                        <rect key="frame" x="46" y="19" width="34" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pl-TU-Qmx">
+                        <rect key="frame" x="46" y="23" width="34" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                     <constraint firstItem="9Pl-TU-Qmx" firstAttribute="leading" secondItem="HoV-PN-7ul" secondAttribute="trailing" constant="3" id="hf1-72-ePH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="sm7-tL-Dmj" secondAttribute="bottom" id="hyM-k3-fkF"/>
                     <constraint firstItem="9Pl-TU-Qmx" firstAttribute="leading" secondItem="HoV-PN-7ul" secondAttribute="trailing" constant="8" symbolic="YES" id="n0Y-cR-bGV"/>
-                    <constraint firstItem="9Pl-TU-Qmx" firstAttribute="centerY" secondItem="HoV-PN-7ul" secondAttribute="centerY" id="qb7-gM-pRc"/>
+                    <constraint firstItem="9Pl-TU-Qmx" firstAttribute="centerY" secondItem="HoV-PN-7ul" secondAttribute="centerY" constant="8" id="qb7-gM-pRc"/>
                     <constraint firstItem="9Pl-TU-Qmx" firstAttribute="centerY" secondItem="HoV-PN-7ul" secondAttribute="centerY" constant="5.5" id="rBI-ml-o6H"/>
                     <constraint firstItem="9Pl-TU-Qmx" firstAttribute="top" secondItem="Ok3-55-TYD" secondAttribute="topMargin" constant="7" id="rro-dP-RNg"/>
                     <constraint firstItem="9Pl-TU-Qmx" firstAttribute="top" secondItem="Ok3-55-TYD" secondAttribute="topMargin" id="ufo-UU-yk9"/>
