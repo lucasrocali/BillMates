@@ -50,6 +50,32 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        alert.title = "You cannot delete the user"
+        alert.addButtonWithTitle("Ok")
+        
+        //Layout
+        txtName.font = fontNeutral
+        txtName.backgroundColor = colorBaseDarkGray
+        
+        btnLeaveGroup.titleLabel!.font = fontButton
+        btnLeaveGroup.titleLabel!.textColor = colorWhite
+        btnLeaveGroup.backgroundColor = colorDarkGreen
+        
+        btnAddUser.titleLabel!.font = fontButton
+        btnAddUser.titleLabel!.textColor = colorWhite
+        btnAddUser.backgroundColor = colorDarkGreen
+        
+        lblUserOfGroup.backgroundColor = colorLightOrange
+        lblUserOfGroup.font = fontNeutral
+        
+    }
+    
+    
     func logout() {
         println("chama ini view")
         var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -79,30 +105,6 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)
-        
-        alert.title = "You cannot delete the user"
-        alert.addButtonWithTitle("Ok")
-        
-        //Layout
-        txtName.font = fontNeutral
-        txtName.backgroundColor = colorBaseDarkGray
-        
-        btnLeaveGroup.titleLabel!.font = fontButton
-        btnLeaveGroup.titleLabel!.textColor = colorWhite
-        btnLeaveGroup.backgroundColor = colorDarkGreen
-        
-        btnAddUser.titleLabel!.font = fontButton
-        btnAddUser.titleLabel!.textColor = colorWhite
-        btnAddUser.backgroundColor = colorDarkGreen
-        
-        lblUserOfGroup.backgroundColor = colorLightOrange
-        lblUserOfGroup.font = fontNeutral
-        
-    }
     
     
     override func viewDidAppear(animated: Bool) {

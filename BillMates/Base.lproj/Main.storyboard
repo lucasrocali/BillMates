@@ -449,10 +449,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvL-Dw-jHb">
-                                <rect key="frame" x="26" y="189" width="130" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvL-Dw-jHb">
+                                <rect key="frame" x="26" y="189" width="150" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="7dk-1q-GMs"/>
+                                    <constraint firstAttribute="width" constant="150" id="7dk-1q-GMs"/>
                                     <constraint firstAttribute="height" constant="35" id="gbw-4d-2Tw"/>
                                 </constraints>
                                 <state key="normal" title="Join a Group">
@@ -460,6 +460,7 @@
                                 </state>
                                 <connections>
                                     <action selector="btnJoinGroup:" destination="IU5-Sr-bl5" eventType="touchUpInside" id="3Lc-GH-Uri"/>
+                                    <action selector="btnJoinGroupDown:" destination="IU5-Sr-bl5" eventType="touchDown" id="9Gt-Kv-pw5"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Group Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ejz-K6-dlp">
@@ -486,17 +487,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5z-Cz-DY1">
-                                <rect key="frame" x="444" y="189" width="130" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5z-Cz-DY1">
+                                <rect key="frame" x="166" y="189" width="130" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7T8-gc-g6z"/>
-                                    <constraint firstAttribute="width" constant="130" id="JTJ-GX-hac"/>
+                                    <constraint firstAttribute="width" constant="150" id="JTJ-GX-hac"/>
                                 </constraints>
                                 <state key="normal" title="Create a Group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="btnCreateGroup:" destination="IU5-Sr-bl5" eventType="touchUpInside" id="3Bz-iw-d57"/>
+                                    <action selector="btnCreateGroupDown:" destination="IU5-Sr-bl5" eventType="touchDown" id="FMs-nI-Uat"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -536,6 +538,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnCreateGroup" destination="S5z-Cz-DY1" id="7JH-fr-g60"/>
+                        <outlet property="btnJoinGroup" destination="QvL-Dw-jHb" id="EtF-LY-W0Z"/>
                         <outlet property="lblError" destination="Yg9-ju-63a" id="3zd-FV-Ick"/>
                         <outlet property="txtGroupKey" destination="4AR-eT-crB" id="EwJ-nJ-fdg"/>
                         <outlet property="txtGroupName" destination="ejz-K6-dlp" id="KTC-Qv-pu7"/>

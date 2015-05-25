@@ -19,6 +19,39 @@ class GroupViewController: UIViewController {
     @IBOutlet weak var txtGroupKey: UITextField!
     let alert = UIAlertView()
     
+    @IBOutlet weak var btnJoinGroup: UIButton!
+    @IBOutlet weak var btnCreateGroup: UIButton!
+    
+    @IBAction func btnJoinGroupDown(sender: UIButton) {
+    }
+    @IBAction func btnCreateGroupDown(sender: UIButton) {
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        alert.title = "You cannot delete the user"
+        alert.addButtonWithTitle("Ok")
+        
+        //Layout
+        txtGroupName.font = fontNeutral
+        txtGroupName.backgroundColor = colorBaseDarkGray
+        
+        txtGroupKey.font = fontNeutral
+        txtGroupKey.backgroundColor = colorBaseDarkGray
+        
+        btnJoinGroup.titleLabel!.font = fontButton
+        btnJoinGroup.titleLabel!.textColor = colorWhite
+        btnJoinGroup.backgroundColor = colorDarkGreen
+        
+        btnCreateGroup.titleLabel!.font = fontButton
+        btnCreateGroup.titleLabel!.textColor = colorWhite
+        btnCreateGroup.backgroundColor = colorDarkGreen
+
+    }
+    
     @IBAction func btnLogout(sender: UIBarButtonItem) {
         self.logout()
     }
@@ -96,9 +129,8 @@ class GroupViewController: UIViewController {
         }
 
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func DismissKeyboard(){
+        view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
