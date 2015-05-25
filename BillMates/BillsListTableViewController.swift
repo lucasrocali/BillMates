@@ -22,6 +22,17 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         //model.refreshData()
         self.tableView.reloadData()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        //Register Custom Cell
+        var nib = UINib(nibName: "billCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "billCell")
+        
+        self.shouldPerformSegueWithIdentifier("listToEdit", sender: nil)
+
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
     }
     
     @IBAction func logoutBtn(sender: UIBarButtonItem) {
@@ -113,15 +124,71 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("billCell", forIndexPath: indexPath) as! UITableViewCell
-        
+        let cell : BillCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("billCell") as! BillCellTableViewCell
         var object : PFObject = self.model.billObjects.objectAtIndex(indexPath.row) as! PFObject
+        var user : String = model.userObject!["username"] as! String
+        var value : Float = object["value"]! as! Float
+        var paidBy : String = object["paidBy"] as! String
+        var sharedWith : [String] = object["sharedWith"] as! [String]
+        var nSharedWith : Int = sharedWith.count as Int
+        cell.lblDescription.text = object["description"] as? String
+        
+        cell.lblDetailes.text =  paidBy + " paid" + " " + "$ "+(NSString(format: "%.2f",value) as! String)
+        
+        cell.lblValue.text = "$ "+(NSString(format: "%.2f",value/Float(nSharedWith)) as! String)
+       
+        //Layout
+        cell.lblDescription.font = fontText
+        cell.lblValue.font = fontNumbers
+        cell.lblDetailes.font = fontDetails
+        cell.lblDirection.font = fontDetails
+        
+        cell.lblDescription.textColor = cellColor0
+        cell.lblValue.textColor = cellColor0
+        cell.lblDetailes.textColor = cellColor0
+        cell.lblDirection.textColor = cellColor0
+        
+        if(indexPath.row % 2 == 0) {
+            cell.backgroundColor = cellColor1
+        } else {
+            cell.backgroundColor = cellColor2
+        }
+        if user == paidBy {
+            cell.lblValue.textColor = textGreen
+            cell.lblDirection.text = "You lent"
+        } else {
+            var flag = 0
+            for friend in sharedWith {
+                if user == friend {
+                    flag = 1
+                }
+            }
+            if flag == 1{   //User is in sharedUsers
+                cell.lblValue.textColor = textOrange
+                cell.lblDirection.text = "You borrowed"
+            } else {
+                cell.lblDirection.text = "Not included"
+                cell.lblValue.textColor = textNeutral
+            }
+        }
+        if object["activated"] as! Bool == false {
+            cell.lblDescription.textColor = textNeutral
+            cell.lblValue.textColor = textNeutral
+            cell.lblDirection.textColor = textNeutral
+            cell.lblDetailes.textColor = textNeutral
+            
+            cell.lblDirection.text = "Bill was settled up"
+            cell.lblValue.text = "$ 0.00"
+        }
+        
+        
+        /*
         cell.textLabel!.text = object["description"] as? String
         
         cell.detailTextLabel!.text = object["value"]!.description as? String
         
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        
+        */
         return cell
     }
     
@@ -145,8 +212,9 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     {
         if segue.identifier == "listToEdit"
         {
-            let indexPath = self.tableView.indexPathForSelectedRow()!
             
+            let indexPath : NSIndexPath = sender as! NSIndexPath
+            println("bora editar indexpahtrow: \(indexPath.row)")
             println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
@@ -157,5 +225,10 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
             editBill.billState = 0
             
         }
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("listToEdit", sender: indexPath)
     }
 }

@@ -14,10 +14,10 @@ import Foundation
 let cellColor0:UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
 
 // LigthGrayGreen
-let cellColor1:UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+let cellColor1:UIColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
 
 // DarkGrayGreen
-let cellColor2:UIColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+let cellColor2:UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
 // LightGrenn
 let cellColor3:UIColor = UIColor(red: 133/255, green: 186/255, blue: 169/255, alpha: 1)
@@ -36,6 +36,9 @@ let textGreen:UIColor = UIColor(red: 0/255, green: 102/255, blue: 51/255, alpha:
 
 //"Negative color"
 let textOrange:UIColor = UIColor(red: 204/255, green: 102/255, blue: 0/255, alpha: 1)
+
+//"Neutral color:
+let textNeutral:UIColor = UIColor(red: 130/255, green: 130/255, blue: 130/255, alpha: 1)
 
 
 // Fontes

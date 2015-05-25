@@ -529,16 +529,17 @@ class Model {
         
         if billToEdit != nil {
             //println(billToEdit)
-            billToEdit!["whoCreated"] = self.userObject!["username"] as! String
             
-            billToEdit!["description"] = description
-            billToEdit!["value"] = NSString(string: value).floatValue
             
             var sharedWith : [String] = billToEdit!["sharedWith"] as! [String]
             var shouldPaid : [String] = billToEdit!["shouldPaid"] as! [String]
             if sharedWith.count != shouldPaid.count {
                 return false
             }
+            billToEdit!["whoCreated"] = self.userObject!["username"] as! String
+            
+            billToEdit!["description"] = description
+            billToEdit!["value"] = NSString(string: value).floatValue
             billToEdit!["sharedWith"] = self.addedUsers
             billToEdit!["shouldPaid"] = self.addedUsers
             if self.hasImg {
@@ -726,15 +727,20 @@ class Model {
             
             var paidBy : String = bill["paidBy"] as! String
             var sharedWith : [String] = bill["sharedWith"] as! [String]
-            var shouldPaid : [String]?
-            shouldPaid = bill["shouldPaid"] as? [String]
+            var shouldPaid : [String] = bill["shouldPaid"] as! [String]
             var value : Float = bill["value"] as! Float
-            if shouldPaid != nil{
-                bill["activated"] = false
-                bill.saveEventually()
+            if shouldPaid.count == 1 {
+                if  shouldPaid[0] == paidBy{
+                    bill["activated"] = false
+                    bill.saveEventually()
+                }
+            }
+            if shouldPaid.count == 0 {
+                    bill["activated"] = false
+                    bill.saveEventually()
             }
             ////println(paidBy + sharedWith[0])
-            for userThatShouldPay in shouldPaid! {
+            for userThatShouldPay in shouldPaid {
                 if userThatShouldPay != paidBy {
                     var (dbId,direction) = getDebtId(paidBy, sharedUser: userThatShouldPay, groupFriends: groupFriends)
                     localDebtStorage[dbId] = localDebtStorage[dbId]! + value*Float(direction)/Float(sharedWith.count)

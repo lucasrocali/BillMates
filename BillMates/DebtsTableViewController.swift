@@ -110,11 +110,10 @@ class DebtsTableViewController: UITableViewController {
         
         //Standart Cell Layout
         
-        tableView.separatorColor = UIColor.clearColor()
-        cell.lblValue.alpha = CGFloat(1)
-        cell.lblUser1.alpha = CGFloat(1)
-        cell.lblUser2.alpha = CGFloat(1)
+        //tableView.separatorColor = UIColor.clearColor()
         cell.lblValue.textColor = cellColor0
+        cell.lblUser1.textColor = cellColor0
+        cell.lblUser2.textColor = cellColor0
         
         cell.lblValue.font = fontNumbers
         cell.lblDirection.font = fontDetails
@@ -137,9 +136,9 @@ class DebtsTableViewController: UITableViewController {
             cell.userInteractionEnabled = false
             cell.imgDirection.hidden = (true)
             //cell.btnSettledUp.hidden = (true)
-            cell.lblValue.alpha = CGFloat(0.4)
-            cell.lblUser1.alpha = CGFloat(0.4)
-            cell.lblUser2.alpha = CGFloat(0.4)
+            cell.lblValue.textColor = textNeutral
+            cell.lblUser1.textColor = textNeutral
+            cell.lblUser2.textColor = textNeutral
             //cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             //cell.imgDirection.image = UIImage(named: "AddUser.png")
         } else if relation!.value > 0 {
