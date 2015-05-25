@@ -43,6 +43,7 @@ class DebtsTableViewController: UITableViewController {
         tableView.registerNib(nib, forCellReuseIdentifier: "debtCell")
         
         self.shouldPerformSegueWithIdentifier("balanceToBalanceDetail", sender: nil)
+        //self.tableView.reloadData()
 
     }
     
@@ -195,6 +196,7 @@ class DebtsTableViewController: UITableViewController {
     */
     func loadDebtList(notification: NSNotification){
         //load data here
+        println("LOADING DEBTS")
         self.tableView.reloadData()
     }
     

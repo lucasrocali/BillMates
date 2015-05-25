@@ -105,11 +105,13 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         //getData()
+        model.sortBillList()
         self.tableView.reloadData()
     }
     
     func loadBillList(notification: NSNotification){
         //load data here
+        model.sortBillList()
         self.tableView.reloadData()
     }
     
