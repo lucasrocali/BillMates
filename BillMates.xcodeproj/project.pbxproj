@@ -40,6 +40,7 @@
 		78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */; };
 		787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787281161B122A8C00564C87 /* BalanceDetailViewController.swift */; };
 		7873B8F41B1325F2005D6835 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */; };
+		7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
 		7886472F1B0B75DD00B916BD /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472A1B0B75DD00B916BD /* AddUser.png */; };
 		788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472B1B0B75DD00B916BD /* BalanceIcon.png */; };
@@ -103,6 +104,7 @@
 		78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationalBillsTableViewController.swift; sourceTree = "<group>"; };
 		787281161B122A8C00564C87 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
 		7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
+		7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListTableViewController.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		7886472A1B0B75DD00B916BD /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddUser.png; sourceTree = "<group>"; };
 		7886472B1B0B75DD00B916BD /* BalanceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BalanceIcon.png; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		7829A3611AEC129D00CEFF35 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */,
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
@@ -402,6 +405,7 @@
 				782893231AFBEFB500966E62 /* InitialViewController.swift in Sources */,
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
 				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
+				7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */,
 				7849DC761B0A0723008039F0 /* Relation.swift in Sources */,
 				DF6C8F041B120C8B0053BD7D /* LayoutModel.swift in Sources */,
 			);
