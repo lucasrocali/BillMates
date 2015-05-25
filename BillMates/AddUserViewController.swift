@@ -11,16 +11,29 @@ import Parse
 import ParseUI
 
 class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
-
+    
+    
     var model = Model.sharedInstance
     let alert = UIAlertView()
     
+    @IBOutlet weak var lblUserOfGroup: UILabel!
+    @IBOutlet weak var btnAddUser: UIButton!
+    @IBOutlet weak var btnLeaveGroup: UIButton!
     @IBOutlet weak var addedUsersTableView: UITableView!
+    
+    @IBAction func btnLeaveGroupDown(sender: UIButton) {
+        btnLeaveGroup.backgroundColor = cellColor3
+    }
+    
+    @IBAction func btnAddUserDown(sender: UIButton) {
+        btnAddUser.backgroundColor = cellColor3
+    }
     
     @IBOutlet weak var txtName: UITextField!
     
     @IBAction func btnLeaveGroup(sender: UIButton) {
+        
+        btnLeaveGroup.backgroundColor = colorDarkGreen
         if model.isConnectedToNetwork() {
             if model.deleteGroupOfUser() {
                 println("deletou!")
@@ -47,6 +60,8 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     @IBAction func buttonAddUser(sender: UIButton) {
+        btnAddUser.backgroundColor = colorDarkGreen
+        
         if !model.isTotallyEmpty(txtName.text) {
             if model.joinGroupWhithoutLogin(txtName.text) {
                 txtName.text = ""
@@ -63,6 +78,33 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        alert.title = "You cannot delete the user"
+        alert.addButtonWithTitle("Ok")
+        
+        //Layout
+        txtName.font = fontNeutral
+        txtName.backgroundColor = colorBaseDarkGray
+        
+        btnLeaveGroup.titleLabel!.font = fontButton
+        btnLeaveGroup.titleLabel!.textColor = colorWhite
+        btnLeaveGroup.backgroundColor = colorDarkGreen
+        
+        btnAddUser.titleLabel!.font = fontButton
+        btnAddUser.titleLabel!.textColor = colorWhite
+        btnAddUser.backgroundColor = colorDarkGreen
+        
+        lblUserOfGroup.backgroundColor = colorLightOrange
+        lblUserOfGroup.font = fontNeutral
+        
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         self.addedUsersTableView.reloadData()
     }
@@ -102,24 +144,26 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         var friendName: String = self.model.groupFriendsString[indexPath.row]
         cell.textLabel!.text = friendName
-
+        
+        
+        cell.textLabel?.font = fontText
+        
+        if(indexPath.row % 2 == 0) {
+            cell.backgroundColor = colorBaseLightGray
+        } else {
+            cell.backgroundColor = colorBaseDarkGray
+        }
+        
         if model.userObject?.username == self.model.groupFriendsString[indexPath.row] {
             cell.userInteractionEnabled = false
         } else {
-             cell.userInteractionEnabled = true
+            cell.userInteractionEnabled = true
         }
+        
+        
         return cell
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)
-        
-        alert.title = "You cannot delete the user"
-        alert.addButtonWithTitle("Ok")
-
-    }
+    
     func DismissKeyboard(){
         view.endEditing(true)
     }

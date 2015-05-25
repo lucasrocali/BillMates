@@ -101,6 +101,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblPaidBy: UILabel!
     @IBOutlet weak var lblPerPerson: UILabel!
+    @IBOutlet weak var lblSharedWith: UILabel!
     @IBOutlet weak var leftBarBtn: UIBarButtonItem!
     @IBOutlet weak var rightBarBtn: UIBarButtonItem!
     
@@ -292,6 +293,20 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         self.model.resetImages()
         
+        //Standart Layout
+        txtDescription.font = fontNeutral
+        txtDescription.backgroundColor = cellColor2
+        txtValue.font = fontNeutral
+        txtValue.backgroundColor = cellColor2
+        
+        lblPaidBy.font = fontNeutral
+        lblPerPerson.font = fontDetails
+        lblSharedWith.font = fontNeutral
+        lblSharedWith.backgroundColor = colorLightOrange
+        
+        //txtDescription.textColor = cellColor6
+        //txtValue.textColor = cellColor6
+        
         if billState == 0{  //to add    (write)
             createBillInterface()
         } else if billState == 1{   //view that can edit
@@ -371,7 +386,18 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         var friendName: String = self.model.groupFriendsString[indexPath.row]
         cell.textLabel!.text = friendName
-    
+        
+        // Layout
+        cell.textLabel?.font = fontText
+        
+        
+        
+        if(indexPath.row % 2 == 0) {
+            cell.backgroundColor = colorBaseLightGray
+        } else {
+            cell.backgroundColor = colorBaseDarkGray
+        }
+        
         if model.isAddedUser(friendName){
             cell.accessoryType = .Checkmark
         }

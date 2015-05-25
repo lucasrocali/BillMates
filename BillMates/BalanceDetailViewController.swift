@@ -67,7 +67,6 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
 
         lblTitle.text = "Related bills"
-        lblTitle.backgroundColor = cellColor6
         
         //Layout
         
@@ -75,17 +74,20 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         lblUser2.font = fontText
         lblDirection.font = fontDetails
         lblValue.font = fontNumbers
-        lblTitle.font = fontText
+        lblTitle.font = fontNeutral
         
         btnSettleUp.titleLabel!.text = "Settle up"
         btnSettleUp.titleLabel!.font = fontButton
         btnSettleUp.backgroundColor = cellColor4
-        btnSettleUp.titleLabel!.textColor = cellColor255
+        btnSettleUp.titleLabel!.textColor = colorWhite
         btnSettleUp.titleLabel!.highlightedTextColor = cellColor3
+        
+        lblTitle.backgroundColor = colorLightOrange
         
         var nib = UINib(nibName: "billCell", bundle: nil)
         filteredTableView.registerNib(nib, forCellReuseIdentifier: "billCell")
-
+        
+        self.shouldPerformSegueWithIdentifier("toDetailBills", sender: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -186,7 +188,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         if segue.identifier == "toDetailBills"
         {
             println("segue to detailBills")
-            let indexPath = self.filteredTableView.indexPathForSelectedRow()!
+            let indexPath : NSIndexPath = sender as! NSIndexPath
             
             println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
@@ -195,6 +197,11 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
 
+   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("toDetailBills", sender: indexPath)
+    }
 
     /*
     // MARK: - Navigation
