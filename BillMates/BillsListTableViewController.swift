@@ -17,7 +17,7 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //model.getBills()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"load", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadBillList:",name:"loadBill", object: nil)
         
         //model.refreshData()
         self.tableView.reloadData()
@@ -108,7 +108,7 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         self.tableView.reloadData()
     }
     
-    func loadList(notification: NSNotification){
+    func loadBillList(notification: NSNotification){
         //load data here
         self.tableView.reloadData()
     }

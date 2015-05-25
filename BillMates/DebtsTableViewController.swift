@@ -36,7 +36,7 @@ class DebtsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.reloadData()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"loadDebts", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadDebtList:",name:"loadDebts", object: nil)
         
         //Register Custom Cell
         var nib = UINib(nibName: "debtCell", bundle: nil)
@@ -193,7 +193,7 @@ class DebtsTableViewController: UITableViewController {
         println("Settle Up for \(relation!.user1) and \(relation!.user2)")
     }
     */
-    func loadList(notification: NSNotification){
+    func loadDebtList(notification: NSNotification){
         //load data here
         self.tableView.reloadData()
     }

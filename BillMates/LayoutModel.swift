@@ -48,6 +48,10 @@ let fontDetails : UIFont = UIFont(name: "Copperplate-Light", size:12)!
 let fontText : UIFont = UIFont(name: "Copperplate-Bold", size:18)!
 let fontButton: UIFont = UIFont(name: "Copperplate-Bold", size: 22)!
 
+//Images
+let imgChecked : UIImage = UIImage(named:"checkedBox.png")!
+let imgUnchecked : UIImage = UIImage(named: "uncheckedBox.png")!
+
 
 //let cellColor2:UIColor = UIColor(red: 109/255, green: 122/255, blue: 118/255, alpha: 1)
 //let cellColor2:UIColor = UIColor(red: 109/255, green: 122/255, blue: 118/255, alpha: 1)

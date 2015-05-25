@@ -146,9 +146,10 @@ class Model {
         queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
             if (error == nil){
                 var temp: NSArray = objects! as NSArray
-                ////println(temp)
+                println(temp)
                 if temp.count > 0 {
                     self.toDoList = temp.mutableCopy() as! NSMutableArray
+                     NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)
                     //self.groupObject = aux.firstObject as! PFObject
                     //self.groupFriendsString = self.groupObject!["groupFriends"] as! [String]
                     //println("\tgroupFRiensdsString saved \(self.groupFriendsString)")
@@ -168,49 +169,63 @@ class Model {
         if self.connectionStatus! {
             //println("NAO DA UNPIN")
             PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
-        
-        var query = PFUser.query()
+            
+            var query = PFUser.query()
             //var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-        var user : PFUser = self.userObject!
-        //println(user)
-        var queryBill: PFQuery = PFQuery(className: "Bill")
-        queryBill.whereKey("groupName", equalTo: user["group"]!)
-        
-        queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                PFObject.pinAllInBackground(objects,block:nil)
-                self.fetchAllObjectsFromLocalDataStore()
-            } else {
-                //println("ERROR NO FECTH - BILL")
-            }
-        }
-        
-        var queryFriend: PFQuery = PFQuery(className: "Group")
-        queryFriend.whereKey("groupName", equalTo: user["group"]!)
-        
-        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                PFObject.pinAllInBackground(objects,block:nil)
-                self.fetchAllObjectsFromLocalDataStore()
-            } else {
-                //println("ERROR NO FECTH - GROUP")
+            var user : PFUser = self.userObject!
+            //println(user)
+            var queryBill: PFQuery = PFQuery(className: "Bill")
+            queryBill.whereKey("groupName", equalTo: user["group"]!)
+            
+            queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    PFObject.pinAllInBackground(objects,block:nil)
+                    self.fetchAllObjectsFromLocalDataStore()
+                } else {
+                    //println("ERROR NO FECTH - BILL")
+                }
             }
             
-        }
-        
-        var queryDebt : PFQuery = PFQuery(className: "Debts")
-        queryDebt.whereKey("groupName", equalTo: user["group"]!)
-        
-        queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-            if (error == nil){
-                PFObject.pinAllInBackground(objects,block:nil)
-                self.fetchAllObjectsFromLocalDataStore()
-            } else {
-                //println("ERROR NO FECTH - DEBTS")
+            var queryFriend: PFQuery = PFQuery(className: "Group")
+            queryFriend.whereKey("groupName", equalTo: user["group"]!)
+            
+            queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    PFObject.pinAllInBackground(objects,block:nil)
+                    self.fetchAllObjectsFromLocalDataStore()
+                } else {
+                    //println("ERROR NO FECTH - GROUP")
+                }
+                
             }
             
+            var queryDebt : PFQuery = PFQuery(className: "Debts")
+            queryDebt.whereKey("groupName", equalTo: user["group"]!)
+            
+            queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    PFObject.pinAllInBackground(objects,block:nil)
+                    self.fetchAllObjectsFromLocalDataStore()
+                } else {
+                    //println("ERROR NO FECTH - DEBTS")
+                }
+                
+            }
+            var queryToDo : PFQuery = PFQuery(className: "ToDo")
+            queryToDo.whereKey("groupName", equalTo: user["group"]!)
+            
+            queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+                if (error == nil){
+                    PFObject.pinAllInBackground(objects,block:nil)
+                    self.fetchAllObjectsFromLocalDataStore()
+                } else {
+                    //println("ERROR NO FECTH - DEBTS")
+                }
+                
+            }
+        
         }
-        }
+        
         
     }
     func createGroup(groupName:String,groupKey:String) -> Bool{
@@ -409,14 +424,21 @@ class Model {
         var username : String = user["username"] as! String
         if canDelete(username) {
             user["group"] = "nil"
+            var index : Int = findIndex(self.groupFriendsString, name: username)
+            self.groupFriendsString.removeAtIndex(index)
+            
+            self.groupObject!["groupFriends"] = self.groupFriendsString
+            
+            
             if connectionStatus! {
+                self.groupObject!.save()
                 user.save()
             } else {
-                //println("No connection")
+                self.groupObject!.saveEventually()
                 user.saveEventually()
             }
-            self.resetModel()
-            //billObjects = []
+            self.calculateDebts(true)
+
             return true
         } else {
             return false
@@ -1082,6 +1104,8 @@ class Model {
             PFBill["shouldPaid"] = shouldPaid
             PFBill.saveEventually()
         }
+        self.calculateDebts(true)
+        getPersonalRelations()
         //refreshData()
     }
     
@@ -1104,6 +1128,20 @@ class Model {
         let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection) ? true : false
+    }
+    
+    func sortToDoItems() {
+        var lastIndex = self.toDoList.count - 1
+        var sortedItems : NSMutableArray = NSMutableArray()
+        for (var i = lastIndex ; i >= 0; i--) {
+            var item : PFObject = self.toDoList.objectAtIndex(i) as! PFObject
+            if item["done"] as! Bool{
+                sortedItems.addObject(item)
+            } else {
+                sortedItems.insertObject(item, atIndex: 0)
+            }
+        }
+        self.toDoList = sortedItems
     }
     
     func createToDoItem(todoItem:String) {
