@@ -463,7 +463,7 @@ class Model {
             }
         }
         var query = PFUser.query()
-        query?.fromLocalDatastore()
+        //query?.fromLocalDatastore()
         query!.whereKey("username", equalTo: userToDelete)
         
         var temp : NSArray = query!.findObjects()! as NSArray

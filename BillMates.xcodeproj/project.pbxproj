@@ -37,7 +37,7 @@
 		7829A3681AEC176F00CEFF35 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3671AEC176F00CEFF35 /* Model.swift */; };
 		7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */; };
 		7849DC761B0A0723008039F0 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849DC751B0A0723008039F0 /* Relation.swift */; };
-		78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */; };
+		78596A261B0912340016EC0B /* RIPRelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RIPRelationalBillsTableViewController.swift */; };
 		787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787281161B122A8C00564C87 /* BalanceDetailViewController.swift */; };
 		7873B8F41B1325F2005D6835 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */; };
 		7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */; };
@@ -105,7 +105,7 @@
 		7829A3671AEC176F00CEFF35 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		7849DC751B0A0723008039F0 /* Relation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
-		78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationalBillsTableViewController.swift; sourceTree = "<group>"; };
+		78596A251B0912340016EC0B /* RIPRelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPRelationalBillsTableViewController.swift; sourceTree = "<group>"; };
 		787281161B122A8C00564C87 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
 		7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListTableViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
 				7881D4191B01013800A08DD0 /* GroupViewController.swift */,
-				78596A251B0912340016EC0B /* RelationalBillsTableViewController.swift */,
+				78596A251B0912340016EC0B /* RIPRelationalBillsTableViewController.swift */,
 				787281161B122A8C00564C87 /* BalanceDetailViewController.swift */,
 				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
@@ -417,7 +417,7 @@
 				7810CAD81AEC0CF600FD00F0 /* BillsListTableViewController.swift in Sources */,
 				78F4C0261B10CF33000093E8 /* debtCellTableViewCell.swift in Sources */,
 				7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */,
-				78596A261B0912340016EC0B /* RelationalBillsTableViewController.swift in Sources */,
+				78596A261B0912340016EC0B /* RIPRelationalBillsTableViewController.swift in Sources */,
 				7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */,
 				787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */,
 				7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */,
