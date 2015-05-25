@@ -312,7 +312,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVG-KT-hzi" userLabel="Settle up">
-                                <rect key="frame" x="0.0" y="155" width="600" height="34"/>
+                                <rect key="frame" x="86" y="160" width="428" height="34"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Settle up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,12 +322,6 @@
                                     <action selector="btnSettledDown:" destination="nsP-nc-uwl" eventType="touchDown" id="gi4-bA-8go"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd0-oy-3yZ">
-                                <rect key="frame" x="0.0" y="219" width="600" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow1to2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y1F-ri-cxt">
                                 <rect key="frame" x="16" y="94" width="35" height="40"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -337,7 +331,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WOU-vZ-hta">
-                                <rect key="frame" x="16" y="269" width="568" height="282"/>
+                                <rect key="frame" x="16" y="274" width="568" height="277"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="relationalBillCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="relationalBillCell" id="2NC-Hl-kqP">
@@ -356,6 +350,16 @@
                                     <outlet property="delegate" destination="nsP-nc-uwl" id="Tx1-Ou-aVJ"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd0-oy-3yZ">
+                                <rect key="frame" x="0.0" y="209" width="600" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Cf5-WA-1pf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -376,18 +380,21 @@
                             <constraint firstItem="hd0-oy-3yZ" firstAttribute="centerX" secondItem="MVG-KT-hzi" secondAttribute="centerX" id="TCa-7C-6bK"/>
                             <constraint firstItem="X4H-5b-ON8" firstAttribute="top" secondItem="SaK-dC-QtA" secondAttribute="bottom" constant="20" id="hiP-g1-SGe"/>
                             <constraint firstItem="505-b7-bj6" firstAttribute="leading" secondItem="Y1F-ri-cxt" secondAttribute="trailing" constant="5" id="jue-U3-BkO"/>
+                            <constraint firstItem="MVG-KT-hzi" firstAttribute="leading" secondItem="zcE-zY-gPI" secondAttribute="leadingMargin" constant="70" id="mbk-6R-HyC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MVG-KT-hzi" secondAttribute="trailing" constant="70" id="muu-BJ-suq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y2Q-YW-286" secondAttribute="trailing" constant="10" id="oVR-2I-cQe"/>
                             <constraint firstItem="Y1F-ri-cxt" firstAttribute="top" secondItem="SaK-dC-QtA" secondAttribute="bottom" constant="30" id="q91-ek-t81"/>
                             <constraint firstItem="WOU-vZ-hta" firstAttribute="leading" secondItem="zcE-zY-gPI" secondAttribute="leadingMargin" id="rLm-h1-I7e"/>
                             <constraint firstItem="X4H-5b-ON8" firstAttribute="leading" secondItem="zcE-zY-gPI" secondAttribute="leadingMargin" constant="10" id="tgo-sw-yKm"/>
-                            <constraint firstItem="hd0-oy-3yZ" firstAttribute="top" secondItem="MVG-KT-hzi" secondAttribute="bottom" constant="30" id="uJj-9j-Ru7"/>
-                            <constraint firstItem="MVG-KT-hzi" firstAttribute="top" secondItem="505-b7-bj6" secondAttribute="bottom" constant="10" id="uej-W3-4mn"/>
+                            <constraint firstItem="hd0-oy-3yZ" firstAttribute="top" secondItem="MVG-KT-hzi" secondAttribute="bottom" constant="15" id="uJj-9j-Ru7"/>
+                            <constraint firstItem="MVG-KT-hzi" firstAttribute="top" secondItem="505-b7-bj6" secondAttribute="bottom" constant="15" id="uej-W3-4mn"/>
                             <constraint firstItem="zNR-Es-sDF" firstAttribute="trailing" secondItem="zcE-zY-gPI" secondAttribute="trailingMargin" constant="-10" id="xg9-Il-aaE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="tgo-sw-yKm"/>
                                 <exclude reference="HH4-Ny-mBG"/>
+                                <exclude reference="Gxq-k8-sU3"/>
                                 <exclude reference="0DU-5d-2o1"/>
                             </mask>
                         </variation>
@@ -779,6 +786,6 @@
         <image name="arrow1to2.png" width="459" height="447"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uug-fY-bCx"/>
+        <segue reference="pgn-ej-4dG"/>
     </inferredMetricsTieBreakers>
 </document>

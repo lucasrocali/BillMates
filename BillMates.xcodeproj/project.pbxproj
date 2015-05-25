@@ -41,6 +41,8 @@
 		787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787281161B122A8C00564C87 /* BalanceDetailViewController.swift */; };
 		7873B8F41B1325F2005D6835 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */; };
 		7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */; };
+		7873B90A1B1372E0005D6835 /* toDoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7873B9081B1372E0005D6835 /* toDoCell.xib */; };
+		7873B90B1B1372E0005D6835 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B9091B1372E0005D6835 /* ToDoTableViewCell.swift */; };
 		7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881D4191B01013800A08DD0 /* GroupViewController.swift */; };
 		7886472F1B0B75DD00B916BD /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472A1B0B75DD00B916BD /* AddUser.png */; };
 		788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472B1B0B75DD00B916BD /* BalanceIcon.png */; };
@@ -48,6 +50,8 @@
 		788647321B0B75DD00B916BD /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472D1B0B75DD00B916BD /* Camera.png */; };
 		788647331B0B75DD00B916BD /* TodoList.png in Resources */ = {isa = PBXBuildFile; fileRef = 7886472E1B0B75DD00B916BD /* TodoList.png */; };
 		788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788647341B0B8E8100B916BD /* ImageDetailViewController.swift */; };
+		7895570A1B137A1200A7EAB8 /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557081B137A1200A7EAB8 /* checkedBox.png */; };
+		7895570B1B137A1200A7EAB8 /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557091B137A1200A7EAB8 /* uncheckedBox.png */; };
 		78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0191B10C094000093E8 /* debtCell.xib */; };
 		78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0211B10C74D000093E8 /* arrow1to2.png */; };
 		78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0221B10C74D000093E8 /* arrow2to1.png */; };
@@ -105,6 +109,8 @@
 		787281161B122A8C00564C87 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
 		7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListTableViewController.swift; sourceTree = "<group>"; };
+		7873B9081B1372E0005D6835 /* toDoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = toDoCell.xib; sourceTree = "<group>"; };
+		7873B9091B1372E0005D6835 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
 		7881D4191B01013800A08DD0 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		7886472A1B0B75DD00B916BD /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddUser.png; sourceTree = "<group>"; };
 		7886472B1B0B75DD00B916BD /* BalanceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BalanceIcon.png; sourceTree = "<group>"; };
@@ -112,6 +118,8 @@
 		7886472D1B0B75DD00B916BD /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		7886472E1B0B75DD00B916BD /* TodoList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TodoList.png; sourceTree = "<group>"; };
 		788647341B0B8E8100B916BD /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
+		789557081B137A1200A7EAB8 /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
+		789557091B137A1200A7EAB8 /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = "<group>"; };
 		78F4C0191B10C094000093E8 /* debtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = debtCell.xib; sourceTree = "<group>"; };
 		78F4C0211B10C74D000093E8 /* arrow1to2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow1to2.png; sourceTree = "<group>"; };
 		78F4C0221B10C74D000093E8 /* arrow2to1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2to1.png; sourceTree = "<group>"; };
@@ -198,6 +206,7 @@
 				7829A3611AEC129D00CEFF35 /* Controller */,
 				7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */,
 				7810CABB1AEC094F00FD00F0 /* Main.storyboard */,
+				7873B9081B1372E0005D6835 /* toDoCell.xib */,
 				78F4C0191B10C094000093E8 /* debtCell.xib */,
 				DF6C8F011B11F6DD0053BD7D /* billCell.xib */,
 				7810CABE1AEC094F00FD00F0 /* Images.xcassets */,
@@ -236,6 +245,7 @@
 		7829A3611AEC129D00CEFF35 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7895570C1B13817700A7EAB8 /* CellController */,
 				7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */,
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
@@ -246,8 +256,6 @@
 				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
 				7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */,
-				78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */,
-				7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -265,6 +273,8 @@
 		788647291B0B75AF00B916BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				789557081B137A1200A7EAB8 /* checkedBox.png */,
+				789557091B137A1200A7EAB8 /* uncheckedBox.png */,
 				78F4C0211B10C74D000093E8 /* arrow1to2.png */,
 				78F4C0221B10C74D000093E8 /* arrow2to1.png */,
 				7886472A1B0B75DD00B916BD /* AddUser.png */,
@@ -274,6 +284,16 @@
 				7886472E1B0B75DD00B916BD /* TodoList.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		7895570C1B13817700A7EAB8 /* CellController */ = {
+			isa = PBXGroup;
+			children = (
+				7873B9091B1372E0005D6835 /* ToDoTableViewCell.swift */,
+				78F4C0251B10CF33000093E8 /* debtCellTableViewCell.swift */,
+				7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */,
+			);
+			name = CellController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,15 +383,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF6C8F021B11F6DD0053BD7D /* billCell.xib in Resources */,
+				7873B90A1B1372E0005D6835 /* toDoCell.xib in Resources */,
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
 				788647331B0B75DD00B916BD /* TodoList.png in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
 				78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */,
 				788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */,
+				7895570A1B137A1200A7EAB8 /* checkedBox.png in Resources */,
 				788647321B0B75DD00B916BD /* Camera.png in Resources */,
 				7886472F1B0B75DD00B916BD /* AddUser.png in Resources */,
 				78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */,
 				78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */,
+				7895570B1B137A1200A7EAB8 /* uncheckedBox.png in Resources */,
 				788647311B0B75DD00B916BD /* BillList.png in Resources */,
 				7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */,
 			);
@@ -406,6 +429,7 @@
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
 				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
 				7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */,
+				7873B90B1B1372E0005D6835 /* ToDoTableViewCell.swift in Sources */,
 				7849DC761B0A0723008039F0 /* Relation.swift in Sources */,
 				DF6C8F041B120C8B0053BD7D /* LayoutModel.swift in Sources */,
 			);

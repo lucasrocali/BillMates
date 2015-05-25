@@ -16,8 +16,11 @@ let cellColor0:UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
 // LigthGrayGreen
 let cellColor1:UIColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
 
-// DarkGrayGreen
+// MediumGrayGreen
 let cellColor2:UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+
+// DarkGray
+let cellColor6:UIColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
 
 // LightGrenn
 let cellColor3:UIColor = UIColor(red: 133/255, green: 186/255, blue: 169/255, alpha: 1)
@@ -27,6 +30,7 @@ let cellColor4:UIColor = UIColor(red: 80/255, green: 124/255, blue: 109/255, alp
 
 // BaseGreen
 let cellColor5:UIColor = UIColor(red: 112/255, green: 141/255, blue: 131/255, alpha: 1)
+
 
 // White
 let cellColor255:UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)

@@ -67,7 +67,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
 
         lblTitle.text = "Related bills"
-        lblTitle.backgroundColor = cellColor2
+        lblTitle.backgroundColor = cellColor6
         
         //Layout
         
