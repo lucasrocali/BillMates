@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-// Palheta de cores
+//Palheta de cores
 
 //Black
 let cellColor0:UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
