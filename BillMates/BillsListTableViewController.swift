@@ -124,7 +124,7 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : BillCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("billCell") as! BillCellTableViewCell
+        let cell : BillTableViewCell = tableView.dequeueReusableCellWithIdentifier("billCell") as! BillTableViewCell
         var object : PFObject = self.model.billObjects.objectAtIndex(indexPath.row) as! PFObject
         var user : String = model.userObject!["username"] as! String
         var value : Float = object["value"]! as! Float
