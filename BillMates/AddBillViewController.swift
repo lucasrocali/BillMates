@@ -126,30 +126,45 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func doneAddBill(sender: UIBarButtonItem) {
         
-        if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
-            if billState == 0{
-                println("0")
-                self.model.saveBill(description: txtDescription.text, value: txtValue.text)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            } else if billState == 2 {
-                println("1")
-                if self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex) {
+        if model.addedUsers.count > 0 {
+            if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
+                if billState == 0{
+                    println("0")
+                    self.model.saveBill(description: txtDescription.text, value: txtValue.text)
                     self.navigationController?.popToRootViewControllerAnimated(true)
-                } else {
-                    let alert = UIAlertView()
-                    alert.title = "You cannot edit"
-                    alert.message = "Some users thtat share the bill alread settled up"
-                    alert.addButtonWithTitle("Ok")
-                    alert.show()
+                } else if billState == 2 {
+                    println("1")
+                    if self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex) {
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    } else {
+                        let alert = UIAlertView()
+                        alert.title = "You cannot edit"
+                        alert.message = "Some users thtat share the bill alread settled up"
+                        alert.addButtonWithTitle("Ok")
+                        alert.show()
+                    }
+                } else {    //view tahata can edit state 1
+                    println("2")
+                    billState = 2
+                    self.viewDidLoad()
+                    self.tableView.reloadData()
                 }
-            } else {    //view tahata can edit state 1
-                println("2")
-                billState = 2
-                self.viewDidLoad()
-                self.tableView.reloadData()
+                
+            } else {
+                let alert = UIAlertView()
+                alert.title = "You cannot add"
+                alert.message = "Please fill the description and value of the bill"
+                alert.addButtonWithTitle("Ok")
+                alert.show()
             }
-            
+        } else {
+            let alert = UIAlertView()
+            alert.title = "You cannot add"
+            alert.message = "Beacause the bill does not include anyone"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
         }
+        
     }
     func imageTapped(img: AnyObject)
     {
@@ -290,7 +305,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.imageView.addGestureRecognizer(tgr)
         self.imageView.userInteractionEnabled = true
         tableView.delegate = self
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
+        //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "userCell")
         self.model.resetImages()
         
         //Standart Layout
@@ -382,27 +397,35 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UITableViewCell
+        
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath)
+            as! UITableViewCell
+       // cell = UITableViewCell(style: UITableViewCellStyle., reuseIdentifier: "userCell")
+
         
         var friendName: String = self.model.groupFriendsString[indexPath.row]
         cell.textLabel!.text = friendName
+        cell.detailTextLabel!.text = "Included"
+        cell.detailTextLabel?.font = fontDetails
+        cell.detailTextLabel?.textColor = colorBlack
         
         // Layout
-        cell.textLabel?.font = fontText
+        cell.textLabel!.font = fontText
         
         
-        
+        cell.detailTextLabel!.hidden = true
         if(indexPath.row % 2 == 0) {
             cell.backgroundColor = colorBaseLightGray
         } else {
             cell.backgroundColor = colorBaseDarkGray
         }
-        
         if model.isAddedUser(friendName){
-            cell.accessoryType = .Checkmark
+            //cell.accessoryType = .Checkmark
+            cell.detailTextLabel!.hidden = false
         }
         else{
-            cell.accessoryType = .None
+            cell.detailTextLabel!.hidden = true
         }
         if billState == 3 || billState == 1 {
             cell.userInteractionEnabled = false

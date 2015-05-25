@@ -57,7 +57,7 @@ class Model {
         //println(self.billObjects)
         //println(connectionStatus)
         var queryy = PFUser.query()
-        queryy!.fromLocalDatastore()
+        //queryy!.fromLocalDatastore()
             var user = queryy!.getObjectWithId(PFUser.currentUser()!.objectId!)
             self.userObject = user! as? PFUser
             //println(self.userObject)
@@ -86,8 +86,9 @@ class Model {
             if (error == nil){
                 var temp: NSArray = objects! as NSArray
                 ////println(temp)
-                self.billObjects.removeAllObjects()
+                
                  if temp.count > 0 {
+                    self.billObjects.removeAllObjects()
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
                     //println("\tbillObjects saved \(self.billObjects.count)")
                     NSNotificationCenter.defaultCenter().postNotificationName("loadBill", object: nil)
@@ -109,6 +110,7 @@ class Model {
                     var aux : NSMutableArray = temp.mutableCopy() as! NSMutableArray
                     self.groupObject = aux.firstObject as! PFObject
                     self.groupFriendsString = self.groupObject!["groupFriends"] as! [String]
+                    self.calculateDebts(true)
                     //println("\tgroupFRiensdsString saved \(self.groupFriendsString)")
                 }
                 
@@ -130,7 +132,8 @@ class Model {
             if self.groupObject != nil {
                 var groupFriends : [String] = self.groupObject!["groupFriends"] as! [String]
                 if self.debtObjects.count != self.getNumOfDebts(groupFriends.count) {
-                    //self.calculateDebts(true)
+                    self.calculateDebts(true)
+                    NSNotificationCenter.defaultCenter().postNotificationName("loadDebts", object: nil)
                     ////println("DEBTS DIFERENTS NA THREAD")
                 } else {
                     //self.calculateDebts(true)
@@ -167,7 +170,7 @@ class Model {
     func fetchAllObjects(){
         //println("FETCH LOCAL")
         if self.connectionStatus! {
-            //println("NAO DA UNPIN")
+            println("NAO DA UNPIN")
             PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
             
             var query = PFUser.query()
@@ -182,7 +185,7 @@ class Model {
                     PFObject.pinAllInBackground(objects,block:nil)
                     self.fetchAllObjectsFromLocalDataStore()
                 } else {
-                    //println("ERROR NO FECTH - BILL")
+                    println("ERROR NO FECTH - BILL")
                 }
             }
             
@@ -380,21 +383,24 @@ class Model {
     
     func deleteBill(index: Int) {
         refreshNetworkStatus()
-        //println("Delete bill at \(index)")
+        println("Delete bill at \(index)")
         
-        var bill = billObjects.objectAtIndex(index) as! PFObject
-        
+        var bill : PFObject = billObjects.objectAtIndex(index) as! PFObject
+        println(bill)
         var query = PFQuery(className:"Bill")
-        query.fromLocalDatastore()
+        //query.fromLocalDatastore()
         query.getObjectInBackgroundWithId(bill.objectId!) {
-            (bill: PFObject?, error: NSError?) -> Void in
+            (billToDelete: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 //println("ERRO PRA DELETAR")
             } else {
                 if self.connectionStatus! {
-                    bill?.delete()
+                    println("deletando")
+                    billToDelete!.deleteInBackground()
+                    bill.unpinInBackground()
+                    //self.refreshData()
                 } else {
-                    bill?.deleteEventually()
+                    billToDelete!.deleteEventually()
                 }
                 //self.billObjects.removeObjectAtIndex(index)
                 self.calculateDebts(true)
@@ -889,15 +895,13 @@ class Model {
         
         
         let sortedRelations = relationsToOrder.sorted { (lhs:Relation, rhs:Relation) in
-            //return lhs.user1.localizedCaseInsensitiveCompare(rhs.user1) == NSComparisonResult.OrderedAscending
             var value1 = self.abs(lhs.value)
             var value2 = self.abs(rhs.value)
 
-            return  value1 > value2        }
-        self.relations = sortedRelations
-        for relation in self.relations{
-            //println(relation.debtStringCell)
+            return  value1 > value2
         }
+        self.relations = sortedRelations
+        println("GENERATE DEBTS")
         NSNotificationCenter.defaultCenter().postNotificationName("loadDebts", object: nil)
     }
     
@@ -1128,6 +1132,20 @@ class Model {
         let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection) ? true : false
+    }
+    
+    func sortBillList() {
+        var lastIndex = self.billObjects.count - 1
+        var sortedBills : NSMutableArray = NSMutableArray()
+        for (var i = lastIndex ; i >= 0; i--) {
+            var item : PFObject = self.billObjects.objectAtIndex(i) as! PFObject
+            if item["activated"] as! Bool{
+                sortedBills.insertObject(item, atIndex: 0)
+            } else {
+                sortedBills.addObject(item)
+            }
+        }
+        self.billObjects = sortedBills
     }
     
     func sortToDoItems() {
