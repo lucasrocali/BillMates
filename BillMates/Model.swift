@@ -30,6 +30,8 @@ class Model {
     
     var debtObjects : NSMutableArray = NSMutableArray()
     
+    var toDoList : NSMutableArray = NSMutableArray()
+    
     var relations : [Relation] = [Relation]()
     
     var personalRelations : [Relation] = [Relation]()
@@ -87,7 +89,7 @@ class Model {
                  if temp.count > 0 {
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
                     //println("\tbillObjects saved \(self.billObjects.count)")
-                    NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("loadBill", object: nil)
                 }
                 
             } else {
@@ -119,7 +121,7 @@ class Model {
         queryDebt.fromLocalDatastore()
         queryDebt.whereKey("groupName", equalTo: user["group"]!)
         
-        var temp: NSArray = queryDebt.findObjects() as! NSArray
+        var temp: NSArray = queryDebt.findObjects()! as NSArray
         if temp.count > 0{
             self.debtObjects.removeAllObjects()
             self.debtObjects  = temp.mutableCopy() as! NSMutableArray
@@ -135,8 +137,29 @@ class Model {
                 }
                 
             }
+           
+        }
+        var queryToDo : PFQuery = PFQuery(className: "ToDo")
+        queryToDo.fromLocalDatastore()
+        queryToDo.whereKey("groupName", equalTo: user["group"]!)
+        queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                var temp: NSArray = objects! as NSArray
+                ////println(temp)
+                if temp.count > 0 {
+                    self.toDoList = temp.mutableCopy() as! NSMutableArray
+                    //self.groupObject = aux.firstObject as! PFObject
+                    //self.groupFriendsString = self.groupObject!["groupFriends"] as! [String]
+                    //println("\tgroupFRiensdsString saved \(self.groupFriendsString)")
+                }
+                
+            } else {
+                ////println(error?.userInfo)
+                //println("ERROR NO FECTH FROM LOCAL - GROUP")
+            }
             
         }
+        
     }
     
     func fetchAllObjects(){
@@ -1082,6 +1105,20 @@ class Model {
         return (isReachable && !needsConnection) ? true : false
     }
     
-    
+    func createToDoItem(todoItem:String) {
+        var object : PFObject!
+        
+        object = PFObject(className: "ToDo")
+        
+        object["description"] = todoItem
+        object["whoCreated"] = self.userObject!["username"] as! String
+        object["done"] = false
+        object["whoDone"] = " "
+        object["groupName"] = self.userObject!["group"] as! String
+        object.saveEventually()
+        self.toDoList.addObject(object)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)
+    }
    
 }
