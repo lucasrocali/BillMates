@@ -121,7 +121,7 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         //return model.bills.count
         return self.model.billObjects.count
     }
-    
+    //new branch
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : BillTableViewCell = tableView.dequeueReusableCellWithIdentifier("billCell") as! BillTableViewCell
