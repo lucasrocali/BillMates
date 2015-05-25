@@ -13,10 +13,17 @@ import ParseUI
 class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIViewControllerTransitioningDelegate {
     
     var model = Model.sharedInstance
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Setting Dafault Layout
+        UITabBar.appearance().tintColor = colorDarkOrange
+        UINavigationBar.appearance().tintColor = colorDarkOrange
+        
+        let tabBarAttributes = [NSFontAttributeName:fontTabBar]
+        UITabBarItem.appearance().setTitleTextAttributes(tabBarAttributes, forState: UIControlState.Normal)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,7 +84,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
         println("Fail to Sign Up..")
     }
@@ -120,29 +127,29 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                         txt = temp.mutableCopy() as! NSMutableArray
                         
                         var user : PFUser = txt.objectAtIndex(0) as! PFUser
-                         var userGroup : String = "x"
+                        var userGroup : String = "x"
                         if user["group"] != nil {
                             userGroup = user["group"] as! String
                             println(userGroup)
                             self.model.refreshData()
                         }
                         if user["group"] == nil || userGroup == "nil"{
-                        
+                            
                             var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        
+                            
                             var vc : UINavigationController = storyBoard.instantiateViewControllerWithIdentifier("groupViewController") as! UINavigationController
                             
                             self.presentViewController(vc, animated: true, completion: nil)
-                                
+                            
                             println("Alread Logged")
                             println(PFUser.currentUser()!)
                             self.model.refreshData()
                         }
-                    
+                        
                     } else {
-                            println(error?.userInfo)
-                            println("Mae to no erro e cagado")
-                        }
+                        println(error?.userInfo)
+                        println("Mae to no erro e cagado")
+                    }
                 }
             }
         }

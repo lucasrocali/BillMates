@@ -82,6 +82,7 @@ let fontDetails : UIFont = UIFont(name: "Copperplate-Light", size:12)!
 let fontText : UIFont = UIFont(name: "Copperplate-Bold", size:18)!
 let fontButton: UIFont = UIFont(name: "Copperplate-Bold", size: 18)!
 let fontNeutral : UIFont = UIFont(name: "Copperplate",size: 20)!
+let fontTabBar : UIFont = UIFont(name: "Copperplate", size: 12)!
 
 //Images
 let imgChecked : UIImage = UIImage(named:"checkedBox.png")!
