@@ -16,12 +16,12 @@ class DebtsTableViewController: UITableViewController {
     @IBAction func changeBalanceBtns(sender: UISegmentedControl) {
         switch tableControl.selectedSegmentIndex {
         case 0:
-            println("ALL");
+            //println("ALL");
             debtsState = 0
             //self.viewDidLoad()
             self.tableView.reloadData()
         case 1:
-            println("Personal");
+            //println("Personal");
             model.getPersonalRelations()
             debtsState = 1
             //self.viewDidLoad()
@@ -191,21 +191,21 @@ class DebtsTableViewController: UITableViewController {
         } else {
             relation  = model.personalRelations[sender.tag]
         }
-        println("Settle Up for \(relation!.user1) and \(relation!.user2)")
+        //println("Settle Up for \(relation!.user1) and \(relation!.user2)")
     }
     */
     func loadDebtList(notification: NSNotification){
         //load data here
-        println("LOADING DEBTS")
+        //println("LOADING DEBTS")
         self.tableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-         println("segue")
+         //println("segue")
         if segue.identifier == "balanceToBalanceDetail" && sender != nil
         {
-            println("Bora muleKOTE")
+            ////println("Bora muleKOTE")
             let indexPath : NSIndexPath = sender as! NSIndexPath
             
             var filteredBills = segue.destinationViewController as! BalanceDetailViewController
@@ -229,7 +229,7 @@ class DebtsTableViewController: UITableViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
        
         if sender != nil {
-            println("nil")
+            //println("nil")
             return false
         }
         if identifier == "relationsToFilteredBills" && sender != nil{

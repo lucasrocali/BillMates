@@ -24,11 +24,11 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         
         lastChosenMediaType = info[UIImagePickerControllerMediaType] as? String
-        println("1")
+        //println("1")
         if let mediaType = lastChosenMediaType {
-            println("2")
+            //println("2")
             if mediaType == kUTTypeImage as NSString {
-                println("3")
+                //println("3")
                 image = info[UIImagePickerControllerEditedImage] as? UIImage
             }
         }
@@ -41,7 +41,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func addPicture(sender: UIButton) {
-        println("ui fui clicado")
+        //println("ui fui clicado")
         var alert:UIAlertController=UIAlertController(title: "Choose Image", message:
             nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
@@ -129,11 +129,11 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         if model.addedUsers.count > 0 {
             if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
                 if billState == 0{
-                    println("0")
+                    //println("0")
                     self.model.saveBill(description: txtDescription.text, value: txtValue.text)
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 } else if billState == 2 {
-                    println("1")
+                    //println("1")
                     if self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex) {
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     } else {
@@ -144,7 +144,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                         alert.show()
                     }
                 } else {    //view tahata can edit state 1
-                    println("2")
+                    //println("2")
                     billState = 2
                     self.viewDidLoad()
                     self.tableView.reloadData()
@@ -171,14 +171,14 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
        
         if self.imageView!.image != nil {
             performSegueWithIdentifier("toImageDetail", sender: self)
-            println("Cliquei na image view")
+            //println("Cliquei na image view")
             if let mediaType = lastChosenMediaType {
                 if mediaType == kUTTypeImage as NSString {
-                    println("Vai fuder")
+                    //println("Vai fuder")
                     model.resetImages()
                     model.setImages(image!)
                     //vc.imageDetail!.image = image!
-                    println("fudeu")
+                    //println("fudeu")
                     //vc.imageDetail!.hidden = false
                     
                 }
@@ -189,14 +189,14 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         var user : PFUser = model.userObject!
         var paidByUsername : String = user["username"]! as! String
         lblPaidBy.text = "Paid by: " + paidByUsername
-        //println("Add")
+        ////println("Add")
         model.addedUsers.removeAll(keepCapacity: false)
         leftBarBtn.title = "Cancel"
 
     }
     
     func editBillInterface(){
-        println("Edit")
+        //println("Edit")
         txtDescription.userInteractionEnabled = true
         txtValue.userInteractionEnabled = true
         btnAddImg.hidden = false
@@ -210,14 +210,14 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         billId = object.objectId
         var perPerson : Float = valueFloat/Float(model.addedUsers.count)
         lblPerPerson.text = String(format: " %.2f per peson",perPerson)
-        println("Nao fudeu ainda")
+        //println("Nao fudeu ainda")
         if object["img"] != nil{
             if model.connectionStatus! {
-                println("Tem foto")
+                //println("Tem foto")
                 var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
-                println("Nao fudeu ainda")
+                //println("Nao fudeu ainda")
                 var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
-                println("fudeu")
+                //println("fudeu")
                 let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
                 imageView.image = imgTBNUI
                 
@@ -230,19 +230,19 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.model.setImages(imgUI)
                         
                     } else {
-                        println("FUDEU NO REFRESH EM BACKGROUND")
+                        //println("FUDEU NO REFRESH EM BACKGROUND")
                         
                     }
                 }
             } else {
-                println("no internet") //tratar imagem
+                //println("no internet") //tratar imagem
             }
         }
 
     }
     
     func viewBillInterface(){
-        println("See")
+        //println("See")
         let object : PFObject
         if billState == 1{
             object = self.model.billObjects[billCellIndex] as! PFObject
@@ -258,14 +258,14 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         billId = object.objectId
         var perPerson : Float = valueFloat/Float(model.addedUsers.count)
         lblPerPerson.text = String(format: " %.2f per peson",perPerson)
-        println("Nao fudeu ainda")
+        //println("Nao fudeu ainda")
         if object["img"] != nil{
             if model.connectionStatus! {
-                println("Tem foto")
+                //println("Tem foto")
                 var imgTBNFile : PFFile = object["imgTBN"] as! PFFile
-                println("Nao fudeu ainda")
+                //println("Nao fudeu ainda")
                 var imgTBNNS : NSData = imgTBNFile.getData()! as NSData
-                println("fudeu")
+                //println("fudeu")
                 let imgTBNUI : UIImage = UIImage(data: imgTBNNS)!
                 imageView.image = imgTBNUI
                 
@@ -279,12 +279,12 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
                        // self.model.imageToSave = imgUI
                         
                     } else {
-                        println("FUDEU NO REFRESH EM BACKGROUND")
+                        //println("FUDEU NO REFRESH EM BACKGROUND")
                         
                     }
                 }
             } else {
-                println("no internet") //tratar imagem
+                //println("no internet") //tratar imagem
             }
         }
 

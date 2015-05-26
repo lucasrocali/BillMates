@@ -36,7 +36,7 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         btnLeaveGroup.backgroundColor = colorDarkGreen
         if model.isConnectedToNetwork() {
             if model.deleteGroupOfUser() {
-                println("deletou!")
+                //println("deletou!")
                 self.logout()
             } else {//
                 alert.title = "You cannot leave the group"
@@ -77,7 +77,7 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func logout() {
-        println("chama ini view")
+        //println("chama ini view")
         var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         var vc : UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("initialViewController") as! UITabBarController

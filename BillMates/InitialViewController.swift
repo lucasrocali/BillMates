@@ -31,12 +31,12 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
         //model.resetModel()
         model.refreshNetworkStatus()
         if model.isConnectedToNetwork(){
-            println("pica branca")
+            //println("pica branca")
             loginSetup()
         } else {
-            println("pica preta")
+            //println("pica preta")
             if(PFUser.currentUser() == nil){
-                println("frudeu negao")
+                //println("frudeu negao")
                 loginSetup()
             } else {
                 model.refreshData()
@@ -61,7 +61,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     }
     
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
-        println("Fail to Log In..");
+        //println("Fail to Log In..");
     }
     
     func signUpViewController(signUpController: PFSignUpViewController, shouldBeginSignUp info: [NSObject : AnyObject]) -> Bool {
@@ -86,10 +86,10 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     }
     
     func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
-        println("Fail to Sign Up..")
+        //println("Fail to Sign Up..")
     }
     func signUpViewControllerDidCancelSignUp(signUpController: PFSignUpViewController) {
-        println("User dissmissed to sign up")
+        //println("User dissmissed to sign up")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -97,14 +97,57 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     }
     
     func loginSetup() {
-        println("pica branca")
+        //println("pica branca")
         if(PFUser.currentUser() == nil){
-            println("Log in")
+            //println("Log in")
             var loginViewController = PFLogInViewController()
             
             loginViewController.delegate = self
             
+            //Layout
+            loginViewController.logInView?.backgroundColor = colorBaseDarkGray
+            loginViewController.logInView?.usernameField?.font = fontText
+            loginViewController.logInView?.passwordField?.font = fontText
+            loginViewController.logInView?.passwordForgottenButton?.titleLabel?.font = fontDetails
+            loginViewController.logInView?.passwordForgottenButton?.titleLabel?.textColor = colorDarkOrange
+            loginViewController.logInView?.logInButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
+            loginViewController.logInView!.logInButton!.backgroundColor = colorDarkGreen
+            loginViewController.logInView!.logInButton!.titleLabel!.textColor = colorWhite
+            loginViewController.logInView!.logInButton!.titleLabel!.font = fontButton
+            
+            loginViewController.logInView?.signUpButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
+            loginViewController.logInView!.signUpButton!.backgroundColor = colorDarkOrange
+            loginViewController.logInView!.signUpButton!.titleLabel!.textColor = colorWhite
+            loginViewController.logInView!.signUpButton!.titleLabel!.font = fontButton
+            
+            var logInTitle = UILabel()
+            logInTitle.text = "Bill Mates"
+            logInTitle.font = fontLogo
+            
+            loginViewController.logInView?.logo = logInTitle
+            
+            //-
+            
             var signUpViewController = PFSignUpViewController()
+            //Layout
+            
+            signUpViewController.signUpView?.backgroundColor = colorBaseDarkGray
+            signUpViewController.signUpView?.usernameField?.font = fontText
+            signUpViewController.signUpView?.passwordField?.font = fontText
+            signUpViewController.signUpView?.emailField?.font = fontText
+            
+            signUpViewController.signUpView?.signUpButton?.setBackgroundImage(nil, forState: UIControlState.Normal)
+            signUpViewController.signUpView?.signUpButton!.backgroundColor = colorDarkOrange
+            signUpViewController.signUpView?.signUpButton!.titleLabel!.textColor = colorWhite
+            signUpViewController.signUpView?.signUpButton!.titleLabel!.font = fontButton
+            
+            var signUpLogoTitle = UILabel()
+            signUpLogoTitle.text = "Bill Mates"
+            signUpLogoTitle.font = fontLogo
+            
+            signUpViewController.signUpView?.logo = signUpLogoTitle
+            
+            //--
             
             signUpViewController.delegate = self
             
@@ -130,7 +173,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                         var userGroup : String = "x"
                         if user["group"] != nil {
                             userGroup = user["group"] as! String
-                            println(userGroup)
+                            //println(userGroup)
                             self.model.refreshData()
                         }
                         if user["group"] == nil || userGroup == "nil"{
@@ -141,14 +184,14 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
                             
                             self.presentViewController(vc, animated: true, completion: nil)
                             
-                            println("Alread Logged")
-                            println(PFUser.currentUser()!)
+                            //println("Alread Logged")
+                            //println(PFUser.currentUser()!)
                             self.model.refreshData()
                         }
                         
                     } else {
-                        println(error?.userInfo)
-                        println("Mae to no erro e cagado")
+                        //println(error?.userInfo)
+                        //println("Mae to no erro e cagado")
                     }
                 }
             }

@@ -57,7 +57,7 @@ class GroupViewController: UIViewController {
     }
     func logout() {
         if model.isConnectedToNetwork() {
-            println("Log out e chama view")
+            //println("Log out e chama view")
             PFUser.logOut()
             model.resetModel()
             
@@ -81,7 +81,7 @@ class GroupViewController: UIViewController {
         //lblError.hidden = true
         if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
             if self.model.createGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
-                println(" GROUP CREATED")
+                //println(" GROUP CREATED")
         
                 var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -107,7 +107,7 @@ class GroupViewController: UIViewController {
         //lblError.hidden = true
         if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
             if self.model.joinGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
-                println(" GROUP JOINED")
+                //println(" GROUP JOINED")
             
                 var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             

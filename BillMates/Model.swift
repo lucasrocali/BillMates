@@ -380,8 +380,34 @@ class Model {
         }
         return Static.instance!
     }
+    func deleteToDoItem(index: Int) -> Bool{
+        refreshNetworkStatus()
+        println("Delete ToDo at \(index)")
+        
+        var toDo : PFObject = toDoList.objectAtIndex(index) as! PFObject
+        println(toDo)
+        var query = PFQuery(className:"ToDo")
+        //query.fromLocalDatastore()
+        var toDoToDelete: PFObject = query.getObjectWithId(toDo.objectId!)!
+        //if billToDelete {
+        if self.connectionStatus! {
+            println("deletando")
+            toDoToDelete.delete()
+            toDo.unpinInBackground()
+            //self.refreshData()
+        } else {
+            toDoToDelete.deleteEventually()
+            toDo.unpinInBackground()
+        }
+        //} //else {
+        // return false
+        //}
+        self.toDoList.removeObjectAtIndex(index)
+        return true
+    }
+
     
-    func deleteBill(index: Int) {
+    func deleteBill(index: Int) -> Bool{
         refreshNetworkStatus()
         println("Delete bill at \(index)")
         
@@ -389,27 +415,24 @@ class Model {
         println(bill)
         var query = PFQuery(className:"Bill")
         //query.fromLocalDatastore()
-        query.getObjectInBackgroundWithId(bill.objectId!) {
-            (billToDelete: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                //println("ERRO PRA DELETAR")
+        var billToDelete: PFObject = query.getObjectWithId(bill.objectId!)!
+        //if billToDelete {
+            if self.connectionStatus! {
+                println("deletando")
+                billToDelete.delete()
+                bill.unpinInBackground()
+                //self.refreshData()
             } else {
-                if self.connectionStatus! {
-                    println("deletando")
-                    billToDelete!.deleteInBackground()
-                    bill.unpinInBackground()
-                    //self.refreshData()
-                } else {
-                    billToDelete!.deleteEventually()
-                }
-                //self.billObjects.removeObjectAtIndex(index)
-                self.calculateDebts(true)
+                billToDelete.deleteEventually()
+                bill.unpinInBackground()
             }
-            
-        }
+        //} //else {
+           // return false
+        //}
         self.billObjects.removeObjectAtIndex(index)
+        return true
     }
-    
+
     func canDelete(username:String) -> Bool {
         for debt in self.debtObjects {
             var checkDebt : PFObject = debt as! PFObject
@@ -669,10 +692,12 @@ class Model {
     
     func getNumOfDebts(n:Int) -> Int{
         var numOfDebts = 0
-        for i in 1..<n{
-            numOfDebts = numOfDebts + i
-        }
+        if n != 0 {
+            for i in 1..<n{
+                numOfDebts = numOfDebts + i
+            }
         ////println("pra \(n) eh \(numOfDebts)")
+        }
         return numOfDebts
     }
     
@@ -1172,7 +1197,7 @@ class Model {
         object["done"] = false
         object["whoDone"] = " "
         object["groupName"] = self.userObject!["group"] as! String
-        object.saveEventually()
+        object.save()
         self.toDoList.addObject(object)
         
         NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)

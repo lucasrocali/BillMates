@@ -40,15 +40,15 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         if user1 != nil && user2 != nil {
             model.filterBillsByRelation(user1!,user2:user2!)
         }
-        println(user1!+user2!)
-        println(self.model.filteredBills.count)
+        //println(user1!+user2!)
+        //println(self.model.filteredBills.count)
         self.filteredTableView.reloadData()
         
         // Populating
         
         currentUser = model.userObject!["username"] as? String
-       // println(currentUser)
-       // println(user1!)
+       // //println(currentUser)
+       // //println(user1!)
         
         if value > 0 {
             lblUser1.text = user1
@@ -117,7 +117,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         var paidBy : String = object["paidBy"] as! String
         var sharedWith : [String] = object["sharedWith"] as! [String]
         var nSharedWith : Int = sharedWith.count as Int
-        println(object)
+        //println(object)
         
         cell.lblDescription.text = object["description"] as! String
         
@@ -184,13 +184,13 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-        println("segue")
+        //println("segue")
         if segue.identifier == "toDetailBills"
         {
-            println("segue to detailBills")
+            //println("segue to detailBills")
             let indexPath : NSIndexPath = sender as! NSIndexPath
             
-            println("Cell n: \(indexPath.row)")
+            //println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
             editBill.billState = 3

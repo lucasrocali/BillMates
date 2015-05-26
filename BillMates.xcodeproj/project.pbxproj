@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		780740901B075CCD006E2C30 /* DebtsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */; };
 		7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */; };
-		7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7810CAB61AEC094F00FD00F0 /* BillMates.xcdatamodeld */; };
 		7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7810CABB1AEC094F00FD00F0 /* Main.storyboard */; };
 		7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7810CABE1AEC094F00FD00F0 /* Images.xcassets */; };
 		7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7810CAC01AEC094F00FD00F0 /* LaunchScreen.xib */; };
@@ -52,6 +51,18 @@
 		788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788647341B0B8E8100B916BD /* ImageDetailViewController.swift */; };
 		7895570A1B137A1200A7EAB8 /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557081B137A1200A7EAB8 /* checkedBox.png */; };
 		7895570B1B137A1200A7EAB8 /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557091B137A1200A7EAB8 /* uncheckedBox.png */; };
+		7895572E1B147DE800A7EAB8 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557241B147DE800A7EAB8 /* Icon-40.png */; };
+		7895572F1B147DE800A7EAB8 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557251B147DE800A7EAB8 /* Icon-40@2x.png */; };
+		789557301B147DE800A7EAB8 /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557261B147DE800A7EAB8 /* Icon-40@3x.png */; };
+		789557311B147DE800A7EAB8 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557271B147DE800A7EAB8 /* Icon-60@2x.png */; };
+		789557321B147DE800A7EAB8 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557281B147DE800A7EAB8 /* Icon-60@3x.png */; };
+		789557331B147DE800A7EAB8 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 789557291B147DE800A7EAB8 /* Icon-76.png */; };
+		789557341B147DE800A7EAB8 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7895572A1B147DE800A7EAB8 /* Icon-76@2x.png */; };
+		789557351B147DE800A7EAB8 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7895572B1B147DE800A7EAB8 /* Icon-Small.png */; };
+		789557361B147DE800A7EAB8 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7895572C1B147DE800A7EAB8 /* Icon-Small@2x.png */; };
+		789557371B147DE800A7EAB8 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7895572D1B147DE800A7EAB8 /* Icon-Small@3x.png */; };
+		7895573B1B147E5E00A7EAB8 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7895573A1B147E5E00A7EAB8 /* logo.png */; };
+		7895573D1B14889A00A7EAB8 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7895573C1B14889A00A7EAB8 /* CustomNavigationController.swift */; };
 		78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0191B10C094000093E8 /* debtCell.xib */; };
 		78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0211B10C74D000093E8 /* arrow1to2.png */; };
 		78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F4C0221B10C74D000093E8 /* arrow2to1.png */; };
@@ -75,7 +86,6 @@
 		7810CAAF1AEC094F00FD00F0 /* BillMates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillMates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7810CAB31AEC094F00FD00F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7810CAB41AEC094F00FD00F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7810CAB71AEC094F00FD00F0 /* BillMates.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BillMates.xcdatamodel; sourceTree = "<group>"; };
 		7810CABC1AEC094F00FD00F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7810CABE1AEC094F00FD00F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7810CAC11AEC094F00FD00F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -120,6 +130,18 @@
 		788647341B0B8E8100B916BD /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		789557081B137A1200A7EAB8 /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
 		789557091B137A1200A7EAB8 /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = "<group>"; };
+		789557241B147DE800A7EAB8 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		789557251B147DE800A7EAB8 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		789557261B147DE800A7EAB8 /* Icon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@3x.png"; sourceTree = "<group>"; };
+		789557271B147DE800A7EAB8 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		789557281B147DE800A7EAB8 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		789557291B147DE800A7EAB8 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		7895572A1B147DE800A7EAB8 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		7895572B1B147DE800A7EAB8 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		7895572C1B147DE800A7EAB8 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		7895572D1B147DE800A7EAB8 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
+		7895573A1B147E5E00A7EAB8 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		7895573C1B14889A00A7EAB8 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		78F4C0191B10C094000093E8 /* debtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = debtCell.xib; sourceTree = "<group>"; };
 		78F4C0211B10C74D000093E8 /* arrow1to2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow1to2.png; sourceTree = "<group>"; };
 		78F4C0221B10C74D000093E8 /* arrow2to1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2to1.png; sourceTree = "<group>"; };
@@ -211,7 +233,6 @@
 				DF6C8F011B11F6DD0053BD7D /* billCell.xib */,
 				7810CABE1AEC094F00FD00F0 /* Images.xcassets */,
 				7810CAC01AEC094F00FD00F0 /* LaunchScreen.xib */,
-				7810CAB61AEC094F00FD00F0 /* BillMates.xcdatamodeld */,
 				7810CAB21AEC094F00FD00F0 /* Supporting Files */,
 			);
 			path = BillMates;
@@ -247,6 +268,7 @@
 			children = (
 				7895570C1B13817700A7EAB8 /* CellController */,
 				7873B8F91B135089005D6835 /* ToDoListTableViewController.swift */,
+				7895573C1B14889A00A7EAB8 /* CustomNavigationController.swift */,
 				782893221AFBEFB500966E62 /* InitialViewController.swift */,
 				7829A3621AEC12BD00CEFF35 /* AddBillViewController.swift */,
 				7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */,
@@ -273,6 +295,7 @@
 		788647291B0B75AF00B916BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				789557231B147DBC00A7EAB8 /* icons */,
 				789557081B137A1200A7EAB8 /* checkedBox.png */,
 				789557091B137A1200A7EAB8 /* uncheckedBox.png */,
 				78F4C0211B10C74D000093E8 /* arrow1to2.png */,
@@ -294,6 +317,24 @@
 				7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */,
 			);
 			name = CellController;
+			sourceTree = "<group>";
+		};
+		789557231B147DBC00A7EAB8 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				7895573A1B147E5E00A7EAB8 /* logo.png */,
+				789557241B147DE800A7EAB8 /* Icon-40.png */,
+				789557251B147DE800A7EAB8 /* Icon-40@2x.png */,
+				789557261B147DE800A7EAB8 /* Icon-40@3x.png */,
+				789557271B147DE800A7EAB8 /* Icon-60@2x.png */,
+				789557281B147DE800A7EAB8 /* Icon-60@3x.png */,
+				789557291B147DE800A7EAB8 /* Icon-76.png */,
+				7895572A1B147DE800A7EAB8 /* Icon-76@2x.png */,
+				7895572B1B147DE800A7EAB8 /* Icon-Small.png */,
+				7895572C1B147DE800A7EAB8 /* Icon-Small@2x.png */,
+				7895572D1B147DE800A7EAB8 /* Icon-Small@3x.png */,
+			);
+			name = icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,21 +423,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7895573B1B147E5E00A7EAB8 /* logo.png in Resources */,
 				DF6C8F021B11F6DD0053BD7D /* billCell.xib in Resources */,
+				7895572E1B147DE800A7EAB8 /* Icon-40.png in Resources */,
 				7873B90A1B1372E0005D6835 /* toDoCell.xib in Resources */,
+				7895572F1B147DE800A7EAB8 /* Icon-40@2x.png in Resources */,
 				7810CABD1AEC094F00FD00F0 /* Main.storyboard in Resources */,
 				788647331B0B75DD00B916BD /* TodoList.png in Resources */,
 				7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */,
+				789557351B147DE800A7EAB8 /* Icon-Small.png in Resources */,
 				78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */,
 				788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */,
 				7895570A1B137A1200A7EAB8 /* checkedBox.png in Resources */,
+				789557311B147DE800A7EAB8 /* Icon-60@2x.png in Resources */,
 				788647321B0B75DD00B916BD /* Camera.png in Resources */,
+				789557371B147DE800A7EAB8 /* Icon-Small@3x.png in Resources */,
 				7886472F1B0B75DD00B916BD /* AddUser.png in Resources */,
 				78F4C0231B10C74D000093E8 /* arrow1to2.png in Resources */,
 				78F4C0241B10C74D000093E8 /* arrow2to1.png in Resources */,
 				7895570B1B137A1200A7EAB8 /* uncheckedBox.png in Resources */,
+				789557341B147DE800A7EAB8 /* Icon-76@2x.png in Resources */,
+				789557331B147DE800A7EAB8 /* Icon-76.png in Resources */,
 				788647311B0B75DD00B916BD /* BillList.png in Resources */,
+				789557321B147DE800A7EAB8 /* Icon-60@3x.png in Resources */,
 				7810CABF1AEC094F00FD00F0 /* Images.xcassets in Resources */,
+				789557361B147DE800A7EAB8 /* Icon-Small@2x.png in Resources */,
+				789557301B147DE800A7EAB8 /* Icon-40@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,8 +478,8 @@
 				7829A3681AEC176F00CEFF35 /* Model.swift in Sources */,
 				788647351B0B8E8100B916BD /* ImageDetailViewController.swift in Sources */,
 				782893231AFBEFB500966E62 /* InitialViewController.swift in Sources */,
+				7895573D1B14889A00A7EAB8 /* CustomNavigationController.swift in Sources */,
 				7810CAB51AEC094F00FD00F0 /* AppDelegate.swift in Sources */,
-				7810CAB81AEC094F00FD00F0 /* BillMates.xcdatamodeld in Sources */,
 				7873B8FA1B135089005D6835 /* ToDoListTableViewController.swift in Sources */,
 				7873B90B1B1372E0005D6835 /* ToDoTableViewCell.swift in Sources */,
 				7849DC761B0A0723008039F0 /* Relation.swift in Sources */,
@@ -651,19 +703,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		7810CAB61AEC094F00FD00F0 /* BillMates.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7810CAB71AEC094F00FD00F0 /* BillMates.xcdatamodel */,
-			);
-			currentVersion = 7810CAB71AEC094F00FD00F0 /* BillMates.xcdatamodel */;
-			path = BillMates.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7810CAA71AEC094F00FD00F0 /* Project object */;
 }

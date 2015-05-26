@@ -79,10 +79,11 @@ let colorWhite:UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, al
 
 let fontNumbers : UIFont = UIFont(name: "Copperplate-Bold", size:20)!
 let fontDetails : UIFont = UIFont(name: "Copperplate-Light", size:12)!
-let fontText : UIFont = UIFont(name: "Copperplate-Bold", size:18)!
+let fontText : UIFont = UIFont(name: "Copperplate-Bold", size:16)!
 let fontButton: UIFont = UIFont(name: "Copperplate-Bold", size: 18)!
 let fontNeutral : UIFont = UIFont(name: "Copperplate",size: 20)!
 let fontTabBar : UIFont = UIFont(name: "Copperplate", size: 12)!
+let fontLogo : UIFont = UIFont(name: "Copperplate-Bold", size:32)!
 
 //Images
 let imgChecked : UIImage = UIImage(named:"checkedBox.png")!

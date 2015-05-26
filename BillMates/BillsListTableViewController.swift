@@ -52,11 +52,11 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     }
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         let buttonTitle = alertView.buttonTitleAtIndex(buttonIndex)
-        println("\(buttonTitle) pressed")
+        //println("\(buttonTitle) pressed")
         if buttonTitle == "Ok" {
-           println("Ok pressed")
+           //println("Ok pressed")
             if model.isConnectedToNetwork() {
-                println("Log out e chama view")
+                //println("Log out e chama view")
                 PFUser.logOut()
                 model.resetModel()
                 
@@ -74,7 +74,7 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
             }
             
         } else {
-            println("Cancel pressed")
+            //println("Cancel pressed")
         }
     }
     
@@ -83,9 +83,9 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     func refresh(sender:AnyObject)
     {
         cTimes++
-        println(cTimes)
+        //println(cTimes)
         // Code to refresh table view
-        println("\nREFRESH")
+        //println("\nREFRESH")
         //model.calculateDebts()
         model.refreshData()
         self.tableView.reloadData()
@@ -93,10 +93,10 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         
         /*
         if model.isConnectedToNetwork() == true{
-        println("Internet Status = ON")
+        //println("Internet Status = ON")
         model.refreshData(true)
         } else {
-        println("Internet Status = OFF")
+        //println("Internet Status = OFF")
         model.refreshData(false)
         }*/
         
@@ -196,15 +196,19 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        //let appDelegate =
+        //UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let managedContext = appDelegate.managedObjectContext!
+        //let managedContext = appDelegate.managedObjectContext!
         
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
             
-            model.deleteBill(indexPath.row)
+            if model.deleteBill(indexPath.row) {
+                println("DELETOU A \(indexPath.row) PORRA")
+            } else {
+                println("ERRO PRA DELETAR")
+            }
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
@@ -216,8 +220,8 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         {
             
             let indexPath : NSIndexPath = sender as! NSIndexPath
-            println("bora editar indexpahtrow: \(indexPath.row)")
-            println("Cell n: \(indexPath.row)")
+            //println("bora editar indexpahtrow: \(indexPath.row)")
+            //println("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
             editBill.billState = 1

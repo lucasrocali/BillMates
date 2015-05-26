@@ -24,26 +24,26 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
     }
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         let buttonTitle = alertView.buttonTitleAtIndex(buttonIndex)
-        println("\(buttonTitle) pressed")
+        ////println("\(buttonTitle) pressed")
         if buttonTitle == "Add" {
             let textField = alertView.textFieldAtIndex(0)
             print(textField!.text)
             model.createToDoItem(textField!.text)
             
         } else {
-            println("Cancel pressed")
+            //println("Cancel pressed")
         }
     }
 
     func loadToDoList(notification: NSNotification){
         //load data here
-        println("Load To Do List")
+        //println("Load To Do List")
         self.tableView.reloadData()
     }
     func refresh(sender:AnyObject)
     {
         // Code to refresh table view
-        println("\nREFRESH")
+        //println("\nREFRESH")
         //model.calculateDebts()
         //model.refreshData()
         self.tableView.reloadData()
@@ -51,10 +51,10 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
         
         /*
         if model.isConnectedToNetwork() == true{
-        println("Internet Status = ON")
+        //println("Internet Status = ON")
         model.refreshData(true)
         } else {
-        println("Internet Status = OFF")
+        //println("Internet Status = OFF")
         model.refreshData(false)
         }*/
         
@@ -93,16 +93,17 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        //let appDelegate =
+       // UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let managedContext = appDelegate.managedObjectContext!
+        //let managedContext = appDelegate.managedObjectContext!
         
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
             
-            println("delete To Do ")
+            //println("delete To Do ")
             //model.deleteBill(indexPath.row)
+            model.deleteToDoItem(indexPath.row)
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
@@ -111,7 +112,7 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         self.view.endEditing(true)
-        println("clicked at ]\(indexPath.row)")
+        //println("clicked at ]\(indexPath.row)")
         
         var toDoItem : PFObject = model.toDoList.objectAtIndex(indexPath.row) as! PFObject
         var state : Bool = toDoItem["done"] as! Bool
@@ -141,7 +142,7 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        println("COUNT: \(model.toDoList.count)")
+        //println("COUNT: \(model.toDoList.count)")
         return model.toDoList.count
     }
 

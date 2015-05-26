@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iD8-33-zEm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iD8-33-zEm">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +29,7 @@
                             <outlet property="delegate" destination="F7k-U5-94P" id="9D7-YW-KFW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Bills List" id="wgm-2A-rdH">
+                    <navigationItem key="navigationItem" title="Bills list" id="wgm-2A-rdH">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="uaE-Ei-S5w">
                             <connections>
                                 <action selector="logoutBtn:" destination="F7k-U5-94P" id="6ZR-Tz-R92"/>
@@ -95,7 +95,7 @@
                                     <constraint firstAttribute="height" constant="50" id="rDT-ab-uui"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mer-qc-mRg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mer-qc-mRg">
                                 <rect key="frame" x="0.0" y="275" width="600" height="276"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -132,7 +132,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Shared with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avO-eB-zdc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shared with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avO-eB-zdc">
                                 <rect key="frame" x="0.0" y="235" width="600" height="35"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -192,7 +192,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="9Lt-tU-RqR">
+                    <navigationItem key="navigationItem" title="Bill" id="9Lt-tU-RqR">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="2mS-jI-ua4">
                             <connections>
                                 <action selector="cancelAddBill:" destination="gLj-HQ-rlL" id="5u6-LF-L0p"/>
@@ -225,7 +225,7 @@
         <!--Bills List-->
         <scene sceneID="rnj-d3-euu">
             <objects>
-                <navigationController restorationIdentifier="BillsListNaviagationController" storyboardIdentifier="BillsListNaviagationController" id="Ote-QQ-Ppj" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="BillsListNaviagationController" storyboardIdentifier="BillsListNaviagationController" id="Ote-QQ-Ppj" customClass="CustomNavigationController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bills List" image="BillList.png" id="wkG-Tu-mD1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bTd-Le-2bu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -301,7 +301,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="direction" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-Es-sDF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="direction" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-Es-sDF">
                                 <rect key="frame" x="508" y="84" width="67" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -319,7 +319,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2Q-YW-286">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2Q-YW-286">
                                 <rect key="frame" x="534" y="125" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -333,7 +333,7 @@
                                     <constraint firstAttribute="height" constant="40" id="ddj-MA-cde"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WOU-vZ-hta">
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WOU-vZ-hta">
                                 <rect key="frame" x="0.0" y="245" width="600" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -353,7 +353,7 @@
                                     <outlet property="delegate" destination="nsP-nc-uwl" id="Tx1-Ou-aVJ"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd0-oy-3yZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd0-oy-3yZ">
                                 <rect key="frame" x="0.0" y="210" width="600" height="35"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -363,7 +363,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVG-KT-hzi" userLabel="Settle up">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVG-KT-hzi" userLabel="Settle up">
                                 <rect key="frame" x="86" y="160" width="428" height="35"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -377,6 +377,12 @@
                                     <action selector="btnSettledDown:" destination="nsP-nc-uwl" eventType="touchDown" id="gi4-bA-8go"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJX-hL-aXc">
+                                <rect key="frame" x="289" y="20" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -530,7 +536,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Sl2-ce-Yoc">
+                    <navigationItem key="navigationItem" title="Create/Join a group" id="Sl2-ce-Yoc">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="FaI-qu-0Lo">
                             <connections>
                                 <action selector="btnLogout:" destination="IU5-Sr-bl5" id="YSC-Gs-K4C"/>
@@ -742,7 +748,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Waq-3a-Eam"/>
+                    <navigationItem key="navigationItem" title="Add user" id="Waq-3a-Eam"/>
                     <connections>
                         <outlet property="addedUsersTableView" destination="64D-Pa-YhO" id="mee-tm-XyY"/>
                         <outlet property="btnAddUser" destination="qN6-f2-Foa" id="ebp-Rx-TjW"/>
@@ -797,7 +803,7 @@
                             <outlet property="delegate" destination="t33-ue-2rl" id="icH-61-TVK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="0J9-LH-4Uk">
+                    <navigationItem key="navigationItem" title="To-do list" id="0J9-LH-4Uk">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="s4g-iR-uHR">
                             <connections>
                                 <action selector="addToDoItem:" destination="t33-ue-2rl" id="pap-Bq-BEa"/>
@@ -815,10 +821,10 @@
             </objects>
             <point key="canvasLocation" x="2071" y="1040"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="7zZ-UB-m6g">
             <objects>
-                <navigationController storyboardIdentifier="groupViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jYZ-hY-WDk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="groupViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jYZ-hY-WDk" customClass="CustomNavigationController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wti-Hu-441">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -836,7 +842,7 @@
         <!--Balance-->
         <scene sceneID="kSW-2b-yxc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gI-AI-R7B" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gI-AI-R7B" customClass="CustomNavigationController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Balance" image="BalanceIcon.png" id="UZM-rZ-Ans"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mlv-My-R6Z">
@@ -855,7 +861,7 @@
         <!--Add User-->
         <scene sceneID="RaO-BN-KCj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gdR-T8-hRw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gdR-T8-hRw" customClass="CustomNavigationController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Add User" image="AddUser.png" id="meS-56-2J8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qY7-Ng-k1Z">
@@ -874,7 +880,7 @@
         <!--To-do List-->
         <scene sceneID="heo-nR-You">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QUe-Dw-Z7a" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QUe-Dw-Z7a" customClass="CustomNavigationController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="To-do List" image="TodoList.png" id="6cF-Yq-VCi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="20U-gx-b9K">
@@ -900,7 +906,7 @@
         <image name="arrow1to2.png" width="459" height="447"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ac8-cr-Amj"/>
+        <segue reference="pgn-ej-4dG"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.80000000000000004" green="0.32156862745098036" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
