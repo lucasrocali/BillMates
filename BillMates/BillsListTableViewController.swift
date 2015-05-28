@@ -84,8 +84,18 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         // Code to refresh table view
         //println("\nREFRESH")
         //model.calculateDebts()
-        model.refreshData()
-        self.tableView.reloadData()
+        model.refreshNetworkStatus()
+        if model.connectionStatus! {
+            model.refreshData()
+            self.tableView.reloadData()
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        }
+        
+        
         self.refreshControl?.endRefreshing()
         
         /*
@@ -132,8 +142,11 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         var nSharedWith : Int = sharedWith.count as Int
         cell.lblDescription.text = object["description"] as? String
         
-        cell.lblDetailes.text =  paidBy + " paid" + " " + "$ "+(NSString(format: "%.2f",value) as! String)
-        
+        if paidBy == user {
+            cell.lblDetailes.text =  "you" + " paid" + " " + "$ "+(NSString(format: "%.2f",value) as! String)
+        } else {
+            cell.lblDetailes.text =  paidBy + " paid" + " " + "$ "+(NSString(format: "%.2f",value) as! String)
+        }
         cell.lblValue.text = "$ "+(NSString(format: "%.2f",value/Float(nSharedWith)) as! String)
        
         //Layout
@@ -155,6 +168,18 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         if user == paidBy {
             cell.lblValue.textColor = textGreen
             cell.lblDirection.text = "You lent"
+            var flag = 0;
+            for friend in sharedWith {
+                if friend == paidBy {
+                    flag = 1
+                }
+            }
+            if flag == 1 {
+                cell.lblValue.text = "$ "+(NSString(format: "%.2f",value - value/Float(nSharedWith)) as! String)
+            }
+            else {
+                cell.lblValue.text = "$ "+(NSString(format: "%.2f",value) as! String)
+            }
         } else {
             var flag = 0
             for friend in sharedWith {

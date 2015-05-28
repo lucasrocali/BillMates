@@ -319,6 +319,9 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         lblSharedWith.font = fontNeutral
         lblSharedWith.backgroundColor = colorLightOrange
         
+        txtDescription.textColor = colorDarkGray
+        txtValue.textColor = colorDarkGray
+        
         //txtDescription.textColor = cellColor6
         //txtValue.textColor = cellColor6
         

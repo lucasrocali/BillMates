@@ -59,7 +59,7 @@ let colorBaseLightGray:UIColor = UIColor(red: 250/255, green: 250/255, blue: 250
 let colorBaseDarkGray:UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
 
 // Dark Gray
-let colorDarkGray:UIColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+let colorDarkGray:UIColor = UIColor(red: 90/255, green: 90/255, blue: 90/255, alpha: 1)
 
 // DarkGreen
 let colorDarkGreen : UIColor = UIColor(red: 80/255, green: 124/255, blue: 109/255, alpha: 1)

@@ -56,6 +56,7 @@ class Model {
         refreshNetworkStatus()
         //println(self.billObjects)
         //println(connectionStatus)
+        if connectionStatus! {
         var queryy = PFUser.query()
         //queryy!.fromLocalDatastore()
             var user = queryy!.getObjectWithId(PFUser.currentUser()!.objectId!)
@@ -71,13 +72,46 @@ class Model {
                     }
                 }
             }
+        } else {
+             self.userObject = PFUser.currentUser()!
+            if(self.userObject != nil){
+
+                //self.userObject = PFUser.currentUser()!
+            self.fetchAllObjectsFromLocalDataStore()
+            }
+        }
     }
-    func fetchAllObjectsFromLocalDataStore(){
-        
-        
-        //var query = PFUser.query()
+    func fetchAllObjectsFromLocalDataStore(){ 
+        fetchBillFromLocal()
+        fetchGroupFromLocal()
+        fetchDebtsFromLocal()
+        fetchTodoFromLocal()
+
+    }
+    func fetchBill() {
+        if self.connectionStatus! {
+            println("NAO DA UNPIN")
+            PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
+        }
+        println("fetch bil")
+        var query = PFUser.query()
         //var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-        //self.userObject = user
+        var user : PFUser = self.userObject!
+        //println(user)
+        var queryBill: PFQuery = PFQuery(className: "Bill")
+        queryBill.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                //self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                println("ERROR NO FECTH - BILL")
+            }
+        }
+        
+    }
+    func fetchBillFromLocal () {
         var user : PFUser = self.userObject!
         var queryBill: PFQuery = PFQuery(className: "Bill")
         queryBill.fromLocalDatastore()
@@ -87,18 +121,38 @@ class Model {
                 var temp: NSArray = objects! as NSArray
                 ////println(temp)
                 
-                 if temp.count > 0 {
+                //if temp.count > 0 {
                     self.billObjects.removeAllObjects()
                     self.billObjects = temp.mutableCopy() as! NSMutableArray
                     //println("\tbillObjects saved \(self.billObjects.count)")
                     NSNotificationCenter.defaultCenter().postNotificationName("loadBill", object: nil)
-                }
+                //}
                 
             } else {
                 ////println(error?.userInfo)
                 //println("ERROR NO FECTH FROM LOCAL - BILL")
             }
         }
+    }
+    
+    func fetchGroup() {
+        var user : PFUser = self.userObject!
+        var queryFriend: PFQuery = PFQuery(className: "Group")
+        queryFriend.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                //self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                //println("ERROR NO FECTH - GROUP")
+            }
+            
+        }
+    }
+    
+    func fetchGroupFromLocal() {
+        var user : PFUser = self.userObject!
         var queryGroup: PFQuery = PFQuery(className: "Group")
         queryGroup.fromLocalDatastore()
         queryGroup.whereKey("groupName", equalTo: user["group"]!)
@@ -120,6 +174,25 @@ class Model {
             }
             
         }
+    }
+    func fetchDebt() {
+        var user : PFUser = self.userObject!
+        var queryDebt : PFQuery = PFQuery(className: "Debts")
+        queryDebt.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                //self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                //println("ERROR NO FECTH - DEBTS")
+            }
+            
+        }
+    }
+    
+    func fetchDebtsFromLocal() {
+        var user : PFUser = self.userObject!
         var queryDebt : PFQuery = PFQuery(className: "Debts")
         queryDebt.fromLocalDatastore()
         queryDebt.whereKey("groupName", equalTo: user["group"]!)
@@ -141,8 +214,32 @@ class Model {
                 }
                 
             }
-           
+            
         }
+    }
+
+    func fetchTodo() {
+        if self.connectionStatus! {
+            println("NAO DA UNPIN")
+            PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
+        var user : PFUser = self.userObject!
+        var queryToDo : PFQuery = PFQuery(className: "ToDo")
+        queryToDo.whereKey("groupName", equalTo: user["group"]!)
+        
+        queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
+            if (error == nil){
+                PFObject.pinAllInBackground(objects,block:nil)
+                //self.fetchAllObjectsFromLocalDataStore()
+            } else {
+                //println("ERROR NO FECTH - DEBTS")
+            }
+            
+        }
+        }
+    }
+    
+    func fetchTodoFromLocal() {
+        var user : PFUser = self.userObject!
         var queryToDo : PFQuery = PFQuery(className: "ToDo")
         queryToDo.fromLocalDatastore()
         queryToDo.whereKey("groupName", equalTo: user["group"]!)
@@ -152,7 +249,8 @@ class Model {
                 println(temp)
                 if temp.count > 0 {
                     self.toDoList = temp.mutableCopy() as! NSMutableArray
-                     NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)
+                    self.sortToDoItems()
                     //self.groupObject = aux.firstObject as! PFObject
                     //self.groupFriendsString = self.groupObject!["groupFriends"] as! [String]
                     //println("\tgroupFRiensdsString saved \(self.groupFriendsString)")
@@ -162,9 +260,7 @@ class Model {
                 ////println(error?.userInfo)
                 //println("ERROR NO FECTH FROM LOCAL - GROUP")
             }
-            
         }
-        
     }
     
     func fetchAllObjects(){
@@ -173,59 +269,10 @@ class Model {
             println("NAO DA UNPIN")
             PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
             
-            var query = PFUser.query()
-            //var user = query!.getObjectWithId(PFUser.currentUser()!.objectId!) as! PFUser
-            var user : PFUser = self.userObject!
-            //println(user)
-            var queryBill: PFQuery = PFQuery(className: "Bill")
-            queryBill.whereKey("groupName", equalTo: user["group"]!)
-            
-            queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                if (error == nil){
-                    PFObject.pinAllInBackground(objects,block:nil)
-                    //self.fetchAllObjectsFromLocalDataStore()
-                } else {
-                    println("ERROR NO FECTH - BILL")
-                }
-            }
-            
-            var queryFriend: PFQuery = PFQuery(className: "Group")
-            queryFriend.whereKey("groupName", equalTo: user["group"]!)
-            
-            queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                if (error == nil){
-                    PFObject.pinAllInBackground(objects,block:nil)
-                    //self.fetchAllObjectsFromLocalDataStore()
-                } else {
-                    //println("ERROR NO FECTH - GROUP")
-                }
-                
-            }
-            
-            var queryDebt : PFQuery = PFQuery(className: "Debts")
-            queryDebt.whereKey("groupName", equalTo: user["group"]!)
-            
-            queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                if (error == nil){
-                    PFObject.pinAllInBackground(objects,block:nil)
-                    //self.fetchAllObjectsFromLocalDataStore()
-                } else {
-                    //println("ERROR NO FECTH - DEBTS")
-                }
-                
-            }
-            var queryToDo : PFQuery = PFQuery(className: "ToDo")
-            queryToDo.whereKey("groupName", equalTo: user["group"]!)
-            
-            queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
-                if (error == nil){
-                    PFObject.pinAllInBackground(objects,block:nil)
-                    //self.fetchAllObjectsFromLocalDataStore()
-                } else {
-                    //println("ERROR NO FECTH - DEBTS")
-                }
-                
-            }
+            fetchBill()
+            fetchGroup()
+            fetchDebt()
+            fetchTodo()
         
         }
         
@@ -387,7 +434,7 @@ class Model {
         var toDo : PFObject = toDoList.objectAtIndex(index) as! PFObject
         println(toDo)
         var query = PFQuery(className:"ToDo")
-        //query.fromLocalDatastore()
+        query.fromLocalDatastore()
         var toDoToDelete: PFObject = query.getObjectWithId(toDo.objectId!)!
         //if billToDelete {
         if self.connectionStatus! {
@@ -414,14 +461,15 @@ class Model {
         var bill : PFObject = billObjects.objectAtIndex(index) as! PFObject
         println(bill)
         var query = PFQuery(className:"Bill")
-        //query.fromLocalDatastore()
+        query.fromLocalDatastore()
         var billToDelete: PFObject = query.getObjectWithId(bill.objectId!)!
         //if billToDelete {
             if self.connectionStatus! {
                 println("deletando")
-                billToDelete.delete()
+                billToDelete.deleteInBackground()
                 bill.unpinInBackground()
                 //self.refreshData()
+                calculateDebts(true)
             } else {
                 billToDelete.deleteEventually()
                 bill.unpinInBackground()
@@ -599,7 +647,7 @@ class Model {
     func editBill(#description:String, value:String, billId: String,cellId:Int) -> Bool{
         refreshNetworkStatus()
         var queryBill: PFQuery = PFQuery(className: "Bill")
-        //queryBill.fromLocalDatastore()
+        queryBill.fromLocalDatastore()
         var billToEdit: PFObject! = queryBill.getObjectWithId(billId)
         
         println(billId)
@@ -927,164 +975,97 @@ class Model {
             return  value1 > value2
         }
         self.relations = sortedRelations
+        getPersonalRelations()
         println("GENERATE DEBTS")
         NSNotificationCenter.defaultCenter().postNotificationName("loadDebts", object: nil)
     }
     
     func calculateDebts(background:Bool) {
         refreshNetworkStatus()
-        if self.groupObject != nil {
-            var groupFriends : [String] = self.groupFriendsString
-            if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
-                println("\n 1 ≠ DIFERENTE DO PARSE BORA - VER \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
-                var userGroupName : String = self.groupObject!["groupName"] as! String
-                var queryDebt : PFQuery = PFQuery(className: "Debts")
-                queryDebt.whereKey("groupName", equalTo: userGroupName)
-                var tempDebts : NSArray = queryDebt.findObjects()! as NSArray
-
-                var refreshedDebts : NSMutableArray = tempDebts.mutableCopy() as! NSMutableArray
-                self.debtObjects = refreshedDebts
-                
-                var queryGroup: PFQuery = PFQuery(className: "Group")
-                queryGroup.whereKey("groupName", equalTo: userGroupName)
-                var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
-                var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
-                var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
-                self.groupFriendsString = refreshedGroupFriends
-                
-                var numOfRefreshedDebts = refreshedDebts.count
-                var numOfDebtsThatShouldHave = getNumOfDebts(refreshedGroupFriends.count)
-                var numOfDebtsThatShouldHaveForLessOneUser = getNumOfDebts(refreshedGroupFriends.count - 1)
-                
-                if numOfRefreshedDebts == numOfDebtsThatShouldHave {
-                    //refresh
-                     println("\n 1 ≠ = DEBTS UPDATE, REFRESH - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
-                    refreshDebts()
+        if connectionStatus! {
+            if self.groupObject != nil {
+                var groupFriends : [String] = self.groupFriendsString
+                if self.debtObjects.count != getNumOfDebts(groupFriends.count) {
+                    println("\n 1 ≠ DIFERENTE DO PARSE BORA - VER \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
+                    var userGroupName : String = self.groupObject!["groupName"] as! String
+                    var queryDebt : PFQuery = PFQuery(className: "Debts")
+                    queryDebt.whereKey("groupName", equalTo: userGroupName)
+                    var tempDebts : NSArray = queryDebt.findObjects()! as NSArray
                     
-                } else if numOfRefreshedDebts == numOfDebtsThatShouldHaveForLessOneUser  {
-                    println("\n 1 ≠ < ADICIONAR RELACAO PRO ULTIMO USUAIO ADICIONADO  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
-                    //add new debts for new user
-                    var indexUser : Int = self.groupFriendsString.count
-                    for i in 1..<self.groupFriendsString.count {
-                        var object : PFObject!
-                        object = PFObject(className: "Debts")
+                    var refreshedDebts : NSMutableArray = tempDebts.mutableCopy() as! NSMutableArray
+                    self.debtObjects = refreshedDebts
+                    
+                    var queryGroup: PFQuery = PFQuery(className: "Group")
+                    queryGroup.whereKey("groupName", equalTo: userGroupName)
+                    var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
+                    var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
+                    var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
+                    self.groupFriendsString = refreshedGroupFriends
+                    
+                    var numOfRefreshedDebts = refreshedDebts.count
+                    var numOfDebtsThatShouldHave = getNumOfDebts(refreshedGroupFriends.count)
+                    var numOfDebtsThatShouldHaveForLessOneUser = getNumOfDebts(refreshedGroupFriends.count - 1)
+                    
+                    if numOfRefreshedDebts == numOfDebtsThatShouldHave {
+                        //refresh
+                        println("\n 1 ≠ = DEBTS UPDATE, REFRESH - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
+                        refreshDebts()
                         
-                        var groupNameStr : String = String(i) + String(indexUser)
-                        object["debtId"] = groupNameStr
-                        object["user1"] = groupFriends[i-1]
-                        object["user2"] = groupFriends[indexUser-1]
-                        object["value"] = 0
-                        object["groupName"] = userGroupName
-                        self.debtObjects.addObject(object)
-                        object.saveEventually()
-                    }
-                } else {
-                    
-                    //delete all, aguar fi, vai chupar pica grande grossa
-                    println("\n 1 ≠ > USUARIO DELETADO DELETAR TUDO E CRIAR  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
-                    for debt in self.debtObjects {
-                        var debtPF : PFObject = debt as! PFObject
-                        debtPF.deleteInBackground()
-                    }
-                    self.debtObjects.removeAllObjects()
-                    
-                    for i in 1..<self.groupFriendsString.count {
-                        for j in (i+1)...self.groupFriendsString.count {
-                            ////println("CREATE >>>> Relation between \(i) and \(j)")
+                    } else if numOfRefreshedDebts == numOfDebtsThatShouldHaveForLessOneUser  {
+                        println("\n 1 ≠ < ADICIONAR RELACAO PRO ULTIMO USUAIO ADICIONADO  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
+                        //add new debts for new user
+                        var indexUser : Int = self.groupFriendsString.count
+                        for i in 1..<self.groupFriendsString.count {
                             var object : PFObject!
                             object = PFObject(className: "Debts")
                             
-                            var groupNameStr : String = String(i) + String(j)
+                            var groupNameStr : String = String(i) + String(indexUser)
                             object["debtId"] = groupNameStr
                             object["user1"] = groupFriends[i-1]
-                            object["user2"] = groupFriends[j-1]
+                            object["user2"] = groupFriends[indexUser-1]
                             object["value"] = 0
                             object["groupName"] = userGroupName
                             self.debtObjects.addObject(object)
                             object.saveEventually()
                         }
+                    } else {
+                        
+                        //delete all, aguar fi, vai chupar pica grande grossa
+                        println("\n 1 ≠ > USUARIO DELETADO DELETAR TUDO E CRIAR  - VER \nDEVERIA TER: \(numOfDebtsThatShouldHave) \nTEM: \(numOfRefreshedDebts)\n")
+                        for debt in self.debtObjects {
+                            var debtPF : PFObject = debt as! PFObject
+                            debtPF.deleteInBackground()
+                        }
+                        self.debtObjects.removeAllObjects()
+                        
+                        for i in 1..<self.groupFriendsString.count {
+                            for j in (i+1)...self.groupFriendsString.count {
+                                ////println("CREATE >>>> Relation between \(i) and \(j)")
+                                var object : PFObject!
+                                object = PFObject(className: "Debts")
+                                
+                                var groupNameStr : String = String(i) + String(j)
+                                object["debtId"] = groupNameStr
+                                object["user1"] = groupFriends[i-1]
+                                object["user2"] = groupFriends[j-1]
+                                object["value"] = 0
+                                object["groupName"] = userGroupName
+                                self.debtObjects.addObject(object)
+                                object.saveEventually()
+                            }
+                        }
+                        //refresh
+                        refreshDebts()
+                        
                     }
-                    //refresh
                     refreshDebts()
-
+                } else {
+                    //refresh
+                    println("\n 1 = JUST REFRESH \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
+                    refreshDebts()
                 }
-                refreshDebts()
-            } else {
-                //refresh
-                 println("\n 1 = JUST REFRESH \nDEVERIA TER: \(getNumOfDebts(groupFriends.count)) \nTEM: \(self.debtObjects.count)\n")
-                refreshDebts()
             }
         }
-        
-        
-        
-        
-        /*refreshNetworkStatus()
-        if self.groupObject != nil{
-            
-            var userGroupName : String = self.groupObject!["groupName"] as! String
-            var groupFriends : [String] = self.groupFriendsString
-            //println("DDEBT OBJECTS : \(self.debtObjects.count)")
-            //println(self.getNumOfDebts(groupFriends.count))
-            var queryDebt : PFQuery = PFQuery(className: "Debts")
-            //queryDebt.fromLocalDatastore()
-            queryDebt.whereKey("groupName", equalTo: userGroupName)
-
-            if background {
-                queryDebt.findObjectsInBackgroundWithBlock{(objects,error) -> Void in
-                if (error == nil){
-                    var temp: NSArray = objects! as NSArray
-                    //println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
-                    if temp.count != self.getNumOfDebts(groupFriends.count) {
-                        var queryGroup: PFQuery = PFQuery(className: "Group")
-                        queryGroup.whereKey("groupName", equalTo: userGroupName)
-                        var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
-                        var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
-                        var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
-                        self.groupFriendsString = refreshedGroupFriends
-                        if temp.count != self.getNumOfDebts(refreshedGroupFriends.count){
-                            //println("\t\t\t\t\t#############CREATE RELATIONS")
-                            self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: true)
-                        } else {
-                            self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: false)
-                        }
-                    }
-                    //println("GET RELATIONS")
-                    self.refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
-                    
-                } else {
-                    //println("FUDEU NO REFRESH EM BACKGROUND")
-                }
-
-                }
-            } else {
-                var temp: NSArray = queryDebt.findObjects()! as NSArray
-                //println("NUMERO DE DEBTS NO PARSE: \(temp.count)")
-                if temp.count != getNumOfDebts(groupFriends.count) {
-                    
-                    var queryGroup: PFQuery = PFQuery(className: "Group")
-                    queryGroup.fromLocalDatastore()
-                    queryGroup.whereKey("groupName", equalTo: userGroupName)
-                    var NSGroup : NSArray = queryGroup.findObjects()! as NSArray
-                    var refreshedGroup : PFObject = NSGroup.firstObject as! PFObject
-                    //println("\t\t\t\t\t#############CREATE RELATIONS")
-                    var refreshedGroupFriends : [String] = refreshedGroup["groupFriends"] as! [String]
-                    self.groupFriendsString = refreshedGroupFriends
-                    if temp.count < self.getNumOfDebts(refreshedGroupFriends.count){
-                        //println("\t\t\t\t\t#############CREATE RELATIONS DELETEI USER")
-                        self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: true)
-                    } else {
-                        self.createDebtRelations(refreshedGroupFriends, groupName: userGroupName, create: false)
-                    }
-                }
-                //println("GET RELATIONS")
-                refreshDebts(groupFriends,groupName:userGroupName,backGround:background)
-            }
-            
-            
-            //generateDebtStrings()
-            //println("FINISH TO CALCULATE \(self.relations)")
-        }*/
     }
     
     func findIndex(names:[String],name:String) -> Int {
@@ -1198,7 +1179,7 @@ class Model {
         object["done"] = false
         object["whoDone"] = " "
         object["groupName"] = self.userObject!["group"] as! String
-        object.save()
+        object.saveEventually()
         self.toDoList.addObject(object)
         
         NSNotificationCenter.defaultCenter().postNotificationName("loadToDo", object: nil)

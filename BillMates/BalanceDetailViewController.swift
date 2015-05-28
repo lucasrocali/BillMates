@@ -50,6 +50,12 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
        // //println(currentUser)
        // //println(user1!)
         
+        btnSettleUp.userInteractionEnabled = true
+        
+        if value == 0 {
+            btnSettleUp.userInteractionEnabled = false
+        }
+        
         if value > 0 {
             lblUser1.text = user1
             lblUser2.text = user2
@@ -61,7 +67,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
             lblUser1.text = user1
             lblUser2.text = user2
             lblValue.text = "$ "+(NSString(format: "%.2f",abs(value!)) as String)
-            lblDirection.text = user2! + " owns to" + " " + user1!
+            lblDirection.text = user1! + " owns to" + " " + user2!
             lblValue.textColor = textOrange
             imgDirection.image = UIImage(named: "arrow1to2.png")
         }
@@ -143,7 +149,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
         if user == paidBy {
             cell.lblValue.textColor = textGreen
-            cell.lblDirection.text = user1! + " lent"
+            cell.lblDirection.text = user + " lent"
         } else {
             var flag = 0
             for friend in sharedWith {
@@ -153,7 +159,7 @@ class BalanceDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
             if flag == 1{   //User is in sharedUsers
                 cell.lblValue.textColor = textOrange
-                cell.lblDirection.text = user1! + " borrowed"
+                cell.lblDirection.text = user + " borrowed"
             }
         }
         if object["activated"] as! Bool == false {

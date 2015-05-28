@@ -11,7 +11,7 @@ import UIKit
 class DebtsTableViewController: UITableViewController {
     @IBOutlet weak var tableControl: UISegmentedControl!
     
-    var debtsState : Int = 0 //0 for all, 1 for personal
+    var debtsState : Int = 1 //0 for all, 1 for personal
     
     @IBAction func changeBalanceBtns(sender: UISegmentedControl) {
         switch tableControl.selectedSegmentIndex {
@@ -44,6 +44,7 @@ class DebtsTableViewController: UITableViewController {
         
         self.shouldPerformSegueWithIdentifier("balanceToBalanceDetail", sender: nil)
         //self.tableView.reloadData()
+        model.getPersonalRelations()
 
     }
     
@@ -58,7 +59,10 @@ class DebtsTableViewController: UITableViewController {
 
     func refresh(sender:AnyObject)
     {
+        model.refreshNetworkStatus()
         if model.connectionStatus! {
+        model.fetchDebt()
+        model.fetchDebtsFromLocal()
         model.calculateDebts(false)
         } else {
             let alert = UIAlertView()
@@ -134,7 +138,7 @@ class DebtsTableViewController: UITableViewController {
             cell.lblDirection.hidden = true
             cell.lblLeftUser.hidden = true
             cell.lblRightUser.hidden = true
-            cell.userInteractionEnabled = false
+            //cell.userInteractionEnabled = false
             cell.imgDirection.hidden = (true)
             //cell.btnSettledUp.hidden = (true)
             cell.lblValue.textColor = textNeutral
@@ -143,7 +147,7 @@ class DebtsTableViewController: UITableViewController {
             //cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
             //cell.imgDirection.image = UIImage(named: "AddUser.png")
         } else if relation!.value > 0 {
-            cell.userInteractionEnabled = true
+            //cell.userInteractionEnabled = true
             cell.imgDirection.hidden = (false)
             cell.lblLeftUser.text = relation!.user2
             //cell.lblLeftUser.textColor = textGreen
@@ -153,7 +157,7 @@ class DebtsTableViewController: UITableViewController {
             //cell.lblRightUser.textColor = textOrange
             cell.imgDirection.image = UIImage(named: "arrow2to1.png")
         } else {
-            cell.userInteractionEnabled = true
+            //cell.userInteractionEnabled = true
             cell.imgDirection.hidden = (false)
             cell.lblLeftUser.text = relation!.user1
             //cell.lblLeftUser.textColor = textOrange
@@ -164,6 +168,9 @@ class DebtsTableViewController: UITableViewController {
             cell.imgDirection.image = UIImage(named: "arrow1to2.png")
         }
         
+        if debtsState == 0 && relation!.value != 0{
+            cell.lblValue.textColor = colorBlack
+        }
         /*
         cell.textLabel!.text = relation!.debtStringCell
         

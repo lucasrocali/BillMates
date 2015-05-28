@@ -46,7 +46,18 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
         //println("\nREFRESH")
         //model.calculateDebts()
         //model.refreshData()
-        self.tableView.reloadData()
+        model.refreshNetworkStatus()
+        if model.connectionStatus! {
+            model.fetchTodo()
+            model.fetchTodoFromLocal()
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+        }
+        
+        //self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
         
         /*

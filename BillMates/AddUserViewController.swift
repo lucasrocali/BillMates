@@ -87,21 +87,30 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     @IBAction func buttonAddUser(sender: UIButton) {
         btnAddUser.backgroundColor = colorDarkGreen
-        
-        if !model.isTotallyEmpty(txtName.text) {
-            if model.joinGroupWhithoutLogin(txtName.text) {
-                txtName.text = ""
-                self.view.endEditing(true)
-                self.addedUsersTableView.reloadData()
-                txtName.text = ""
+        model.refreshNetworkStatus()
+        if model.connectionStatus! {
+            model.fetchTodo()
+            model.fetchTodoFromLocal()
+            if !model.isTotallyEmpty(txtName.text) {
+                if model.joinGroupWhithoutLogin(txtName.text) {
+                    txtName.text = ""
+                    self.view.endEditing(true)
+                    self.addedUsersTableView.reloadData()
+                    txtName.text = ""
+                }
+                else {
+                    let alert = UIAlertView()
+                    alert.title = "You cannot add an user that have an account"
+                    alert.message = "The user should join the group"
+                    alert.addButtonWithTitle("Ok")
+                    alert.show()
+                }
             }
-            else {
-                let alert = UIAlertView()
-                alert.title = "You cannot add an user that have an account"
-                alert.message = "The user should join the group"
-                alert.addButtonWithTitle("Ok")
-                alert.show()
-            }
+        } else {
+            let alert = UIAlertView()
+            alert.title = "No internet connection"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
         }
     }
     
