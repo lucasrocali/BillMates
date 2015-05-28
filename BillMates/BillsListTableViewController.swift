@@ -78,11 +78,8 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         }
     }
     
-    var cTimes:Int = 0
-    
     func refresh(sender:AnyObject)
     {
-        cTimes++
         //println(cTimes)
         // Code to refresh table view
         //println("\nREFRESH")

@@ -183,7 +183,7 @@ class Model {
             queryBill.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
                 if (error == nil){
                     PFObject.pinAllInBackground(objects,block:nil)
-                    self.fetchAllObjectsFromLocalDataStore()
+                    //self.fetchAllObjectsFromLocalDataStore()
                 } else {
                     println("ERROR NO FECTH - BILL")
                 }
@@ -195,7 +195,7 @@ class Model {
             queryFriend.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
                 if (error == nil){
                     PFObject.pinAllInBackground(objects,block:nil)
-                    self.fetchAllObjectsFromLocalDataStore()
+                    //self.fetchAllObjectsFromLocalDataStore()
                 } else {
                     //println("ERROR NO FECTH - GROUP")
                 }
@@ -208,7 +208,7 @@ class Model {
             queryDebt.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
                 if (error == nil){
                     PFObject.pinAllInBackground(objects,block:nil)
-                    self.fetchAllObjectsFromLocalDataStore()
+                    //self.fetchAllObjectsFromLocalDataStore()
                 } else {
                     //println("ERROR NO FECTH - DEBTS")
                 }
@@ -220,7 +220,7 @@ class Model {
             queryToDo.findObjectsInBackgroundWithBlock { (objects,error) -> Void in
                 if (error == nil){
                     PFObject.pinAllInBackground(objects,block:nil)
-                    self.fetchAllObjectsFromLocalDataStore()
+                    //self.fetchAllObjectsFromLocalDataStore()
                 } else {
                     //println("ERROR NO FECTH - DEBTS")
                 }
@@ -599,11 +599,12 @@ class Model {
     func editBill(#description:String, value:String, billId: String,cellId:Int) -> Bool{
         refreshNetworkStatus()
         var queryBill: PFQuery = PFQuery(className: "Bill")
-        queryBill.fromLocalDatastore()
+        //queryBill.fromLocalDatastore()
         var billToEdit: PFObject! = queryBill.getObjectWithId(billId)
         
+        println(billId)
         if billToEdit != nil {
-            //println(billToEdit)
+            println(billToEdit)
             
             
             var sharedWith : [String] = billToEdit!["sharedWith"] as! [String]
