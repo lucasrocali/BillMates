@@ -14,6 +14,7 @@
 		7810CAC21AEC094F00FD00F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7810CAC01AEC094F00FD00F0 /* LaunchScreen.xib */; };
 		7810CACE1AEC094F00FD00F0 /* BillMatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810CACD1AEC094F00FD00F0 /* BillMatesTests.swift */; };
 		7810CAD81AEC0CF600FD00F0 /* BillsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */; };
+		781262021B25EC1100CAA17C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781262011B25EC1100CAA17C /* MapViewController.swift */; };
 		782893031AFBE9DF00966E62 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782892FE1AFBE9DF00966E62 /* Bolts.framework */; };
 		782893041AFBE9DF00966E62 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782892FF1AFBE9DF00966E62 /* Parse.framework */; };
 		782893051AFBE9DF00966E62 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782893001AFBE9DF00966E62 /* ParseCrashReporting.framework */; };
@@ -36,6 +37,7 @@
 		7829A3681AEC176F00CEFF35 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A3671AEC176F00CEFF35 /* Model.swift */; };
 		7829A3701AEC321D00CEFF35 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */; };
 		7849DC761B0A0723008039F0 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849DC751B0A0723008039F0 /* Relation.swift */; };
+		78570ED31B25E9D700CD81CC /* addlocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 78570ED21B25E9D700CD81CC /* addlocation.png */; };
 		78596A261B0912340016EC0B /* RIPRelationalBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78596A251B0912340016EC0B /* RIPRelationalBillsTableViewController.swift */; };
 		787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787281161B122A8C00564C87 /* BalanceDetailViewController.swift */; };
 		7873B8F41B1325F2005D6835 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */; };
@@ -93,6 +95,7 @@
 		7810CACC1AEC094F00FD00F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7810CACD1AEC094F00FD00F0 /* BillMatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillMatesTests.swift; sourceTree = "<group>"; };
 		7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillsListTableViewController.swift; sourceTree = "<group>"; };
+		781262011B25EC1100CAA17C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		782892FE1AFBE9DF00966E62 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "sdks/parse-library-1.7.2/Bolts.framework"; sourceTree = "<group>"; };
 		782892FF1AFBE9DF00966E62 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "sdks/parse-library-1.7.2/Parse.framework"; sourceTree = "<group>"; };
 		782893001AFBE9DF00966E62 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "sdks/parse-library-1.7.2/ParseCrashReporting.framework"; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		7829A3671AEC176F00CEFF35 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7829A36F1AEC321D00CEFF35 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		7849DC751B0A0723008039F0 /* Relation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
+		78570ED21B25E9D700CD81CC /* addlocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addlocation.png; sourceTree = "<group>"; };
 		78596A251B0912340016EC0B /* RIPRelationalBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPRelationalBillsTableViewController.swift; sourceTree = "<group>"; };
 		787281161B122A8C00564C87 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
 		7873B8F31B1325F2005D6835 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 				788647341B0B8E8100B916BD /* ImageDetailViewController.swift */,
 				7807408F1B075CCD006E2C30 /* DebtsTableViewController.swift */,
 				7810CAD71AEC0CF600FD00F0 /* BillsListTableViewController.swift */,
+				781262011B25EC1100CAA17C /* MapViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 		788647291B0B75AF00B916BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				78570ED21B25E9D700CD81CC /* addlocation.png */,
 				789557231B147DBC00A7EAB8 /* icons */,
 				789557081B137A1200A7EAB8 /* checkedBox.png */,
 				789557091B137A1200A7EAB8 /* uncheckedBox.png */,
@@ -435,6 +441,7 @@
 				78F4C01A1B10C094000093E8 /* debtCell.xib in Resources */,
 				788647301B0B75DD00B916BD /* BalanceIcon.png in Resources */,
 				7895570A1B137A1200A7EAB8 /* checkedBox.png in Resources */,
+				78570ED31B25E9D700CD81CC /* addlocation.png in Resources */,
 				789557311B147DE800A7EAB8 /* Icon-60@2x.png in Resources */,
 				788647321B0B75DD00B916BD /* Camera.png in Resources */,
 				789557371B147DE800A7EAB8 /* Icon-Small@3x.png in Resources */,
@@ -473,6 +480,7 @@
 				7881D41A1B01013800A08DD0 /* GroupViewController.swift in Sources */,
 				787281171B122A8C00564C87 /* BalanceDetailViewController.swift in Sources */,
 				7829A3631AEC12BD00CEFF35 /* AddBillViewController.swift in Sources */,
+				781262021B25EC1100CAA17C /* MapViewController.swift in Sources */,
 				780740901B075CCD006E2C30 /* DebtsTableViewController.swift in Sources */,
 				7873B8F41B1325F2005D6835 /* BillTableViewCell.swift in Sources */,
 				7829A3681AEC176F00CEFF35 /* Model.swift in Sources */,

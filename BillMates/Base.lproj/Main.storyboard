@@ -71,7 +71,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid by: User " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-JS-JnU">
-                                <rect key="frame" x="16" y="170" width="109" height="21"/>
+                                <rect key="frame" x="16" y="170" width="108.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -96,7 +96,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mer-qc-mRg">
-                                <rect key="frame" x="0.0" y="275" width="600" height="276"/>
+                                <rect key="frame" x="0.0" y="275" width="600" height="275.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="userCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" textLabel="MNa-Fl-5Ug" detailTextLabel="Gdp-aV-W4h" style="IBUITableViewCellStyleValue1" id="r03-oA-gAf">
@@ -127,7 +127,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 per peson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnl-kX-ehS" userLabel="0.00 per person">
-                                <rect key="frame" x="0.0" y="210" width="600" height="21"/>
+                                <rect key="frame" x="0.0" y="210" width="600" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -151,6 +151,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arf-7E-q0J" userLabel="Add Location">
+                                <rect key="frame" x="454" y="164.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9Wq-n2-Qgs"/>
+                                    <constraint firstAttribute="width" constant="30" id="FNG-j1-BjM"/>
+                                </constraints>
+                                <state key="normal" image="addlocation.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="6cy-sj-g5w" kind="show" id="USa-5R-DRM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -163,7 +176,9 @@
                             <constraint firstItem="F2E-bS-7Pc" firstAttribute="centerY" secondItem="baZ-cb-ZyT" secondAttribute="centerY" id="DVG-qY-vxh"/>
                             <constraint firstItem="baZ-cb-ZyT" firstAttribute="top" secondItem="GWK-UM-HMn" secondAttribute="bottom" constant="10" id="E86-Da-uil"/>
                             <constraint firstItem="tF4-tT-y5j" firstAttribute="top" secondItem="mer-qc-mRg" secondAttribute="bottom" id="GSH-pb-avX"/>
+                            <constraint firstItem="F2E-bS-7Pc" firstAttribute="leading" secondItem="Arf-7E-q0J" secondAttribute="trailing" constant="10" id="Ha1-YV-eOd"/>
                             <constraint firstItem="mer-qc-mRg" firstAttribute="leading" secondItem="avO-eB-zdc" secondAttribute="leading" id="IaJ-BN-cEW"/>
+                            <constraint firstItem="F2E-bS-7Pc" firstAttribute="centerY" secondItem="Arf-7E-q0J" secondAttribute="centerY" id="JQj-7k-mgJ"/>
                             <constraint firstAttribute="width" secondItem="nnl-kX-ehS" secondAttribute="width" id="KJa-PV-gpq"/>
                             <constraint firstItem="kbk-kr-YlJ" firstAttribute="width" secondItem="GkG-FE-WHr" secondAttribute="width" id="NFU-FM-hEz"/>
                             <constraint firstAttribute="centerX" secondItem="mer-qc-mRg" secondAttribute="centerX" id="PHV-gv-nN8"/>
@@ -555,6 +570,38 @@
             </objects>
             <point key="canvasLocation" x="2078" y="2023"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Pt0-xD-MW1">
+            <objects>
+                <viewController id="6cy-sj-g5w" userLabel="Map View Controller" customClass="MapViewController" customModule="BillMates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hsW-oa-WDH"/>
+                        <viewControllerLayoutGuide type="bottom" id="1ur-7M-fUE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GX2-ng-JTd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LhO-g5-B54">
+                                <rect key="frame" x="0.0" y="44" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LhO-g5-B54" firstAttribute="top" secondItem="GX2-ng-JTd" secondAttribute="topMargin" constant="44" id="8Hb-AC-dnY"/>
+                            <constraint firstItem="LhO-g5-B54" firstAttribute="leading" secondItem="GX2-ng-JTd" secondAttribute="leading" id="QhF-xq-t27"/>
+                            <constraint firstAttribute="trailing" secondItem="LhO-g5-B54" secondAttribute="trailing" id="SQn-DN-IsY"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="LhO-g5-B54" secondAttribute="bottom" constant="-44" id="fl6-Tk-JxK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="LhO-g5-B54" id="QGZ-cI-DKU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="de8-VY-dYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4397" y="-1983"/>
+        </scene>
         <!--Image Detail View Controller-->
         <scene sceneID="c8B-zd-g7T">
             <objects>
@@ -903,6 +950,7 @@
         <image name="BillList.png" width="30" height="30"/>
         <image name="Camera.png" width="30" height="23"/>
         <image name="TodoList.png" width="30" height="30"/>
+        <image name="addlocation.png" width="30" height="30"/>
         <image name="arrow1to2.png" width="459" height="447"/>
     </resources>
     <inferredMetricsTieBreakers>

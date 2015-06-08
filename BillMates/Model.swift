@@ -43,6 +43,10 @@ class Model {
     
     var hasImg : Bool = false
     
+    var location : CLLocationCoordinate2D?
+    
+    var hasLocation : Bool = false
+    
     var connectionStatus : Bool? //true has connectio, false otherwise
 
     func refreshNetworkStatus() {
@@ -573,6 +577,14 @@ class Model {
         hasImg = true
     }
     
+    func resetLocation() {
+        hasLocation = false
+    }
+    func setLocation(location : CLLocationCoordinate2D) {
+        self.location = location
+        hasLocation = true
+    }
+    
     func saveBill(#description:String, value:String) {
         refreshNetworkStatus()
         var object : PFObject!
@@ -625,6 +637,12 @@ class Model {
             
             resetImages()
             
+        }
+        if hasLocation {
+            var PFLocation :PFGeoPoint = PFGeoPoint(latitude: self.location!.latitude, longitude: self.location!.longitude)
+            object["location"] = PFLocation
+            println(location)
+            resetLocation()
         }
         if connectionStatus! {
             object.saveInBackgroundWithBlock({
