@@ -91,8 +91,8 @@ class AddUserViewController: UIViewController, UITableViewDelegate, UITableViewD
         if model.connectionStatus! {
             model.fetchTodo()
             model.fetchTodoFromLocal()
-            if !model.isTotallyEmpty(txtName.text) {
-                if model.joinGroupWhithoutLogin(txtName.text) {
+            if !model.isTotallyEmpty(txtName.text!) {
+                if model.joinGroupWhithoutLogin(txtName.text!) {
                     txtName.text = ""
                     self.view.endEditing(true)
                     self.addedUsersTableView.reloadData()

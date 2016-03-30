@@ -66,7 +66,7 @@ class InitialViewController: UITabBarController,PFLogInViewControllerDelegate, P
     
     func signUpViewController(signUpController: PFSignUpViewController, shouldBeginSignUp info: [NSObject : AnyObject]) -> Bool {
         if let password = info["password"] as? String {
-            if count(password.utf16) <= 8 {
+            if password.characters.count <= 8 {
                 let alert = UIAlertView()
                 alert.title = "Invalid password"
                 alert.message = "Your password must have at least 8 characters"

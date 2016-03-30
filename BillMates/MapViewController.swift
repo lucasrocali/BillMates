@@ -24,7 +24,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if locValue != nil {
             model.setLocation(locValue!)
         }
-        println("pop")
+        print("pop")
         self.navigationController?.popViewControllerAnimated(true)
         //self.navigationController?.popToViewController(AddBillViewController(), animated: true)
     }
@@ -32,14 +32,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         // Ask for Authorisation from the User.
-        println("Request user")
+        print("Request user")
         self.locationManager.requestAlwaysAuthorization()
         
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            println("Location enabled")
+            print("Location enabled")
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
@@ -54,11 +54,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // Do any additional setup after loading the view.
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        locValue = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        locValue = manager.location!.coordinate
         if locValue != nil {
             let newlLocation = CLLocation(latitude: locValue!.latitude	, longitude: locValue!.longitude)
-            println("locations = \(locValue!.latitude) \(locValue!.longitude)")
+            print("locations = \(locValue!.latitude) \(locValue!.longitude)")
             /*//var pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(your latitude, your longitude)
             var objectAnnotation = MKPointAnnotation()
             objectAnnotation.coordinate = locValue

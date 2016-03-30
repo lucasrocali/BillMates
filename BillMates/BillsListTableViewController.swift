@@ -227,9 +227,9 @@ class BillsListTableViewController: UITableViewController, UIAlertViewDelegate {
         {
             
             if model.deleteBill(indexPath.row) {
-                println("DELETOU A \(indexPath.row) PORRA")
+                print("DELETOU A \(indexPath.row) PORRA")
             } else {
-                println("ERRO PRA DELETAR")
+                print("ERRO PRA DELETAR")
             }
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)

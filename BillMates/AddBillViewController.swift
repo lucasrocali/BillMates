@@ -19,17 +19,15 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     var picker:UIImagePickerController?=UIImagePickerController()
     var popover:UIPopoverController?=nil
 
-    func imagePickerController(picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
-    {
+    func imagePickerController(picker: UIImagePickerController, var didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        lastChosenMediaType = info[UIImagePickerControllerMediaType] as? String
+        lastChosenMediaType = editingInfo![UIImagePickerControllerMediaType] as! String
         //println("1")
         if let mediaType = lastChosenMediaType {
             //println("2")
             if mediaType == kUTTypeImage as NSString {
                 //println("3")
-                image = info[UIImagePickerControllerEditedImage] as? UIImage
+                image = editingInfo![UIImagePickerControllerEditedImage] as! UIImage
             }
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -96,6 +94,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     @IBOutlet weak var txtDescription: UITextField!
 
+    @IBOutlet var lblDate: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var txtValue: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -127,14 +126,14 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func doneAddBill(sender: UIBarButtonItem) {
         
         if model.addedUsers.count > 0 {
-            if (!model.isTotallyEmpty(txtDescription.text) && !model.isTotallyEmpty(txtValue.text)) {
+            if (!model.isTotallyEmpty(txtDescription.text!) && !model.isTotallyEmpty(txtValue.text!)) {
                 if billState == 0{
                     //println("0")
-                    self.model.saveBill(description: txtDescription.text, value: txtValue.text)
+                    self.model.saveBill(description: txtDescription.text!, value: txtValue.text!)
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 } else if billState == 2 {
                     //println("1")
-                    if self.model.editBill(description: txtDescription.text, value: txtValue.text,billId: billId!,cellId:billCellIndex) {
+                    if self.model.editBill(description: txtDescription.text!, value: txtValue.text!,billId: billId!,cellId:billCellIndex) {
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     } else {
                         let alert = UIAlertView()
@@ -211,6 +210,12 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         var perPerson : Float = valueFloat/Float(model.addedUsers.count)
         lblPerPerson.text = String(format: " %.2f per peson",perPerson)
         //println("Nao fudeu ainda")
+        var date : NSDate = object.updatedAt! as NSDate
+        var dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "MMM d, h:mm a"
+        var dateText = NSString(format: "%@",dateFormat.stringFromDate(date))
+        lblDate.text = dateText as String
+        
         if object["img"] != nil{
             if model.connectionStatus! {
                 //println("Tem foto")
@@ -259,6 +264,12 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         var perPerson : Float = valueFloat/Float(model.addedUsers.count)
         lblPerPerson.text = String(format: " %.2f per peson",perPerson)
         //println("Nao fudeu ainda")
+        var date : NSDate = object.updatedAt! as NSDate
+        var dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "MMM d, h:mm a"
+        var dateText = NSString(format: "%@",dateFormat.stringFromDate(date))
+        lblDate.text = dateText as String
+        
         if object["img"] != nil{
             if model.connectionStatus! {
                 //println("Tem foto")
@@ -318,6 +329,7 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         lblPerPerson.font = fontDetails
         lblSharedWith.font = fontNeutral
         lblSharedWith.backgroundColor = colorLightOrange
+        lblDate.font = fontSmallDetail
         
         txtDescription.textColor = colorDarkGray
         txtValue.textColor = colorDarkGray
@@ -384,8 +396,8 @@ class AddBillViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             model.addAddedUsers(friendName)
         }
-        if (!model.isTotallyEmpty(txtValue.text)) && model.addedUsers.count > 0{
-            var value : Float =  NSString(string: txtValue.text).floatValue
+        if (!model.isTotallyEmpty(txtValue.text!)) && model.addedUsers.count > 0{
+            var value : Float =  NSString(string: txtValue.text!).floatValue
             var perPerson : Float = value/Float(model.addedUsers.count)
             lblPerPerson.text = String(format: " %.2f per peson",perPerson)
         } else {

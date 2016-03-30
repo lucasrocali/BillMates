@@ -79,8 +79,8 @@ class GroupViewController: UIViewController {
         alert.title = "You cannot create the group"
         alert.addButtonWithTitle("Ok")
         //lblError.hidden = true
-        if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
-            if self.model.createGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
+        if !model.isTotallyEmpty(txtGroupName.text!) && !model.isTotallyEmpty(txtGroupKey.text!) {
+            if self.model.createGroup(txtGroupName.text!,groupKey: txtGroupKey.text!) {
                 //println(" GROUP CREATED")
         
                 var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -105,8 +105,8 @@ class GroupViewController: UIViewController {
         alert.title = "You cannot join the group"
         alert.addButtonWithTitle("Ok")
         //lblError.hidden = true
-        if !model.isTotallyEmpty(txtGroupName.text) && !model.isTotallyEmpty(txtGroupKey.text) {
-            if self.model.joinGroup(txtGroupName.text,groupKey: txtGroupKey.text) {
+        if !model.isTotallyEmpty(txtGroupName.text!) && !model.isTotallyEmpty(txtGroupKey.text!) {
+            if self.model.joinGroup(txtGroupName.text!,groupKey: txtGroupKey.text!) {
                 //println(" GROUP JOINED")
             
                 var storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

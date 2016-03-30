@@ -48,9 +48,9 @@ class RelationalBillsTableViewController: UITableViewController {
     {
         if segue.identifier == "toDetailBills"
         {
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             
-            println("Cell n: \(indexPath.row)")
+            print("Cell n: \(indexPath.row)")
             var editBill = segue.destinationViewController as! AddBillViewController
             editBill.billCellIndex = indexPath.row
             editBill.billState = 3

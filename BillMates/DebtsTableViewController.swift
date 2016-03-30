@@ -27,7 +27,7 @@ class DebtsTableViewController: UITableViewController {
             //self.viewDidLoad()
             self.tableView.reloadData()
         default:
-            println("Algo errado");
+            print("Algo errado");
         }
     }
 

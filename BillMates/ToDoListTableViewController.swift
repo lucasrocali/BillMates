@@ -28,7 +28,7 @@ class ToDoListTableViewController: UITableViewController, UIAlertViewDelegate {
         if buttonTitle == "Add" {
             let textField = alertView.textFieldAtIndex(0)
             print(textField!.text)
-            model.createToDoItem(textField!.text)
+            model.createToDoItem(textField!.text!)
             
         } else {
             //println("Cancel pressed")
