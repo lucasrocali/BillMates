@@ -56,6 +56,7 @@ class Model {
             connectionStatus = false
         }
     }
+    
     func refreshData() {
         print("Refreshing data")
         refreshNetworkStatus()
