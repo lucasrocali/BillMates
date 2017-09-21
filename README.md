@@ -1,3 +1,3 @@
 # BillMates
 
-<img src="screens.jpg"/>
+![Screenshot](screens.jpg)
